@@ -29,7 +29,8 @@ SECRET_KEY = "django-insecure-_bknbgn^+#-!c97a)aqj8dut4=ysmjoy9)9hk3d$ic+nm3_nal
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'https://p4-green-local-veggies-c5f2f4c33912.herokuapp.com/', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "greenlocalveggies",
+    "shop",
 ]
 
 MIDDLEWARE = [
