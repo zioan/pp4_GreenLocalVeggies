@@ -1,1 +1,1 @@
-web: gunicorn greenlocalveggies.wsgi
+web: gunicorn greenlocalveggies.wsgi --log-file -
