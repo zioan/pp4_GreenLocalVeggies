@@ -2,7 +2,6 @@
 name: User Story Template
 about: Describe this issue template's purpose here.
 title: ''
-labels: Could Have, Must Have, Should Have, Won't Have
 assignees: ''
 
 ---
