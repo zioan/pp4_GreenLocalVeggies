@@ -1,5 +1,11 @@
+{% load static %}
+
 <div class="card" style="width: 18rem;">
-    <img src="{{product.image.url}}" class="card-img-top" alt="{{product.name}}">
+    <img src="{{product.image.url}}"
+        class="card-img-top"
+        alt="{{product.name}}"
+        onerror="this.onerror=null;this.src='{% static 'shop/images/placeholder-image.jpg' %}';"
+    >
     <div class="card-body">
     <h5 class="card-title">{{product.name}}</h5>
     <p class="card-text">{{product.description}}</p>
