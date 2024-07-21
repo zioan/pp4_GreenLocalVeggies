@@ -1,3 +1,4 @@
+/* Main styles */
 html,
 body {
     height: 100%;
@@ -11,3 +12,12 @@ body {
 .content {
     flex: 1;
 }  
+
+/* Top banner */
+.top-banner {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
