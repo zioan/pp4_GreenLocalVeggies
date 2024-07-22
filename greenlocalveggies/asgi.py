@@ -8,9 +8,17 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/asgi/
 """
 
 import os
-
+import sys
+from django.db import connections
+from django.db.utils import OperationalError
 from django.core.asgi import get_asgi_application
 
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "greenlocalveggies.settings")
+
+try:
+    connections['default'].cursor()
+except OperationalError:
+    sys.exit("Database is unavailable")
 
 application = get_asgi_application()
