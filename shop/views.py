@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db import DatabaseError
 from django.http import Http404
 from .models import Product
 
@@ -6,8 +7,11 @@ from .models import Product
 
 
 def index(request):
-    products = Product.objects.all()
-    return render(request, "shop/index.html", {"products": products})
+    try:
+        products = Product.objects.all()
+        return render(request, "shop/index.html", {"products": products})
+    except DatabaseError:
+        return render(request, "shop/500.html")
 
 
 def product_details(request, product_slug):
