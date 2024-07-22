@@ -22,6 +22,7 @@ class Product(models.Model):
     unit = models.CharField(max_length=10, choices=UNIT_CHOICES)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     image = models.ImageField(upload_to="products/")
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return self.name
