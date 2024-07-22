@@ -1,12 +1,47 @@
 {% extends "shop/base/base.html" %}
-{% comment %} {% load static %} {% endcomment %}
+{% load static %}
 
-{% block title %}{{ product.name }}{% endblock title %}
-
-{% comment %} {% block site_css %} {% endcomment %}
-    {% comment %} <link rel="stylesheet" href="{% static '' %}"> {% endcomment %}
-{% comment %} {% endblock site_css %} {% endcomment %}
+{% block title %}Green Local Veggies - {{ product.name }}{% endblock title %}
 
 {% block content %}
-    <p>{{ product.name }}</p>
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Product Image -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img 
+                    src="{{ product.image.url }}" 
+                    class="img-fluid rounded product-details-image" 
+                    alt="{{ product.name }}" 
+                    onerror="this.onerror=null;this.src='{% static 'shop/images/placeholder-image.jpg' %}';"
+                >
+            </div>
+            <!-- Product Details -->
+            <div class="col-md-6">
+                <h1 class="mb-3 text-center">{{ product.name }}</h1>
+                <hr class="my-4">
+                <p class="lead mb-3">{{ product.description }}</p>
+                <hr class="my-4">
+                <h4 class="mb-3 text-success">&#8364; {{ product.price }}</h4>
+                <p class="mb-3 text-muted">Available Quantity: {{ product.stock }} {{ product.unit}}</p>
+                
+                <form>
+                    {% csrf_token %}
+                    <div class="d-flex align-items-center mb-3">
+                        <label for="quantity" class="me-2">Quantity ({{ product.unit}}):</label>
+                        <input 
+                            type="number" 
+                            id="quantity" 
+                            name="quantity" 
+                            class="form-control quantity-selector" 
+                            min="1" 
+                            max="{{ product.stock }}" 
+                            value="1" 
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        <a href="{% url 'index' %}" class="btn btn-secondary mt-4">Back to Products</a>
+    </div>
 {% endblock content %}

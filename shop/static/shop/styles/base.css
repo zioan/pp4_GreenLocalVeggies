@@ -43,3 +43,13 @@ body {
 .btn-icon:hover {
     color: #727272;
 }
+
+/* Product details page */
+.product-details-image {
+    max-width: 480px;
+    width: 100%;
+}
+
+.quantity-selector {
+    width: 100px;
+}
