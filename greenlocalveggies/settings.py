@@ -54,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    'shop.middleware.DatabaseConnectionMiddleware',
 ]
 
 ROOT_URLCONF = "greenlocalveggies.urls"
