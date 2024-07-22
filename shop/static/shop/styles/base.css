@@ -21,3 +21,13 @@ body {
     text-align: center;
     width: 100%;
 }
+
+/* Navigation */
+.btn-no-border-outline {
+    border: none;
+    outline: none;
+}
+
+.fa-search {
+    color: #727272;
+}
