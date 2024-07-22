@@ -18,6 +18,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "greenlocalveggies.settings")
 try:
     connections['default'].cursor()
 except OperationalError:
-    sys.exit("Database is unavailable")
+    print("Database is unavailable")
+    sys.exit(1)
 
 application = get_wsgi_application()
