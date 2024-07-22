@@ -23,6 +23,8 @@ class Product(models.Model):
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     image = models.ImageField(upload_to="products/")
     slug = models.SlugField(unique=True)
+    allow_half_units = models.BooleanField(
+        default=False, help_text="Allow half units for this product")
 
     def __str__(self):
         return self.name

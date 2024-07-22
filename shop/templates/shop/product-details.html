@@ -33,9 +33,10 @@
                             id="quantity" 
                             name="quantity" 
                             class="form-control quantity-selector" 
-                            min="1" 
+                            min="{{ step_value }}" 
                             max="{{ product.stock }}" 
-                            value="1" 
+                            value="{{ step_value }}"
+                            step="{{ step_value }}"
                         >
                     </div>
                     <button type="submit" class="btn btn-primary">Add to Cart</button>
