@@ -31,3 +31,15 @@ body {
 .fa-search {
     color: #727272;
 }
+
+/* Product card */
+.btn-icon {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #727272;
+    font-size: 1.5rem;
+}
+.btn-icon:hover {
+    color: #727272;
+}
