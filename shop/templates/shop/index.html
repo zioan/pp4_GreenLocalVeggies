@@ -14,9 +14,15 @@
 
     <!-- Search result message -->
     {% if request.GET.q %}
-        <p class="text-center mb-4">
-            Showing results for "{{ request.GET.q }}"
-        </p>
+        {% if products %}
+            <p class="text-center mb-4">
+                Showing results for "{{ request.GET.q }}"
+            </p>
+        {% else %}
+            <p class="text-center mb-4">
+                No products found for "{{ request.GET.q }}"
+            </p>
+        {% endif %}
     {% endif %}
 
     <!-- Products Grid -->
