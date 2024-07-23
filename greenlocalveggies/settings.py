@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-_bknbgn^+#-!c97a)aqj8dut4=ysmjoy9)9hk3d$ic+nm3_nal"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = "DEVELOPMENT" in os.environ
 
 ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
@@ -142,3 +142,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Development settings for media files
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/media/"
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
