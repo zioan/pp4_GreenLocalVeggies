@@ -33,6 +33,18 @@ body {
 }
 
 /* Product card */
+
+.card:hover {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    cursor: pointer;
+    height: 200px;
+    object-fit: cover;
+}
+
 .btn-icon {
     background: none;
     border: none;
