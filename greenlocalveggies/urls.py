@@ -20,18 +20,12 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.shortcuts import render
-from django.conf.urls import handler404, handler500
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("shop.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = 'shop.views.custom_404_view'
-
 
 def custom_server_error(request, template_name='500.html'):
     return render(request, template_name, status=500)
-
-
-handler500 = custom_server_error
