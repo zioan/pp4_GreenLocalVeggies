@@ -1,4 +1,4 @@
-{% extends "shop/base/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}Green Local Veggies - {{ product.name }}{% endblock title %}
@@ -12,7 +12,7 @@
                     src="{{ product.image.url }}" 
                     class="img-fluid rounded product-details-image" 
                     alt="{{ product.name }}" 
-                    onerror="this.onerror=null;this.src='{% static 'shop/images/placeholder-image.jpg' %}';"
+                    onerror="this.onerror=null;this.src='{% static 'images/placeholder-image.jpg' %}';"
                 >
             </div>
             <!-- Product Details -->
