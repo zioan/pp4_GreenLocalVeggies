@@ -23,6 +23,7 @@ from django.shortcuts import render
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("customers/", include('customer.urls')),
     path("", include("shop.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

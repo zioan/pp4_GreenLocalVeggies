@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     "cloudinary",
     "cloudinary_storage",
     "shop",
+    "customer",
 ]
+
+AUTH_USER_MODEL = 'customer.CustomerUser'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
