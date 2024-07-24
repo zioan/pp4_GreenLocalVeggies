@@ -2,9 +2,10 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">Green Local Veggies</a>
         <div class="d-flex align-items-center">
-            <button class="btn btn-outline-secondary me-2 d-lg-none btn-no-border-outline" type="button">
+            <a href="{% url 'register' %}" class="btn btn-outline-secondary me-2 d-lg-none btn-no-border-outline"
+                type="button">
                 <i class="fas fa-user"></i>
-            </button>
+            </a>
             <button class="btn btn-outline-secondary me-2 d-lg-none btn-no-border-outline" type="button">
                 <i class="fas fa-shopping-cart"></i>
             </button>
@@ -20,9 +21,9 @@
                     <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">About</a>
                 </li>
-                <li class="nav-item dropdown">
+                {% comment %} <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Dropdown
@@ -35,12 +36,12 @@
                         </li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                </li>
+                </li> {% endcomment %}
             </ul>
             <div class="d-none d-lg-flex">
-                <button class="btn btn-outline-secondary me-2 btn-no-border-outline" type="button">
+                <a href="{% url 'register' %}" class="btn btn-outline-secondary me-2 btn-no-border-outline" type="button">
                     <i class="fas fa-user"></i>
-                </button>
+                </a>
                 <button class="btn btn-outline-secondary btn-no-border-outline" type="button">
                     <i class="fas fa-shopping-cart"></i>
                 </button>
