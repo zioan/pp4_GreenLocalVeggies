@@ -36,16 +36,16 @@ class CustomerUser(AbstractBaseUser, PermissionsMixin):
         ("Westerstede", "Westerstede"),
     ]
 
-    first_name = models.CharField(max_length=100, blank=True, null=True)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
-    street = models.CharField(max_length=100, blank=True, null=True)
-    house_number = models.CharField(max_length=10, blank=True, null=True)
+    first_name = models.CharField(max_length=100, blank=False, null=False)
+    last_name = models.CharField(max_length=100, blank=False, null=False)
+    street = models.CharField(max_length=100, blank=False, null=False)
+    house_number = models.CharField(max_length=10, blank=False, null=False)
     city = models.CharField(
-        max_length=100, choices=REQUIRED_CITY, blank=True, null=True)
+        max_length=100, choices=REQUIRED_CITY, blank=False, null=False)
     zip_code = models.CharField(
-        max_length=5, choices=REQUIRED_ZIP_CODE, blank=True, null=True)
+        max_length=5, choices=REQUIRED_ZIP_CODE, blank=False, null=False)
     email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    phone_number = models.CharField(max_length=15, blank=False, null=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_courier = models.BooleanField(default=False)
