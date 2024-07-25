@@ -1,7 +1,10 @@
-# models.py
 from django.utils import timezone
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin
+)
 
 
 class CustomerUserManager(BaseUserManager):
@@ -17,18 +20,35 @@ class CustomerUserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+
+        # Normalize the email
+        email = self.normalize_email(email)
+
         return self.create_user(email, password, **extra_fields)
 
 
-# models.py
-
-
 class CustomerUser(AbstractBaseUser, PermissionsMixin):
+    REQUIRED_ZIP_CODE = [
+        ("26655", "26655"),
+    ]
+
+    REQUIRED_CITY = [
+        ("Westerstede", "Westerstede"),
+    ]
+
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
+    street = models.CharField(max_length=100, blank=True, null=True)
+    house_number = models.CharField(max_length=10, blank=True, null=True)
+    city = models.CharField(
+        max_length=100, choices=REQUIRED_CITY, blank=True, null=True)
+    zip_code = models.CharField(
+        max_length=5, choices=REQUIRED_ZIP_CODE, blank=True, null=True)
     email = models.EmailField(unique=True)
-    address = models.TextField(blank=True, null=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_courier = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(blank=True, null=True)
 
@@ -50,8 +70,8 @@ class CustomerUser(AbstractBaseUser, PermissionsMixin):
     )
 
     class Meta:
-        verbose_name = 'customer user'
-        verbose_name_plural = 'customer users'
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
 
     def __str__(self):
         return self.email
