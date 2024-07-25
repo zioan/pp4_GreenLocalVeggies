@@ -65,3 +65,8 @@ body {
 .quantity-selector {
     width: 100px;
 }
+
+/* Forms */
+.form-max-width {
+    max-width: 480px;
+}
