@@ -6,8 +6,6 @@ from .models import Product
 
 
 def index(request):
-    raise Exception("Testing 500 error handling")
-
     query = request.GET.get('q')
     if query:
         products = Product.objects.filter(name__icontains=query)
