@@ -70,3 +70,12 @@ body {
 .form-max-width {
     max-width: 480px;
 }
+
+.field-error {
+    color: red;
+    margin-top: 1rem;
+}
+
+.field-error li {
+    list-style: none;
+}
