@@ -1,5 +1,6 @@
 from django import forms
 from .models import CustomerUser
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class CustomerRegistrationForm(forms.ModelForm):
@@ -30,4 +31,9 @@ class CustomerRegistrationForm(forms.ModelForm):
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match.")
 
-        return password_confirm
+
+class CustomerLoginForm(AuthenticationForm):
+    username = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}))
