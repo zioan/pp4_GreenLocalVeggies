@@ -30,3 +30,8 @@ def login(request):
     else:
         form = CustomerLoginForm()
     return render(request, 'customer/login.html', {'form': form})
+
+
+def profile(request):
+    user = request.user
+    return render(request, 'customer/profile.html', {'user': user})
