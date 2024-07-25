@@ -1,0 +1,29 @@
+<div>
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-user"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end">
+        {% if request.user.is_authenticated %}
+        <li>
+            <a href="{% url 'profile' %}" class="dropdown-item" type="button">
+                <i class="fas fa-user-circle"></i> My Profile
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#">
+                <i class="fas fa-book-open"></i> My Orders
+            </a>
+        </li>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}" class="dropdown-item" type="button">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+        {% endif %}
+    </ul>
+</div>

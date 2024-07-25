@@ -2,10 +2,9 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">Green Local Veggies</a>
         <div class="d-flex align-items-center">
-            <a href="{% url 'register' %}" class="btn btn-outline-secondary me-2 d-lg-none btn-no-border-outline"
-                type="button">
-                <i class="fas fa-user"></i>
-            </a>
+            <span class="nav-item dropdown btn btn-no-border-outline d-lg-none">
+                {% include "includes/navbar-account-dropdown.html" %}
+            </span>
             <button class="btn btn-outline-secondary me-2 d-lg-none btn-no-border-outline" type="button">
                 <i class="fas fa-shopping-cart"></i>
             </button>
@@ -23,25 +22,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
-                {% comment %} <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li> {% endcomment %}
+                
             </ul>
             <div class="d-none d-lg-flex">
-                <a href="{% url 'register' %}" class="btn btn-outline-secondary me-2 btn-no-border-outline" type="button">
-                    <i class="fas fa-user"></i>
-                </a>
+                <span class="nav-item dropdown btn btn-no-border-outline">
+                    {% include "includes/navbar-account-dropdown.html" %}
+                </span>
                 <button class="btn btn-outline-secondary btn-no-border-outline" type="button">
                     <i class="fas fa-shopping-cart"></i>
                 </button>
