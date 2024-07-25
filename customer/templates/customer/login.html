@@ -2,16 +2,22 @@
 {% block content %}
 <div class="container my-5 form-max-width">
     <h2 class="text-center mb-3">Login</h2>
+    {% if form.errors %}
+    <div class="alert alert-danger text-center" role="alert">
+        Invalid credentials. Please try again.
+    </div>
+    {% endif %}
     <form method="post">
         {% csrf_token %}
+        {% for field in form %}
         <div class="mb-3">
-            {{ form.username.label_tag }}
-            {{ form.username }}
+            {{ field.label_tag }}
+            {{ field }}
+            <div class="field-error">
+                {{ field.errors }}
+            </div>
         </div>
-        <div class="mb-3">
-            {{ form.password.label_tag }}
-            {{ form.password }}
-        </div>
+        {% endfor %}
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>

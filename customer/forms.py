@@ -93,6 +93,17 @@ class CustomerRegistrationForm(forms.ModelForm):
 
 class CustomerLoginForm(AuthenticationForm):
     username = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'form-control'}))
+        widget=forms.EmailInput(attrs={'class': 'form-control'}),
+        required=True,
+        error_messages={
+            'required': 'Email address is required.',
+            'invalid': 'Enter a valid email address.'
+        }
+    )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        required=True,
+        error_messages={
+            'required': 'Password is required.',
+        }
+    )
