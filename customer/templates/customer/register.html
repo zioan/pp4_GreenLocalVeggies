@@ -2,6 +2,9 @@
 {% block content %}
 <div class="container my-5 form-max-width">
     <h2 class="text-center mb-3">Register</h2>
+    <div class=" my-4 text-end">
+        <p>Already registered? <a href="{% url 'login' %}">Login Here!</a></p>
+    </div>
     {% if form.errors %}
         <div class="alert alert-danger text-center" role="alert">
             Please check the registration form for errors.

@@ -2,6 +2,9 @@
 {% block content %}
 <div class="container my-5 form-max-width">
     <h2 class="text-center mb-3">Login</h2>
+    <div class=" my-4 text-end">
+        <p>You need an account? <a href="{% url 'register' %}">Register Here!</a></p>
+    </div>
     {% if form.errors %}
     <div class="alert alert-danger text-center" role="alert">
         Invalid credentials. Please try again.
