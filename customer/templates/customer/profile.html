@@ -1,10 +1,57 @@
+{% extends "base.html" %}
 {% extends 'base.html' %}
 
+{% block title %}My Profile{% endblock title %}
 {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4">Profile</h2>
-    <p>Email: {{ user.email }}</p>
-    <p>First Name: {{ user.first_name }}</p>
-    <p>Last Name: {{ user.last_name }}</p>
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="true">
+                    <i class="fas fa-user"></i> My Profile
+                </a>
+                <a class="nav-link" id="v-pills-orders-tab" data-bs-toggle="pill" href="#v-pills-orders" role="tab" aria-controls="v-pills-orders" aria-selected="false">
+                    <i class="fas fa-shopping-cart"></i> My Orders
+                </a>
+                <a class="nav-link" id="v-pills-details-tab" data-bs-toggle="pill" href="#v-pills-details" role="tab" aria-controls="v-pills-details" aria-selected="false">
+                    <i class="fas fa-edit"></i> Update Profile
+                </a>
+                <a class="nav-link" id="v-pills-password-tab" data-bs-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="false">
+                    <i class="fas fa-key"></i> Change Password
+                </a>
+                <a class="nav-link text-danger" id="v-pills-delete-tab" data-bs-toggle="pill" href="#v-pills-delete" role="tab" aria-controls="v-pills-delete" aria-selected="false">
+                    <i class="fas fa-trash"></i> Delete Account
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    {% include "customer/components/view-profile.html" %}
+                </div>
+
+                <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-orders-tab">
+                    <h2>My Orders</h2>
+                    <p>Order details and history will be displayed here.</p>
+                </div>
+
+                <div class="tab-pane fade" id="v-pills-details" role="tabpanel" aria-labelledby="v-pills-details-tab">
+                    {% include "customer/components/update-profile.html" %}
+                </div>
+
+                <div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
+                    {% include "customer/components/change-password.html" %}
+                </div>
+
+                <div class="tab-pane fade" id="v-pills-delete" role="tabpanel" aria-labelledby="v-pills-delete-tab">
+                    <h2>Delete Account</h2>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
