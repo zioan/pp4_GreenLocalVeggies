@@ -2,6 +2,7 @@ from django import forms
 from .models import CustomerUser
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 def validate_numeric(value):
@@ -156,3 +157,18 @@ class CustomerProfileForm(forms.ModelForm):
         if CustomerUser.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
             raise forms.ValidationError("This email is already in use. Please supply a different email address.")
         return email
+
+
+class CustomerPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="Old Password"
+    )
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="New Password"
+    )
+    new_password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="Confirm New Password"
+    )
