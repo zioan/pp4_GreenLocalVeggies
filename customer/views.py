@@ -1,6 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
-from .forms import CustomerRegistrationForm, CustomerLoginForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from .forms import (
+    CustomerRegistrationForm,
+    CustomerLoginForm,
+    CustomerProfileForm,
+    CustomerPasswordChangeForm
+)
 
 
 def index(request):
@@ -32,6 +39,28 @@ def login(request):
     return render(request, 'customer/login.html', {'form': form})
 
 
+@login_required
 def profile(request):
-    user = request.user
-    return render(request, 'customer/profile.html', {'user': user})
+    # Instantiate the forms outside the POST check so they are always available
+    profile_form = CustomerProfileForm(instance=request.user)
+    password_form = CustomerPasswordChangeForm(request.user)
+
+    if request.method == 'POST':
+        if 'update_profile' in request.POST:
+            profile_form = CustomerProfileForm(
+                request.POST, instance=request.user)
+            if profile_form.is_valid():
+                profile_form.save()
+                return redirect('profile')
+        elif 'change_password' in request.POST:
+            password_form = CustomerPasswordChangeForm(
+                request.user, request.POST)
+            if password_form.is_valid():
+                password_form.save()
+                update_session_auth_hash(request, password_form.user)
+                return redirect('profile')
+
+    return render(request, 'customer/profile.html', {
+        'profile_form': profile_form,
+        'password_form': password_form,
+    })
