@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% extends 'base.html' %}
-
+{% load static %}
 {% block title %}My Profile{% endblock title %}
 {% block content %}
 
@@ -54,4 +53,5 @@
         </div>
     </div>
 </div>
+<script src="{% static "customer/javascript/script.js" %}"></script>
 {% endblock content %}
