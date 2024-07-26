@@ -1,0 +1,16 @@
+<div class="container my-5 form-max-width">
+    <form method="post" action="{% url 'profile' %}">
+        {% csrf_token %}
+        <h3>Update Profile</h3>
+        {% for field in profile_form %}
+        <div class="mb-3">
+            {{ field.label_tag }}
+            {{ field }}
+            <div class="text-danger">
+                {{ field.errors }}
+            </div>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" name="update_profile">Update Profile</button>
+    </form>
+</div>
