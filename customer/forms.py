@@ -107,3 +107,52 @@ class CustomerLoginForm(AuthenticationForm):
             'required': 'Password is required.',
         }
     )
+
+
+class CustomerProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomerUser
+        fields = ['first_name', 'last_name', 'street', 'house_number', 'city', 'zip_code', 'email', 'phone_number']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'street': forms.TextInput(attrs={'class': 'form-control'}),
+            'house_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.Select(attrs={'class': 'form-control'}),
+            'zip_code': forms.Select(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+        error_messages = {
+            "first_name": {
+                "required": "Your first name must not be empty",
+            },
+            "last_name": {
+                "required": "Your last name must not be empty",
+            },
+            "street": {
+                "required": "Your street address must not be empty",
+            },
+            "house_number": {
+                "required": "Your house number must not be empty",
+            },
+            "city": {
+                "required": "We only allow orders from Westerstede, please confirm your city",
+            },
+            "zip_code": {
+                "required": "We only allow orders from 26655, please confirm your zip code",
+            },
+            "email": {
+                "required": "Your email address must not be empty, you use it to login",
+                "unique": "This email address is already registered, please login",
+            },
+            "phone_number": {
+                "required": "Your phone number must not be empty, we may reach you for delivery",
+            },
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if CustomerUser.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError("This email is already in use. Please supply a different email address.")
+        return email
