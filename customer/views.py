@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import logout
+from django.http import HttpResponseForbidden
 from .forms import (
     CustomerRegistrationForm,
     CustomerLoginForm,
@@ -64,3 +66,15 @@ def profile(request):
         'profile_form': profile_form,
         'password_form': password_form,
     })
+
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        user.delete()
+        # Log out the user and redirect to home page
+        logout(request)
+        return redirect('index')
+    else:
+        return HttpResponseForbidden("You cannot access this page.")
