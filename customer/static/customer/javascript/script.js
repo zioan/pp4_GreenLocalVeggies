@@ -7,26 +7,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // If there's a saved tab, activate it
     if (activeTab) {
-        let tab = new bootstrap.Tab(document.querySelector(`a[href="${activeTab}"]`));
-        tab.show();
+        let tabElement = document.querySelector(`a[href="${activeTab}"]`);
+        if (tabElement) {
+            let tab = new bootstrap.Tab(tabElement);
+            tab.show();
+        } else {
+            return
+        }
     }
 
-    // Add click event listener to all nav-link elements
-    document.querySelectorAll('.nav-link').forEach(function (tab) {
+    // Add click event listener to all tab-link elements
+    document.querySelectorAll('.tab-link').forEach(function (tab) {
         tab.addEventListener('click', function (event) {
             // Save the current tab identifier
             sessionStorage.setItem('activeTab', event.target.getAttribute('href'));
         });
     });
-});
 
-// redirect to the profile tab when the cancel button in account delete tab is clicked
-document.getElementById('cancel-account-delete-button')?.addEventListener('click', function(event) {
-    event.preventDefault();
+    // Redirect to the profile tab when the cancel button in account delete tab is clicked
+    document.getElementById('cancel-account-delete-button')?.addEventListener('click', function(event) {
+        event.preventDefault();
 
-    // Set the active tab to "My Profile"
-    sessionStorage.setItem('activeTab', '#v-pills-profile');
+        // Set the active tab to "My Profile"
+        sessionStorage.setItem('activeTab', '#v-pills-profile');
 
-    // Redirect to the profile tab
-    window.location.href = event.target.href;
+        // Redirect to the profile tab
+        window.location.href = event.target.href;
+    });
 });
