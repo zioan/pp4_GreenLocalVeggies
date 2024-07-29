@@ -38,9 +38,28 @@ body {
 }
 
 /* Product card */
-.card:hover {
+.card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-text {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
 .card-img-top {
@@ -56,6 +75,7 @@ body {
     color: #727272;
     font-size: 1.5rem;
 }
+
 .btn-icon:hover {
     color: #727272;
 }
