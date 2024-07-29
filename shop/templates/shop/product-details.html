@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load shop_extras %}
 
 {% block title %}Green Local Veggies - {{ product.name }}{% endblock title %}
 
@@ -42,7 +43,9 @@
                            value="{{ step_value }}"
                            step="{{ step_value }}">
                 </div>
-                <h4 id="product-price" class="text-success mb-3" data-base-price="{{ product.price }}">Total € {{ product.price }}</h4>
+                <h4 id="product-price" class="text-success mb-3" data-base-price="{{ product.price }}">
+                    Total € <span id="total-price">{{ product.price|mul:step_value|floatformat:2 }}</span>
+                </h4>
                 <button type="submit" class="btn btn-primary" {% if product.stock == 0 %}disabled{% endif %}>
                     Add to Cart
                 </button>
