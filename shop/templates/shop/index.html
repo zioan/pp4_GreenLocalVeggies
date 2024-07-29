@@ -6,7 +6,8 @@
 <div class="container mt-5">
     <!-- Search Form -->
     <form class="d-flex mb-4 w-50 m-auto mb-5" role="search" method="GET" action="{% url 'index' %}">
-        <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search" name="q" value="{{ request.GET.q }}">
+        <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search" name="q"
+            value="{{ search_query }}">
         <button class="btn btn-outline-none btn-no-border-outline" type="submit">
             <i class="fas fa-search"></i>
         </button>
