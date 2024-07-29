@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import Http404
+from django.contrib import messages
 from .models import Product
 
 # Create your views here.
@@ -67,3 +67,23 @@ def product_details(request, product_slug):
         "related_products": related_products,
     }
     return render(request, "shop/product-details.html", context)
+
+
+def add_to_cart(request, product_id):
+    if request.method == 'POST':
+        product = get_object_or_404(Product, id=product_id)
+        quantity = float(request.POST.get('quantity', 1))
+
+        if quantity <= 0 or quantity > product.stock:
+            messages.error(request, "Invalid quantity.")
+            return redirect('product-details', product_slug=product.slug)
+
+        cart = request.session.get('cart', {})
+        cart[product_id] = cart.get(product_id, 0) + quantity
+        request.session['cart'] = cart
+
+        messages.success(request, f"{quantity} {product.unit} of {
+                         product.name} added to cart.")
+        return redirect('product-details', product_slug=product.slug)
+
+    return redirect('index')

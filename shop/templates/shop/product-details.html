@@ -29,7 +29,7 @@
             </p>
             <p class="mb-3">Available Quantity: {{ product.stock }} {{ product.unit }}</p>
             
-                <form>
+            <form method="post" action="{% url 'add_to_cart' product.id %}">
                 {% csrf_token %}
                 <div class="d-flex align-items-center mb-3">
                     <label for="quantity" class="me-2">Quantity ({{ product.unit }}):</label>
