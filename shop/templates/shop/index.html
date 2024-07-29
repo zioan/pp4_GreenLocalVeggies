@@ -26,6 +26,29 @@
         {% endif %}
     {% endif %}
 
+
+    <!-- Sorting and Filtering -->
+    <form method="GET" action="{% url 'index' %}" id="filter-form">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <select class="form-select" name="sort" onchange="this.form.submit()">
+                    <option value="">Sort by</option>
+                    <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                    <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                    <option value="name" {% if current_sort == 'name' %}selected{% endif %}>Name</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <select class="form-select" name="category" onchange="this.form.submit()">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category }}" {% if current_category == category %}selected{% endif %}>{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </form>
+
     <!-- Products Grid -->
     <div class="row">
         {% for product in products %}
