@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     "shop",
     "customer",
+    "cart",
 ]
 
 AUTH_USER_MODEL = 'customer.CustomerUser'
