@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from .models import Product
@@ -53,13 +53,17 @@ def index(request):
 
 
 def product_details(request, product_slug):
-    try:
-        product = Product.objects.get(slug=product_slug)
-        step_value = 0.5 if product.allow_half_units else 1
-    except Product.DoesNotExist:
-        raise Http404("Product does not exist")
+    product = get_object_or_404(Product, slug=product_slug)
+    print("The product is", product)
+    step_value = 0.5 if product.allow_half_units else 1
 
-    return render(request, "shop/product-details.html", {
+    # Get related products (same category, excluding current product)
+    related_products = Product.objects.filter(
+        category=product.category).exclude(pk=product.pk)[:4]
+
+    context = {
         "product": product,
-        "step_value": step_value
-    })
+        "step_value": step_value,
+        "related_products": related_products,
+    }
+    return render(request, "shop/product-details.html", context)
