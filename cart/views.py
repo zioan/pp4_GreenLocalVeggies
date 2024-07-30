@@ -21,7 +21,7 @@ def add_to_cart(request, product_id):
 
         return JsonResponse({
             'status': 'success',
-            'message': f"{quantity} {product.unit} of {product.name} added to cart.",
+            'message': f"{product.name} added to cart.",
             'cart_count': len(cart)
         })
 

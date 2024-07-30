@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    document.getElementById('cart-count').textContent = Math.ceil(data.cart_count);
+                    document.querySelectorAll('.cart-count').forEach(el => {
+                        el.textContent = Math.ceil(data.cart_count);
+                    });
                     // alert(data.message);
                 } else {
                     alert(data.message);
