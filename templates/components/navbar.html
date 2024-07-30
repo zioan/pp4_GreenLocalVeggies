@@ -5,9 +5,10 @@
             <span class="nav-item dropdown btn btn-no-border-outline d-lg-none">
                 {% include "includes/navbar-account-dropdown.html" %}
             </span>
-            <button class="btn btn-outline-secondary me-2 d-lg-none btn-no-border-outline" type="button">
+            <a href="{% url 'cart_detail' %}" class="btn btn-outline-secondary">
                 <i class="fas fa-shopping-cart"></i>
-            </button>
+                <span id="cart-count">{{ request.session.cart|length }}</span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -22,15 +23,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
-                
+
             </ul>
             <div class="d-none d-lg-flex">
                 <span class="nav-item dropdown btn btn-no-border-outline">
                     {% include "includes/navbar-account-dropdown.html" %}
                 </span>
-                <button class="btn btn-outline-secondary btn-no-border-outline" type="button">
+                <a href="{% url 'cart_detail' %}" class="btn btn-outline-secondary">
                     <i class="fas fa-shopping-cart"></i>
-                </button>
+                    <span id="cart-count">{{ request.session.cart|length }}</span>
+                </a>
             </div>
         </div>
     </div>
