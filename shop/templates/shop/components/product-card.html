@@ -1,5 +1,4 @@
 {% load static %}
-{% load cart_tags %}
 
 <div class="card h-100">
     <a href="{% url "product-details" product.slug %}">
@@ -18,21 +17,7 @@
             <form action="{% url 'add_to_cart' product.id %}" method="post" class="add-to-cart-form">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
-                {% get_is_in_cart product.id as in_cart %}
-                <button
-                    type="{% if in_cart %}button{% else %}submit{% endif %}"
-                    class="btn btn-sm {% if in_cart %}btn-success{% else %}btn-primary{% endif %}"
-                    data-product-id="{{ product.id }}"
-                    {% if not product.stock %}disabled{% endif %}
-                    {% if in_cart %}onclick="window.location.href='{% url 'cart_detail' %}'"{% endif %}>
-                    
-                    {% if in_cart %}
-                        <i class="fas fa-check"></i> In Cart
-                    {% else %}
-                        <i class="fas fa-cart-plus"></i> Add to Cart
-                    {% endif %}
-                </button>
-            
+                {% include "shop/components/form-btn.html" %}
             </form>
         </div>
     </div>
