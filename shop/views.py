@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from .models import Product
+from cart.cart import Cart
 
 # Create your views here.
 
@@ -71,16 +72,19 @@ def product_details(request, product_slug):
 
 def add_to_cart(request, product_id):
     if request.method == 'POST':
+        cart = Cart(request)
         product = get_object_or_404(Product, id=product_id)
-        quantity = float(request.POST.get('quantity', 1))
+        try:
+            quantity = float(request.POST.get('quantity', 1))
+        except ValueError:
+            messages.error(request, "Invalid quantity.")
+            return redirect('product-details', product_slug=product.slug)
 
         if quantity <= 0 or quantity > product.stock:
             messages.error(request, "Invalid quantity.")
             return redirect('product-details', product_slug=product.slug)
 
-        cart = request.session.get('cart', {})
-        cart[product_id] = cart.get(product_id, 0) + quantity
-        request.session['cart'] = cart
+        cart.add(product=product, quantity=quantity, update_quantity=True)
 
         messages.success(request, f"{quantity} {product.unit} of {
                          product.name} added to cart.")
