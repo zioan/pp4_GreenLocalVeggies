@@ -2,41 +2,70 @@ document.addEventListener('DOMContentLoaded', function() {
     const addToCartForms = document.querySelectorAll('.add-to-cart-form');
 
     addToCartForms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const productId = this.querySelector('button[type="submit"]').getAttribute('data-product-id');
-            
-            fetch(this.action, {
-                method: 'POST',
-                body: new FormData(this),
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRFToken': this.querySelector('[name=csrfmiddlewaretoken]').value,
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    document.querySelectorAll('#cart-count').forEach(el => {
-                        el.textContent = data.cart_count;
-                    });
-                    // alert(data.message);
-                    
-                    // Update add-to-cart buttons when product is added to cart
-                    document.querySelectorAll(`button[data-product-id="${productId}"]`).forEach(button => {
-                        button.innerHTML = '<i class="fas fa-check"></i> In Cart';
-                        button.classList.remove('btn-primary');
-                        button.classList.add('btn-success');
-                    });
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            });
-        });
+        const button = form.querySelector('button[type="submit"]') || form.querySelector('button');
+        
+        if (button) {
+            // Check if the product is already in the cart
+            if (button.classList.contains('btn-success')) {
+                button.type = 'button';
+                button.addEventListener('click', redirectToCart);
+            } else {
+                form.addEventListener('submit', handleAddToCart);
+            }
+        } else {
+            return;
+        }
     });
+
+    function handleAddToCart(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const button = form.querySelector('button[type="submit"]') || form.querySelector('button');
+
+        const productId = button.getAttribute('data-product-id');
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value,
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                updateCartCount(data.cart_count);
+                updateAddToCartButton(productId);
+                // alert(data.message);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function updateCartCount(count) {
+        document.querySelectorAll('#cart-count').forEach(el => {
+            el.textContent = count;
+        });
+    }
+
+    function updateAddToCartButton(productId) {
+        document.querySelectorAll(`button[data-product-id="${productId}"]`).forEach(button => {
+            button.innerHTML = '<i class="fas fa-check"></i> In Cart';
+            button.classList.remove('btn-primary');
+            button.classList.add('btn-success');
+            button.type = 'button';
+            button.removeEventListener('click', handleAddToCart);
+            button.addEventListener('click', redirectToCart);
+        });
+    }
+
+    function redirectToCart() {
+        window.location.href = '/cart/';
+    }
 });
