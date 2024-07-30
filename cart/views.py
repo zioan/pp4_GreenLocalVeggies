@@ -17,18 +17,20 @@ def add_to_cart(request, product_id):
         if quantity <= 0 or quantity > product.stock:
             raise ValidationError("Invalid quantity.")
 
-        cart.add(product=product, quantity=quantity, update_quantity=True)
+        cart.add(product=product, quantity=quantity, update_quantity=False)
 
         return JsonResponse({
             'status': 'success',
-            'message': f"{product.name} added to cart.",
-            'cart_count': len(cart)
+            'message': f"{quantity} {product.unit} of {product.name} added to cart.",
+            'cart_count': len(cart),
+            'product_in_cart': True
         })
 
     except ValidationError as e:
         return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     except Exception as e:
-        return JsonResponse({'status': 'error', 'message': "An unexpected error occurred."}, status=500)
+        return JsonResponse({
+            'status': 'error', 'message': str(e)}, status=500)
 
 
 @require_POST

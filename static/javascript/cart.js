@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const productId = this.querySelector('button[type="submit"]').getAttribute('data-product-id');
+            
             fetch(this.action, {
                 method: 'POST',
                 body: new FormData(this),
@@ -16,10 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    document.querySelectorAll('.cart-count').forEach(el => {
-                        el.textContent = Math.ceil(data.cart_count);
+                    document.querySelectorAll('#cart-count').forEach(el => {
+                        el.textContent = data.cart_count;
                     });
                     // alert(data.message);
+                    
+                    // Update add-to-cart buttons when product is added to cart
+                    document.querySelectorAll(`button[data-product-id="${productId}"]`).forEach(button => {
+                        button.innerHTML = '<i class="fas fa-check"></i> In Cart';
+                        button.classList.remove('btn-primary');
+                        button.classList.add('btn-success');
+                    });
                 } else {
                     alert(data.message);
                 }

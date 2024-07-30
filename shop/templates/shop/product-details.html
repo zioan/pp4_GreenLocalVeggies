@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load shop_extras %}
+{% load cart_tags %}
 
 {% block title %}Green Local Veggies - {{ product.name }}{% endblock title %}
 
@@ -46,8 +47,13 @@
                 <h4 id="product-price" class="text-success mb-3" data-base-price="{{ product.price }}">
                     Total € <span id="total-price">{{ product.price|mul:step_value|floatformat:2 }}</span>
                 </h4>
-                <button type="submit" class="btn btn-primary" {% if not product.stock %}disabled{% endif %}>
-                    Add to Cart
+                {% get_is_in_cart product.id as in_cart %}
+                <button type="submit" class="btn btn-sm {% if in_cart %}btn-success{% else %}btn-primary{% endif %}" data-product-id="{{ product.id }}" {% if not product.stock %}disabled{% endif %}>
+                    {% if in_cart %}
+                        <i class="fas fa-check"></i> In Cart
+                    {% else %}
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    {% endif %}
                 </button>
             </form>
         </div>
