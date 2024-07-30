@@ -7,7 +7,7 @@
             <span class="nav-item dropdown btn btn-no-border-outline d-lg-none">
                 {% include "includes/navbar-account-dropdown.html" %}
             </span>
-            <a href="{% url 'cart_detail' %}" class="btn btn-outline-secondary">
+            <a href="{% url 'cart_detail' %}" class="btn btn-outline-secondary d-lg-none">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count">{% cart_item_count %}</span>
             </a>
