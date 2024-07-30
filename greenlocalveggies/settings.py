@@ -171,3 +171,5 @@ LOGGING = {
         "level": "WARNING",
     },
 }
+
+CART_SESSION_ID = 'cart'
