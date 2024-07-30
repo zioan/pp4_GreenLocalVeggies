@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateCartCount(count) {
-        document.querySelectorAll('#cart-count').forEach(el => {
+        document.querySelectorAll('.cart-count').forEach(el => {
             el.textContent = count;
         });
     }
