@@ -46,7 +46,7 @@
                 <h4 id="product-price" class="text-success mb-3" data-base-price="{{ product.price }}">
                     Total € <span id="total-price">{{ product.price|mul:step_value|floatformat:2 }}</span>
                 </h4>
-                <button type="submit" class="btn btn-primary" {% if product.stock == 0 %}disabled{% endif %}>
+                <button type="submit" class="btn btn-primary" {% if not product.stock %}disabled{% endif %}>
                     Add to Cart
                 </button>
             </form>
