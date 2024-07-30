@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from shop.models import Product
+from math import ceil
 
 
 class Cart:
@@ -20,9 +21,8 @@ class Cart:
         if update_quantity:
             self.cart[product_id]['quantity'] = str(quantity)
         else:
-            new_quantity = Decimal(
-                self.cart[product_id]['quantity']) + Decimal(quantity)
-            self.cart[product_id]['quantity'] = str(new_quantity)
+            self.cart[product_id]['quantity'] = str(
+                Decimal(self.cart[product_id]['quantity']) + quantity)
 
         self.save()
 
@@ -41,7 +41,7 @@ class Cart:
         products = Product.objects.filter(id__in=product_ids)
 
         for product in products:
-            self.cart[str(product.id)]['product'] = product
+            self.cart[str(product.pk)]['product'] = product
 
         for item in self.cart.values():
             item['price'] = Decimal(item['price'])
@@ -50,10 +50,12 @@ class Cart:
             yield item
 
     def __len__(self):
-        return sum(Decimal(item['quantity']) for item in self.cart.values())
+        return int(ceil(sum(Decimal(item['quantity'])
+                            for item in self.cart.values())))
 
     def get_total_price(self):
-        return sum(Decimal(item['price']) * Decimal(item['quantity']) for item in self.cart.values())
+        return sum(Decimal(item['price']) * Decimal(item['quantity'])
+                   for item in self.cart.values())
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
