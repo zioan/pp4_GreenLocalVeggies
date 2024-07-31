@@ -55,12 +55,12 @@ def index(request):
 
 def product_details(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
-    print("The product is", product)
-    step_value = 0.5 if product.allow_half_units else 1
 
     # Get related products (same category, excluding current product)
     related_products = Product.objects.filter(
         category=product.category).exclude(pk=product.pk)[:4]
+
+    step_value = 1
 
     context = {
         "product": product,
@@ -75,7 +75,7 @@ def add_to_cart(request, product_id):
         cart = Cart(request)
         product = get_object_or_404(Product, id=product_id)
         try:
-            quantity = float(request.POST.get('quantity', 1))
+            quantity = int(request.POST.get('quantity', 1))
         except ValueError:
             messages.error(request, "Invalid quantity.")
             return redirect('product-details', product_slug=product.slug)

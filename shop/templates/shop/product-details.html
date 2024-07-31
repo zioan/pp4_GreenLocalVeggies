@@ -38,10 +38,10 @@
                            id="quantity" 
                            name="quantity" 
                            class="form-control quantity-selector" 
-                           min="{{ step_value }}" 
+                        min="1" 
                            max="{{ product.stock }}" 
-                           value="{{ step_value }}"
-                           step="{{ step_value }}">
+                        value="1"
+                        step="1">
                 </div>
                 <h4 id="product-price" class="text-success mb-3" data-base-price="{{ product.price }}">
                     Total € <span id="total-price">{{ product.price|mul:step_value|floatformat:2 }}</span>
