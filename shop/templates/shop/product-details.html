@@ -49,7 +49,7 @@
                         step="1">
                 </div>
                 <h4 id="product-price" class="text-success mb-3" data-base-price="{{ product.price }}">
-                    Total € <span id="total-price">{{ product.price|mul:step_value|floatformat:2 }}</span>
+                    Total € <span id="total-price">{{ product.price }}</span>
                 </h4>
                 {% include "shop/components/form-btn.html" %}
             </form>
