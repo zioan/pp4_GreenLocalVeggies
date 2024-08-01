@@ -135,6 +135,14 @@ body {
     text-decoration: none;
 }
 
+.table td {
+    vertical-align: middle;
+}
+
+.shop-item {
+    height: 38px;
+}
+
 @media (max-width: 576px) {
     .quantity-container {
         width: 100px;
@@ -142,5 +150,9 @@ body {
 
     .shop-item {
         font-size: 0.75rem;
+    }
+
+    .table td {
+        padding: 0.5rem;
     }
 }
