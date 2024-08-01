@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "shop",
     "customer",
     "cart",
+    "orders",
 ]
 
 AUTH_USER_MODEL = 'customer.CustomerUser'
@@ -173,3 +174,4 @@ LOGGING = {
 }
 
 CART_SESSION_ID = 'cart'
+LOGIN_URL = 'login'
