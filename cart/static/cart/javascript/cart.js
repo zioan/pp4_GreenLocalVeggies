@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const quantityContainers = document.querySelectorAll('.quantity-container');
-    
+
     quantityContainers.forEach(container => {
         const input = container.querySelector('.quantity-input');
         const decreaseBtn = container.querySelector('.quantity-decrease');
@@ -22,12 +22,12 @@ function changeQuantity(input, change) {
 function updateQuantity(input) {
     const productId = input.getAttribute('data-product-id');
     const quantity = input.value;
-    const row = input.closest('tr');
+    const cartItem = input.closest('.cart-item');
 
-    updateCart(productId, quantity, row);
+    updateCart(productId, quantity, cartItem);
 }
 
-function updateCart(productId, quantity, row) {
+function updateCart(productId, quantity, cartItem) {
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     fetch(`/cart/update/${productId}/`, {
@@ -42,9 +42,10 @@ function updateCart(productId, quantity, row) {
     .then(data => {
         if (data.status === 'success') {
             document.getElementById('cart-total').textContent = data.cart_total;
-            const pricePerUnit = parseFloat(row.querySelector('td:nth-child(3)').textContent.substring(1));
+            const priceElement = cartItem.querySelector('.text-end.nowrap p:first-child');
+            const pricePerUnit = parseFloat(priceElement.textContent.replace('€', '').trim());
             const newTotal = (quantity * pricePerUnit).toFixed(2);
-            row.querySelector('.item-total').textContent = '€' + newTotal;
+            cartItem.querySelector('.item-total').textContent = newTotal;
         }
     })
     .catch(error => console.error('Error:', error));

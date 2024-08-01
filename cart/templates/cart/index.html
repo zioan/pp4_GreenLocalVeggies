@@ -7,47 +7,53 @@ Your shopping cart
 
 {% block content %}
 <div class="container mt-5">
-    <h1>Your shopping cart</h1>
+    <h1 class="mb-5">Your shopping cart</h1>
     {% if cart_items %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th class="text-end">Price</th>
-                    <th class="text-end">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in cart_items %}
-                    <tr class="align-middle">
-                        <td>{{ item.product.name }}  ({{ item.product.unit }})</td>
-                        <td>
-                            <div class="d-flex align-items-center shop-item">
-                                <div class="quantity-container me-2">
-                                    <button type="button" class="quantity-btn quantity-decrease" data-product-id="{{ item.product.id }}">-</button>
-                                    <input type="number" class="form-control quantity-input" 
-                                           value="{{ item.quantity }}" min="1"
-                                           max="{{ item.product.stock }}"
-                                           data-product-id="{{ item.product.id }}"
-                                           readonly>
-                                    <button type="button" class="quantity-btn quantity-increase" data-product-id="{{ item.product.id }}">+</button>
-                                </div>
-                                <form action="{% url 'remove_from_cart' item.product.id %}" method="post" class="d-inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-link text-danger p-0">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
+        <div class="cart-items">
+            {% for item in cart_items %}
+                <div class="cart-item mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <div class="d-flex align-items-center">
+                                <a href="{% url 'product-details' item.product.slug %}" class="me-3">
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-item-image">
+                                </a>
+                                <a href="{% url 'product-details' item.product.slug %}" class="text-decoration-none text-dark">
+                                    <h5 class="mb-0">{{ item.product.name }} ({{ item.product.unit }})</h5>
+                                </a>
                             </div>
-                        </td>
-                        <td class="text-end nowrap">€ {{ item.price }}</td>
-                        <td class="text-end item-total nowrap">€ {{ item.total_price }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div class="text-end nowrap">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center me-auto">
+                                    <div class="quantity-container me-2">
+                                        <button type="button" class="quantity-btn quantity-decrease" data-product-id="{{ item.product.id }}">-</button>
+                                        <input type="number" class="form-control quantity-input"
+                                               value="{{ item.quantity }}" min="1"
+                                               max="{{ item.product.stock }}"
+                                               data-product-id="{{ item.product.id }}"
+                                               readonly>
+                                        <button type="button" class="quantity-btn quantity-increase" data-product-id="{{ item.product.id }}">+</button>
+                                    </div>
+                                    <form action="{% url 'remove_from_cart' item.product.id %}" method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-link text-secondary p-0">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="text-end nowrap">
+                                    <p class="mb-0">€ {{ item.price }}</p>
+                                    <p class="mb-0 fw-bold">Total: € <span class="item-total">{{ item.total_price }}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-end nowrap mt-4">
+            <hr>
             <h4>Total: € <span id="cart-total">{{ cart.get_total_price }}</span></h4>
         </div>
         <div class="d-flex justify-content-between mt-3">
