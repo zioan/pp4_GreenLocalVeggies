@@ -210,3 +210,17 @@ body {
         font-size: 0.75rem;
     }
 }
+
+/* Cart page user details */
+.card-header {
+    font-weight: bold;
+}
+
+.card-body p {
+    margin-bottom: 0.5rem;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
