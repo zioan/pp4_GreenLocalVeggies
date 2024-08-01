@@ -24,9 +24,13 @@ Your shopping cart
                     <tr>
                         <td>{{ item.product.name }}</td>
                         <td>
-                            <input type="number" class="form-control quantity-input" 
-                                   value="{{ item.quantity }}" min="1" 
-                                   data-product-id="{{ item.product.id }}">
+                            <div class="quantity-container">
+                                <input type="number" class="form-control quantity-input" 
+                                       value="{{ item.quantity }}" min="1"
+                                       max="{{ item.product.stock }}"
+                                       data-product-id="{{ item.product.id }}"
+                                       data-unit="{{ item.product.unit }}">
+                            </div>
                         </td>
                         <td>€ {{ item.price }}</td>
                         <td class="item-total">€ {{ item.total_price }}</td>

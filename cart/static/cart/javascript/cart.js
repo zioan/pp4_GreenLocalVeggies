@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const quantityInputs = document.querySelectorAll('.quantity-input');
     
     quantityInputs.forEach(input => {
+        const container = input.closest('.quantity-container');
+        container.setAttribute('data-unit', input.getAttribute('data-unit'));
+
         input.addEventListener('change', function() {
             const productId = this.getAttribute('data-product-id');
             const quantity = this.value;

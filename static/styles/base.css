@@ -112,6 +112,17 @@ body {
 }
 
 /* Cart page */
-.quantity-input {
-    width: 70px;
+.quantity-container {
+    position: relative;
+    width: 140px;
+}
+
+.quantity-container::after {
+    content: attr(data-unit);
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #727272;
 }
