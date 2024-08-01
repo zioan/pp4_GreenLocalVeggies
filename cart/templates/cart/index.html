@@ -21,15 +21,17 @@ Your shopping cart
             <tbody>
                 {% for item in cart_items %}
                     <tr class="align-middle">
-                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.product.name }}  ({{ item.product.unit }})</td>
                         <td>
                             <div class="d-flex align-items-center shop-item">
                                 <div class="quantity-container me-2">
+                                    <button type="button" class="quantity-btn quantity-decrease" data-product-id="{{ item.product.id }}">-</button>
                                     <input type="number" class="form-control quantity-input" 
                                            value="{{ item.quantity }}" min="1"
                                            max="{{ item.product.stock }}"
                                            data-product-id="{{ item.product.id }}"
-                                           data-unit="{{ item.product.unit }}">
+                                           readonly>
+                                    <button type="button" class="quantity-btn quantity-increase" data-product-id="{{ item.product.id }}">+</button>
                                 </div>
                                 <form action="{% url 'remove_from_cart' item.product.id %}" method="post" class="d-inline">
                                     {% csrf_token %}

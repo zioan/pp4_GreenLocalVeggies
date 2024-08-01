@@ -1,19 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const quantityInputs = document.querySelectorAll('.quantity-input');
+    const quantityContainers = document.querySelectorAll('.quantity-container');
     
-    quantityInputs.forEach(input => {
-        const container = input.closest('.quantity-container');
-        container.setAttribute('data-unit', input.getAttribute('data-unit'));
+    quantityContainers.forEach(container => {
+        const input = container.querySelector('.quantity-input');
+        const decreaseBtn = container.querySelector('.quantity-decrease');
+        const increaseBtn = container.querySelector('.quantity-increase');
 
-        input.addEventListener('change', function() {
-            const productId = this.getAttribute('data-product-id');
-            const quantity = this.value;
-            const row = this.closest('tr');
-
-            updateCart(productId, quantity, row);
-        });
+        decreaseBtn.addEventListener('click', () => changeQuantity(input, -1));
+        increaseBtn.addEventListener('click', () => changeQuantity(input, 1));
     });
 });
+
+function changeQuantity(input, change) {
+    let newValue = parseInt(input.value) + change;
+    if (newValue >= parseInt(input.min) && newValue <= parseInt(input.max)) {
+        input.value = newValue;
+        updateQuantity(input);
+    }
+}
+
+function updateQuantity(input) {
+    const productId = input.getAttribute('data-product-id');
+    const quantity = input.value;
+    const row = input.closest('tr');
+
+    updateCart(productId, quantity, row);
+}
 
 function updateCart(productId, quantity, row) {
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
