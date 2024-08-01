@@ -34,6 +34,24 @@ def add_to_cart(request, product_id):
 
 
 @require_POST
+def update_cart(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    quantity = int(request.POST.get('quantity'))
+
+    if quantity > 0:
+        cart.add(product=product, quantity=quantity, update_quantity=True)
+    else:
+        cart.remove(product)
+
+    return JsonResponse({
+        'status': 'success',
+        'cart_total': cart.get_total_price(),
+        'cart_count': cart.total_quantity(),
+    })
+
+
+@require_POST
 def remove_from_cart(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)

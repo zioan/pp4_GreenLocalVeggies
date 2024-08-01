@@ -97,7 +97,6 @@ body {
     }
 }
 
-
 /* Forms */
 .form-max-width {
     max-width: 480px;
@@ -110,4 +109,9 @@ body {
 
 .field-error li {
     list-style: none;
+}
+
+/* Cart page */
+.quantity-input {
+    width: 70px;
 }

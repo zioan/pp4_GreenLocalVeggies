@@ -6,51 +6,48 @@ Your shopping cart
 {% endblock %}
 
 {% block content %}
-<h1>Your shopping cart</h1>
-{% if cart_items %}
-<table class="table">
-    <thead>
-        <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Remove</th>
-            <th>Unit price</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in cart_items %}
-        <tr>
-            <td>
-                <a href="{{ item.product.get_absolute_url }}">
-                    <img src="{{ item.product.image.url }}" alt="" style="width: 100px;">
-                </a>
-            </td>
-            <td>{{ item.product.name }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>
-                <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Remove" class="btn btn-danger">
-                </form>
-            </td>
-            <td>€{{ item.price }}</td>
-            <td>€{{ item.total_price }}</td>
-        </tr>
-        {% endfor %}
-        <tr class="total">
-            <td colspan="5">Total</td>
-            <td>€{{ cart.get_total_price }}</td>
-        </tr>
-    </tbody>
-</table>
-<p>
-    <a href="{% url 'index' %}" class="btn btn-secondary">Continue shopping</a>
-    <a href="#" class="btn btn-primary">Checkout</a>
-</p>
-{% else %}
-<p>Your cart is empty.</p>
-<a href="{% url 'index' %}" class="btn btn-primary">Go shopping</a>
-{% endif %}
+<div class="container mt-5">
+    <h1>Your shopping cart</h1>
+    {% if cart_items %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>
+                            <input type="number" class="form-control quantity-input" 
+                                   value="{{ item.quantity }}" min="1" 
+                                   data-product-id="{{ item.product.id }}">
+                        </td>
+                        <td>€ {{ item.price }}</td>
+                        <td class="item-total">€ {{ item.total_price }}</td>
+                        <td>
+                            <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-right">
+            <h4>Total: $<span id="cart-total">{{ cart.get_total_price }}</span></h4>
+        </div>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+
+{% csrf_token %}
+<script src="{% static 'cart/javascript/cart.js' %}"></script>
 {% endblock %}
