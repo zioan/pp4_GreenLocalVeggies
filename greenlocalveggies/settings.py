@@ -175,3 +175,6 @@ LOGGING = {
 
 CART_SESSION_ID = 'cart'
 LOGIN_URL = 'login'
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+JSON_ENCODER = 'greenlocalveggies.utils.DecimalEncoder'

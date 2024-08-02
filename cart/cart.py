@@ -26,7 +26,6 @@ class Cart:
         self.save()
 
     def save(self):
-        self.session[settings.CART_SESSION_ID] = self.cart
         self.session.modified = True
 
     def remove(self, product):
@@ -38,20 +37,19 @@ class Cart:
     def __iter__(self):
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
-
+        cart = self.cart.copy()
         for product in products:
-            self.cart[str(product.pk)]['product'] = product
-
-        for item in self.cart.values():
+            cart[str(product.pk)]['product'] = product
+        for item in cart.values():
             item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
+            item['total_price'] = item['price'] * int(item['quantity'])
             yield item
 
     def __len__(self):
         return len(self.cart)
 
     def get_total_price(self):
-        return sum(Decimal(item['price']) * Decimal(item['quantity'])
+        return sum(Decimal(item['price']) * int(item['quantity'])
                    for item in self.cart.values())
 
     def total_quantity(self):
@@ -62,4 +60,17 @@ class Cart:
         self.save()
 
     def get_items(self):
-        return list(self.__iter__())
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+
+        cart_items = []
+        for product in products:
+            item = self.cart[str(product.pk)]
+            cart_items.append({
+                'product': product,
+                'quantity': int(item['quantity']),
+                'price': Decimal(item['price']),
+                'total_price': Decimal(item['price']) * int(item['quantity'])
+            })
+
+        return cart_items
