@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
+from .models import Order
 
 
 @login_required
@@ -28,3 +29,15 @@ def checkout(request):
         form = OrderCreateForm()
     return render(request, 'orders/checkout.html',
                   {'cart': cart, 'form': form})
+
+
+@login_required
+def order_list(request):
+    orders = request.user.orders.all()
+    return render(request, 'orders/order-list.html', {'orders': orders})
+
+
+@login_required
+def order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    return render(request, 'orders/order-detail.html', {'order': order})
