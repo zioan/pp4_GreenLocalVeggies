@@ -34,7 +34,7 @@ def checkout(request):
 @login_required
 def order_list(request):
     orders = request.user.orders.all()
-    return render(request, 'orders/order-list.html', {'orders': orders})
+    return render(request, 'orders/order-history.html', {'orders': orders})
 
 
 @login_required
