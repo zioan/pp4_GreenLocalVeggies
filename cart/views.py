@@ -62,7 +62,6 @@ def remove_from_cart(request, product_id):
 def cart_detail(request):
     cart = Cart(request)
     cart_items = cart.get_items()
-    print("Cart items:", cart_items)
     return render(request, "cart/index.html", {
         "cart": cart,
         "cart_items": cart_items
