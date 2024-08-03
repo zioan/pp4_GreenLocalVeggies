@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
+from django.contrib import messages
 from shop.models import Product
 from decimal import Decimal
 from .cart import Cart
@@ -56,6 +57,7 @@ def remove_from_cart(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
+    messages.success(request, f"{product.name} removed from cart.")
     return redirect("cart_detail")
 
 
