@@ -23,17 +23,8 @@
         {% include "components/top-banner.html" %}
 
         {% include "components/navbar.html" %}
-
-        {% if messages %}
-        <div class="container mt-3">
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
+        
+        {% include "includes/toast.html" %}
 
         {% block content %}
         <p>No products available.</p>
@@ -45,6 +36,14 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
         <script src="{% static "javascript/cart.js" %}"></script>
+        <script src="{% static "javascript/toast.js" %}"></script>
+        <script>
+            {% if messages %}
+                {% for message in messages %}
+                    showToast('{{ message|escapejs }}', '{{ message.tags }}');
+                {% endfor %}
+            {% endif %}
+        </script>
     </body>
 
 </html>
