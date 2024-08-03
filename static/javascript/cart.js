@@ -38,13 +38,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.status === 'success') {
                 updateCartCount(data.cart_count);
                 updateAddToCartButton(productId);
+                showToast(data.message, 'success');
                 // alert(data.message);
             } else {
-                alert(data.message);
+                showToast(data.message, 'danger');
             }
         })
         .catch(error => {
             console.error('Error:', error);
+            showToast('An error occurred. Please try again.', 'danger');
         });
     }
 
