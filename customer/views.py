@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import logout
 from django.http import HttpResponseForbidden
+from django.contrib import messages
 from .forms import (
     CustomerRegistrationForm,
     CustomerLoginForm,
@@ -53,6 +54,8 @@ def profile(request):
                 request.POST, instance=request.user)
             if profile_form.is_valid():
                 profile_form.save()
+                messages.success(
+                    request, 'Your profile has been updated successfully.')
                 return redirect('profile')
         elif 'change_password' in request.POST:
             password_form = CustomerPasswordChangeForm(
@@ -60,6 +63,8 @@ def profile(request):
             if password_form.is_valid():
                 password_form.save()
                 update_session_auth_hash(request, password_form.user)
+                messages.success(
+                    request, 'Your password has been changed successfully.')
                 return redirect('profile')
 
     return render(request, 'customer/profile.html', {
