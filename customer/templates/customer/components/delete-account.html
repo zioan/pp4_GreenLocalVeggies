@@ -1,11 +1,35 @@
 <div class="container my-5 form-max-width">
     <h2 class="text-center mb-3">Delete Account</h2>
-    <form method="post" action="{% url 'delete_account' %}">
+    <form id="delete-account-form" method="post" action="{% url 'delete_account' %}">
         {% csrf_token %}
         <div class="alert alert-danger">
-            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            <p>You are about to delete your account. This action cannot be undone!</p>
         </div>
-        <button type="submit" class="btn btn-danger">Delete Account</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">Delete
+            Account</button>
         <a href="{% url 'profile' %}" id="cancel-account-delete-button" class="btn btn-secondary">Cancel</a>
     </form>
+</div>
+
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmModalLabel">Confirm Account Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert">
+                    <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete">Delete Account</button>
+            </div>
+        </div>
+    </div>
 </div>
