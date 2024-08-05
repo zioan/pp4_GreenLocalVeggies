@@ -1,16 +1,17 @@
-<div class="container my-5 form-max-width">
-    <h2 class="text-center mb-3">Delete Account</h2>
-    <form id="delete-account-form" method="post" action="{% url 'delete_account' %}">
-        {% csrf_token %}
-        <div class="alert alert-danger">
-            <p>You are about to delete your account. This action cannot be undone!</p>
-        </div>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">Delete
-            Account</button>
+{% extends "includes/card-component.html" %}
+{% block card_content %}
+<form id="delete-account-form" method="post" action="{% url 'delete_account' %}">
+    {% csrf_token %}
+    <div class="alert alert-danger">
+        <p>You are about to delete your account. This action cannot be undone!</p>
+    </div>
+    <div class="text-end">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">
+            Delete Account
+        </button>
         <a href="{% url 'profile' %}" id="cancel-account-delete-button" class="btn btn-secondary">Cancel</a>
-    </form>
-</div>
-
+    </div>
+</form>
 
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel"
@@ -33,3 +34,4 @@
         </div>
     </div>
 </div>
+{% endblock %}
