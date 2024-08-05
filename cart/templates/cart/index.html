@@ -11,18 +11,27 @@ Your shopping cart
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="mb-5">Your shopping cart</h1>
+    <h1 class="mb-5 text-center">Your shopping cart</h1>
     {% if cart_items %}
-        <div class="cart-items">
-            {% for item in cart_items %}
+    <div class="card my-5">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">
+                <i class="fas fa-shopping-cart me-2"></i>Your Cart Items
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="cart-items">
+                {% for item in cart_items %}
                 <div class="cart-item mb-4">
                     <div class="row align-items-center">
                         <div class="col-md-6 mb-3 mb-md-0">
                             <div class="d-flex align-items-center">
                                 <a href="{% url 'product-details' item.product.slug %}" class="me-3">
-                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-item-image">
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                                        class="cart-item-image">
                                 </a>
-                                <a href="{% url 'product-details' item.product.slug %}" class="text-decoration-none text-dark">
+                                <a href="{% url 'product-details' item.product.slug %}"
+                                    class="text-decoration-none text-dark">
                                     <h5 class="mb-0">{{ item.product.name }} ({{ item.product.unit }})</h5>
                                 </a>
                             </div>
@@ -31,15 +40,16 @@ Your shopping cart
                             <div class="d-flex align-items-center">
                                 <div class="d-flex align-items-center me-auto">
                                     <div class="quantity-container me-2">
-                                        <button type="button" class="quantity-btn quantity-decrease" data-product-id="{{ item.product.id }}">-</button>
+                                        <button type="button" class="quantity-btn quantity-decrease"
+                                            data-product-id="{{ item.product.id }}">-</button>
                                         <input type="number" class="form-control quantity-input"
-                                               value="{{ item.quantity }}" min="1"
-                                               max="{{ item.product.stock }}"
-                                               data-product-id="{{ item.product.id }}"
-                                               readonly>
-                                        <button type="button" class="quantity-btn quantity-increase" data-product-id="{{ item.product.id }}">+</button>
+                                            value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}"
+                                            data-product-id="{{ item.product.id }}" readonly>
+                                        <button type="button" class="quantity-btn quantity-increase"
+                                            data-product-id="{{ item.product.id }}">+</button>
                                     </div>
-                                    <form action="{% url 'remove_from_cart' item.product.id %}" method="post" class="d-inline">
+                                    <form action="{% url 'remove_from_cart' item.product.id %}" method="post"
+                                        class="d-inline">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-link text-secondary p-0">
                                             <i class="fas fa-trash-alt"></i>
@@ -48,58 +58,63 @@ Your shopping cart
                                 </div>
                                 <div class="text-end nowrap">
                                     <p class="mb-0">€ {{ item.price }}</p>
-                                    <p class="mb-0 fw-bold">Total: € <span class="item-total">{{ item.total_price }}</span></p>
+                                    <p class="mb-0 fw-bold">Total: € <span
+                                            class="item-total">{{ item.total_price }}</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="text-end nowrap mt-4">
+                <hr>
+                <h4>Total: € <span id="cart-total">{{ cart.get_total_price }}</span></h4>
+            </div>
         </div>
-        <div class="text-end nowrap mt-4">
-            <hr>
-            <h4>Total: € <span id="cart-total">{{ cart.get_total_price }}</span></h4>
-        </div>
+    </div>
 
-        {% if user.is_authenticated %}
-        <div class="card mb-4">
-            <div class="card-header bg-light">
-                <h5 class="mb-0"><i class="fas fa-shipping-fast me-2"></i>Delivery Information</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
-                        <p><strong>Email:</strong> {{ user.email }}</p>
-                        <p><strong>Phone:</strong> {{ user.phone_number }}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Address:</strong> {{ user.house_number }} {{ user.street }}</p>
-                        <p><strong>City:</strong> {{ user.city }}</p>
-                        <p><strong>ZIP Code:</strong> {{ user.zip_code }}</p>
-                    </div>
+
+    {% if user.is_authenticated %}
+    <div class="card my-5">
+        <div class="card-header bg-light">
+            <h5 class="mb-0"><i class="fas fa-shipping-fast me-2"></i>Delivery Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Phone:</strong> {{ user.phone_number }}</p>
                 </div>
-                <div class="mt-3">
-                    <a href="{% url 'profile' %}" class="btn btn-outline-secondary btn-sm">
-                        <i class="fas fa-edit me-1"></i>Edit Delivery Information
-                    </a>
+                <div class="col-md-6">
+                    <p><strong>Address:</strong> {{ user.house_number }} {{ user.street }}</p>
+                    <p><strong>City:</strong> {{ user.city }}</p>
+                    <p><strong>ZIP Code:</strong> {{ user.zip_code }}</p>
                 </div>
             </div>
+            <div class="mt-3">
+                <a href="{% url 'profile' %}" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-edit me-1"></i>Edit Delivery Information
+                </a>
+            </div>
         </div>
-        {% else %}
-        <div class="alert alert-info" role="alert">
-            <i class="fas fa-info-circle me-2"></i>Please <a href="{% url 'login' %}">log in</a> to to continue with your order.
-        </div>
-        {% endif %}
-        <div class="d-flex justify-content-between mt-3">
-            <a href="{% url 'index' %}" class="btn btn-secondary">Continue shopping</a>
-            {% if user.is_authenticated %}
-                <a href="{% url 'checkout' %}" class="btn btn-primary">Checkout</a>
-            {% endif %}
-        </div>
+    </div>
     {% else %}
-        <p>Your cart is empty.</p>
-        <a href="{% url 'index' %}" class="btn btn-primary">Go to shop</a>
+    <div class="alert alert-info" role="alert">
+        <i class="fas fa-info-circle me-2"></i>Please <a href="{% url 'login' %}">log in</a> to to continue with your
+        order.
+    </div>
+    {% endif %}
+    <div class="d-flex justify-content-between my-5">
+        <a href="{% url 'index' %}" class="btn btn-secondary">Continue shopping</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'checkout' %}" class="btn btn-primary">Checkout</a>
+        {% endif %}
+    </div>
+    {% else %}
+    <p>Your cart is empty.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary">Go to shop</a>
     {% endif %}
 </div>
 
