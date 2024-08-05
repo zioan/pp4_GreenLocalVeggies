@@ -1,16 +1,18 @@
-<div class="container my-5 form-max-width">
-    <form method="post" action="{% url 'profile' %}">
-        {% csrf_token %}
-        <h3>Update Profile</h3>
-        {% for field in profile_form %}
-        <div class="mb-3">
-            {{ field.label_tag }}
-            {{ field }}
-            <div class="text-danger">
-                {{ field.errors }}
-            </div>
+{% extends "includes/card-component.html" %}
+{% block card_content %}
+<form method="post" action="{% url 'profile' %}">
+    {% csrf_token %}
+    {% for field in profile_form %}
+    <div class="mb-3">
+        {{ field.label_tag }}
+        {{ field }}
+        <div class="text-danger">
+            {{ field.errors }}
         </div>
-        {% endfor %}
+    </div>
+    {% endfor %}
+    <div class="text-end">
         <button type="submit" class="btn btn-primary" name="update_profile">Update Profile</button>
-    </form>
-</div>
+    </div>
+</form>
+{% endblock %}
