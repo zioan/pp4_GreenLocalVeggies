@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib import messages
 from .models import Product
 from cart.cart import Cart
 
@@ -70,24 +71,19 @@ def product_details(request, product_slug):
     return render(request, "shop/product-details.html", context)
 
 
+@require_POST
 def add_to_cart(request, product_id):
-    if request.method == 'POST':
-        cart = Cart(request)
-        product = get_object_or_404(Product, id=product_id)
-        try:
-            quantity = int(request.POST.get('quantity', 1))
-        except ValueError:
-            messages.error(request, "Invalid quantity.")
-            return redirect('product-details', product_slug=product.slug)
-
-        if quantity <= 0 or quantity > product.stock:
-            messages.error(request, "Invalid quantity.")
-            return redirect('product-details', product_slug=product.slug)
-
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    try:
+        quantity = int(request.POST.get('quantity', 1))
         cart.add(product=product, quantity=quantity, update_quantity=True)
-
-        messages.success(request, f"{quantity} {product.unit} of {
-                         product.name} added to cart.")
-        return redirect('product-details', product_slug=product.slug)
-
-    return redirect('index')
+        return JsonResponse({
+            'status': 'success',
+            'message': f"{quantity} {product.unit} of {product.name} added to cart.",
+            # You might need to implement this method
+            'cart_quantity': cart.get_item_quantity(product.pk),
+            'cart_count': len(cart),
+        })
+    except ValueError:
+        return JsonResponse({'status': 'error', 'message': 'Invalid quantity'}, status=400)

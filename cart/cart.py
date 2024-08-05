@@ -55,6 +55,9 @@ class Cart:
     def total_quantity(self):
         return sum(item['quantity'] for item in self.cart.values())
 
+    def get_item_quantity(self, product_id):
+        return self.cart.get(str(product_id), {}).get('quantity', 0)
+
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
         self.save()
