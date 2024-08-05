@@ -57,8 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateAddToCartButton(productId) {
-        document.querySelectorAll(`button[data-product-id="${productId}"]`).forEach(button => {
-            button.innerHTML = '<i class="fas fa-check"></i> In Cart';
+        document.querySelectorAll(`button.btn-primary[data-product-id="${productId}"]`).forEach(button => {
+            button.innerHTML = '<i class="fas fa-check"></i> Show in Cart';
             button.classList.remove('btn-primary');
             button.classList.add('btn-success');
             button.type = 'button';
