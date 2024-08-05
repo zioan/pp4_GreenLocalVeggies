@@ -33,3 +33,24 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const stripeForm = document.getElementById("payment-form");
+    const checkoutFormButton = document.querySelector("#checkout-form input[type='submit']");
+
+    // Function to toggle visibility of the checkout button
+    function toggleCheckoutButtonVisibility() {
+        if (stripeForm) {
+            if (checkoutFormButton) {
+                checkoutFormButton.style.display = 'none';
+            }
+        } else {
+            if (checkoutFormButton) {
+                checkoutFormButton.style.display = 'inline-block';
+            }
+        }
+    }
+
+    // Run the function to set initial visibility
+    toggleCheckoutButtonVisibility();
+});
