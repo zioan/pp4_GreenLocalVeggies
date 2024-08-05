@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Checkout{% endblock %}
+{% block title %}Checkout{% endblock%}
 
 {% block content %}
 <h1>Checkout</h1>
@@ -16,9 +17,29 @@
     </ul>
     <p>Total: ${{ cart.get_total_price }}</p>
 </div>
-<form method="post" class="order-form">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <input type="submit" value="Place order">
+<form method="post" id="checkout-form">
+    {{ form.as_p }} {% csrf_token %}
+    <input type="submit" value="Place order and Pay" />
 </form>
+
+{% if client_secret %}
+<div class="container mt-5">
+    <h1>Complete Your Payment</h1>
+    <p>Total amount: €{{ order.total_price }}</p>
+    <form id="payment-form" data-stripe-publishable-key="{{ STRIPE_PUBLISHABLE_KEY }}"
+        data-client-secret="{{ client_secret }}"
+        data-return-url="{{ request.scheme }}://{{ request.get_host }}{% url 'payment_success' %}">
+        <div id="payment-element">
+            <!-- Stripe.js injects the Payment Element -->
+        </div>
+        <button id="submit" class="btn btn-primary mt-3">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text">Pay now</span>
+        </button>
+        <div id="payment-message" class="hidden"></div>
+    </form>
+</div>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'orders/javascript/payment.js' %}"></script>
+{% endif %}
 {% endblock %}
