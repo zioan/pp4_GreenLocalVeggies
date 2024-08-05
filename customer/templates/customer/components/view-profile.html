@@ -1,51 +1,48 @@
-<div class="card">
-    <div class="card-header">
-        <h3 class="mb-0 text-center">My Profile</h3>
+{% extends "includes/card-component.html" %}
+{% block card_content %}
+<div class="row mb-3 p-3 bg-light rounded">
+    <div class="col-md-4 mb-3">
+        <h6 class="font-weight-bold">First Name</h6>
+        <p>{{ user.first_name }}</p>
     </div>
-    <div class="card-body">
-        <div class="row mb-3">
-            <div class="col-md-4">
-                <h5 class="font-weight-bold">First Name</h5>
-                <p>{{ user.first_name }}</p>
-            </div>
-            <div class="col-md-4">
-                <h5 class="font-weight-bold">Last Name</h5>
-                <p>{{ user.last_name }}</p>
-            </div>
-            <div class="col-md-4">
-                <h5 class="font-weight-bold">Email</h5>
-                <p>{{ user.email }}</p>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-4">
-                <h5 class="font-weight-bold">Phone Number</h5>
-                <p>{{ user.phone_number }}</p>
-            </div>
-            <div class="col-md-4">
-                <h5 class="font-weight-bold">Street</h5>
-                <p>{{ user.street }}</p>
-            </div>
-            <div class="col-md-4">
-                <h5 class="font-weight-bold">House Number</h5>
-                <p>{{ user.house_number }}</p>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <h5 class="font-weight-bold">City</h5>
-                <p>{{ user.city }}</p>
-            </div>
-            <div class="col-md-6">
-                <h5 class="font-weight-bold">ZIP Code</h5>
-                <p>{{ user.zip_code }}</p>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-12">
-                <h5 class="font-weight-bold">Account Created</h5>
-                <p>{{ user.date_joined|date:"d.m.Y" }}</p>
-            </div>
-        </div>
+    <div class="col-md-4 mb-3">
+        <h6 class="font-weight-bold">Last Name</h6>
+        <p>{{ user.last_name }}</p>
+    </div>
+    <div class="col-md-4 mb-3">
+        <h6 class="font-weight-bold">Email</h6>
+        <p>{{ user.email }}</p>
     </div>
 </div>
+<div class="row mb-3 p-3 bg-light rounded">
+    <div class="col-md-4 mb-3">
+        <h6 class="font-weight-bold">Phone Number</h6>
+        <p>{{ user.phone_number }}</p>
+    </div>
+    <div class="col-md-4 mb-3">
+        <h6 class="font-weight-bold">Street</h6>
+        <p>{{ user.street }}</p>
+    </div>
+    <div class="col-md-4 mb-3">
+        <h6 class="font-weight-bold">House Number</h6>
+        <p>{{ user.house_number }}</p>
+    </div>
+</div>
+<div class="row mb-3 p-3 bg-light rounded">
+    <div class="col-md-6 mb-3">
+        <h6 class="font-weight-bold">City</h6>
+        <p>{{ user.city }}</p>
+    </div>
+    <div class="col-md-6 mb-3">
+        <h6 class="font-weight-bold">ZIP Code</h6>
+        <p>{{ user.zip_code }}</p>
+    </div>
+</div>
+<div class="row p-3 bg-light rounded">
+    <div class="col-md-12">
+        <h6 class="font-weight-bold">Account Created</h6>
+        <p>{{ user.date_joined|date:"d.m.Y" }}</p>
+    </div>
+</div>
+
+{% endblock %}
