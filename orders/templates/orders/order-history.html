@@ -1,27 +1,54 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}My Orders{% endblock %}
 
-{% block content %}
-<h1>My Orders</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Order Number</th>
-            <th>Date</th>
-            <th>Total</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for order in orders %}
-        <tr>
-            <td><a href="{% url 'order-detail' order.id %}">{{ order.id }}</a></td>
-            <td>{{ order.created_at }}</td>
-            <td>${{ order.total_price }}</td>
-            <td>{{ order.get_status_display }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'orders/styles/orders.css' %}">
+{% endblock extra_css %}
+
+{{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">
+                <i class="fas fa-history me-2"></i>My Order History
+            </h5>
+        </div>
+        <div class="card-body">
+            {% if orders %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.id }}</td>
+                                    <td>{{ order.created_at|date:"d.m.Y H:i" }}</td>
+                                    <td>€{{ order.total_price|floatformat:2 }}</td>
+                                    <td><span class="badge bg-{{ order.get_status_display|lower }}">{{ order.get_status_display }}</span></td>
+                                    <td>
+                                        <a href="{% url 'order-detail' order.id %}" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye me-1"></i>View
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-center">You haven't placed any orders yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
