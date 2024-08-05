@@ -14,7 +14,7 @@
 {% if client_secret %}
 <div class="container my-5">
     <!-- Payment Form Card -->
-    <div class="card shadow-sm">
+    <div class="card">
         <div class="card-header bg-light">
             <h5 class="mb-0">
                 <i class="fas fa-credit-card me-2"></i>Complete Your Payment
@@ -41,7 +41,7 @@
 
 <div class="container my-5">
     <!-- Order Summary Card -->
-    <div class="card shadow-sm mb-4">
+    <div class="card">
         <div class="card-header bg-light">
             <h5 class="mb-0">
                 <i class="fas fa-box me-2"></i>Your Order
@@ -81,8 +81,8 @@
 </div>
 
 {% if user.is_authenticated %}
-<div class="container">
-    <div class="card mb-4">
+<div class="container my-5">
+    <div class="card">
         <div class="card-header bg-light">
             <h5 class="mb-0"><i class="fas fa-shipping-fast me-2"></i>Delivery Information</h5>
         </div>
