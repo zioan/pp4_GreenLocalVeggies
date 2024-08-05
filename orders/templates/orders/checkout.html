@@ -4,7 +4,7 @@
 {% block title %}Checkout{% endblock%}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'orders/styles/checkout.css' %}">
+<link rel="stylesheet" href="{% static 'orders/styles/orders.css' %}">
 {% endblock extra_css %}
 
 
@@ -53,13 +53,16 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <a href="{% url 'product-details' item.product.slug %}" class="me-3">
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid rounded checkout-item-image">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                                class="img-fluid rounded checkout-item-image">
                         </a>
                         <div>
-                            <a href="{% url 'product-details' item.product.slug %}" class="text-decoration-none text-dark">
+                            <a href="{% url 'product-details' item.product.slug %}"
+                                class="text-decoration-none text-dark">
                                 <h6 class="mb-1">{{ item.product.name }}</h6>
                             </a>
-                            <small class="text-muted">{{ item.quantity }} {{ item.product.unit }} x €{{ item.product.price }}</small>
+                            <small class="text-muted">{{ item.quantity }} {{ item.product.unit }} x €{{
+                                item.product.price }}</small>
                         </div>
                     </div>
                     <div class="text-end">
