@@ -18,42 +18,8 @@
     white-space: nowrap;
 }
 
-.btn-link {
-    text-decoration: none;
-}
-
 @media (max-width: 767px) {
     .cart-item .row {
         flex-direction: column;
     }
-}
-
-@media (max-width: 576px) {
-    .quantity-container {
-        width: 100px;
-    }
-
-    .quantity-input {
-        width: 1.5rem;
-        font-size: 0.875rem;
-    }
-
-    .quantity-btn {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-    }
-}
-
-/* Cart page user details */
-.card-header {
-    font-weight: bold;
-}
-
-.card-body p {
-    margin-bottom: 0.5rem;
-}
-
-.btn-outline-secondary:hover {
-    background-color: #6c757d;
-    color: white;
 }
