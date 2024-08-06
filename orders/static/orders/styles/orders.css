@@ -3,10 +3,10 @@
     height: 80px;
     object-fit: cover;
     border-radius: 4px;
-}
-
-.badge.bg-pending { background-color: #ffc107; }
-.badge.bg-processing { background-color: #17a2b8; }
-.badge.bg-shipped { background-color: #28a745; }
-.badge.bg-delivered { background-color: #28a745; }
-.badge.bg-cancelled { background-color: #dc3545; }
+  }
+  
+  .badge.bg-pending { background-color: var(--warning-color); }
+  .badge.bg-processing { background-color: var(--info-color); }
+  .badge.bg-shipped { background-color: var(--success-color); }
+  .badge.bg-delivered { background-color: var(--success-color); }
+  .badge.bg-cancelled { background-color: var(--danger-color); }
