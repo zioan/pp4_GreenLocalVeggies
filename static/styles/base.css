@@ -14,6 +14,24 @@ body {
   flex: 1;
 }
 
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+    color: var(--white-color);
+}
+
 /* Top banner */
 .top-banner {
   background-color: var(--black-color);
@@ -40,6 +58,15 @@ body {
 /* Product card */
 .card {
   transition: box-shadow var(--transition-speed) ease-in-out;
+  background-color: var(--white-color);
+  border-color: var(--border-color);
+  box-shadow: var(--box-shadow);
+}
+
+.card-header {
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+    border-bottom-color: var(--border-color);
 }
 
 .card:hover {
@@ -92,4 +119,14 @@ body {
 
 .field-error li {
   list-style: none;
+}
+
+.form-control {
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: var(--box-shadow);
 }
