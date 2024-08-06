@@ -1,0 +1,16 @@
+/* Profile tabular view */
+.nav-pills .nav-link {
+    color: var(--text-primary);
+    background-color: var(--bg-light);
+    transition: background-color var(--transition-speed);
+}
+
+.nav-pills .nav-link.active {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+.nav-pills .nav-link:hover {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
