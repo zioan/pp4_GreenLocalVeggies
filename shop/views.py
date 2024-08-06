@@ -12,6 +12,8 @@ def index(request):
     query = request.GET.get('q')
     sort = request.GET.get('sort')
     category = request.GET.get('category')
+    availability = request.GET.get('availability')
+
     products_list = Product.objects.all()
 
     # Apply search filter if query exists
@@ -21,6 +23,13 @@ def index(request):
     # Apply category filter
     if category:
         products_list = products_list.filter(category=category)
+
+    # Apply availability filter
+    if availability:
+        if availability == 'in_stock':
+            products_list = products_list.filter(stock__gt=0)
+        elif availability == 'out_of_stock':
+            products_list = products_list.filter(stock=0)
 
     # Apply sorting
     if sort == 'price_asc':
@@ -48,6 +57,7 @@ def index(request):
         "categories": categories,
         "current_sort": sort,
         "current_category": category,
+        "current_availability": availability,
         "search_query": query,
     }
 
