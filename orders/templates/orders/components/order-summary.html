@@ -1,0 +1,35 @@
+<div class="card mb-4">
+    <div class="card-header bg-light">
+        <h5 class="mb-0">
+            <i class="fas fa-box me-2"></i>Your Order
+        </h5>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            {% for item in cart %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <a href="{% url 'product-details' item.product.slug %}" class="me-3">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                            class="img-fluid rounded checkout-item-image">
+                    </a>
+                    <div>
+                        <a href="{% url 'product-details' item.product.slug %}"
+                            class="text-decoration-none text-dark">
+                            <h6 class="mb-1">{{ item.product.name }}</h6>
+                        </a>
+                        <small class="text-muted">{{ item.quantity }} {{ item.product.unit }} x €{{ item.price }}</small>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <p class="mb-0">Price per {{ item.product.unit }}: €{{ item.price }}</p>
+                    <p class="fw-bold mb-0">Total: €{{ item.total_price }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="mt-4 text-end">
+            <h5>Total: <span class="fw-bold">€{{ cart.get_total_price }}</span></h5>
+        </div>
+    </div>
+</div>

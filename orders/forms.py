@@ -11,7 +11,7 @@ class OrderCreateForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = []  # Add any other fields you want to include
+        fields = []  # No specific fields are needed
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
