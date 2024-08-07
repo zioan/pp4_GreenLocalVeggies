@@ -4,6 +4,7 @@ from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
 from .models import Order
+from delivery_instructions.models import DeliveryInstruction
 from django.conf import settings
 from django.contrib import messages
 import stripe
@@ -15,11 +16,19 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def checkout(request):
     cart = Cart(request)
     if request.method == 'POST':
-        form = OrderCreateForm(request.POST)
+        form = OrderCreateForm(request.POST, user=request.user)
         if form.is_valid():
             order = form.save(commit=False)
             order.user = request.user
             order.total_price = cart.get_total_price()
+
+            saved_instruction = form.cleaned_data.get('saved_instruction')
+            if saved_instruction:
+                order.delivery_instruction = saved_instruction.instruction
+            else:
+                order.delivery_instruction = form.cleaned_data.get(
+                    'delivery_instruction')
+
             order.save()
             for item in cart:
                 OrderItem.objects.create(order=order,
@@ -42,11 +51,15 @@ def checkout(request):
                 'form': form,
             })
     else:
-        form = OrderCreateForm()
+        form = OrderCreateForm(user=request.user)
+
+    saved_instructions = DeliveryInstruction.objects.filter(user=request.user)
+
     return render(request, 'orders/checkout.html', {
         'cart': cart,
         'form': form,
         'STRIPE_PUBLISHABLE_KEY': settings.STRIPE_PUBLISHABLE_KEY,
+        'saved_instructions': saved_instructions,
     })
 
 
