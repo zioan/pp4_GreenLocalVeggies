@@ -37,6 +37,13 @@
             <form method="post" id="checkout-form">
                 {% csrf_token %}
 
+                <!-- Terms and Conditions Checkbox -->
+                <div class="form-check mt-4">
+                    <input class="form-check-input" type="checkbox" id="termsCheckbox">
+                    <label class="form-check-label" for="termsCheckbox">
+                        I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a>
+                    </label>
+                </div>
 
                 <!-- Place Order Button -->
                 <div class="d-grid">
@@ -45,6 +52,9 @@
                 
             </form>
         </div>
+
+        {% include "orders/components/terms-and-conditions.html" %}
+
     </div>
 </div>
 
