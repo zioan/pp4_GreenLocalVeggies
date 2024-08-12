@@ -5,23 +5,19 @@
         </h5>
     </div>
     <div class="card-body">
-        <form method="post" id="checkout-form">
-            {% csrf_token %}
-            <div class="mb-4">
-                <label for="{{ form.saved_instruction.id_for_label }}" class="form-label fw-bold">Select a delivery instruction:</label>
-                {{ form.saved_instruction }}
-            </div>
-            <div id="selectedInstructionDisplay" class="mb-4" style="display: none;">
-                <h6 class="fw-bold">Selected Instruction:</h6>
-                <p id="selectedInstructionText"></p>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <button type="button" class="btn btn-outline-secondary" id="toggleManageInstructions">
-                    <i class="fas fa-cog me-2"></i>Manage Instructions
-                </button>
-                <button type="submit" class="btn btn-primary">Place Order</button>
-            </div>
-        </form>
+        <div class="mb-4">
+            <label for="{{ form.saved_instruction.id_for_label }}" class="form-label fw-bold">Select a delivery instruction:</label>
+            {{ form.saved_instruction }}
+        </div>
+        <div id="selectedInstructionDisplay" class="mb-4" style="display: none;">
+            <h6 class="fw-bold">Selected Instruction:</h6>
+            <p id="selectedInstructionText"></p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <button type="button" class="btn btn-outline-secondary" id="toggleManageInstructions">
+                <i class="fas fa-cog me-2"></i>Manage Instructions
+            </button>
+        </div>
 
         <div id="manageInstructionsSection" style="display: none;">
             <hr>

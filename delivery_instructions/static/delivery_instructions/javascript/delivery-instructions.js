@@ -12,12 +12,55 @@ document.addEventListener('DOMContentLoaded', function() {
     const confirmDeleteBtn = document.getElementById('confirmDelete');
     const selectedInstructionDisplay = document.getElementById('selectedInstructionDisplay');
     const selectedInstructionText = document.getElementById('selectedInstructionText');
+    const checkoutForm = document.getElementById('checkout-form');
+
+    // Hidden input to the checkout form for the selected instruction
+    const hiddenInstructionInput = document.createElement('input');
+    hiddenInstructionInput.type = 'hidden';
+    hiddenInstructionInput.name = 'selected_instruction';
+    hiddenInstructionInput.id = 'selected_instruction';
+    checkoutForm.appendChild(hiddenInstructionInput);
+
+    // Event listener for selecting an instruction from the main dropdown
+    savedInstructionSelect.addEventListener('change', function() {
+        if (this.value) {
+            fetch(`/delivery-instructions/${this.value}/`)
+            .then(response => response.json())
+            .then(data => {
+                selectedInstructionText.textContent = data.instruction;
+                selectedInstructionDisplay.style.display = 'block';
+                hiddenInstructionInput.value = data.instruction;
+            });
+        } else {
+            clearSelectedInstructionDisplay();
+            hiddenInstructionInput.value = '';
+        }
+    });
 
     // Toggle manage instructions section
     toggleManageInstructionsBtn.addEventListener('click', function() {
         manageInstructionsSection.style.display = manageInstructionsSection.style.display === 'none' ? 'block' : 'none';
         if (manageInstructionsSection.style.display === 'block') {
             populateEditSelect();
+        }
+    });
+
+    // Enable/disable Place Order button based on checkbox
+    termsCheckbox.addEventListener('change', function() {
+        placeOrderBtn.disabled = !this.checked;
+    });
+
+    // Handle Place Order button click
+    placeOrderBtn.addEventListener('click', function() {
+        const deliveryInstructionsCard = document.querySelector('.delivery-instructions-card');
+        if (deliveryInstructionsCard) {
+            deliveryInstructionsCard.style.display = 'none';
+        }
+
+        // Show the Stripe payment form (assuming it's hidden initially)
+        const paymentForm = document.getElementById('payment-form');
+        if (paymentForm) {
+            paymentForm.style.display = 'block';
         }
     });
 
@@ -36,11 +79,11 @@ document.addEventListener('DOMContentLoaded', function() {
     savedInstructionSelect.addEventListener('change', function() {
         if (this.value) {
             fetch(`/delivery-instructions/${this.value}/`)
-                .then(response => response.json())
-                .then(data => {
-                    selectedInstructionText.textContent = data.instruction;
-                    selectedInstructionDisplay.style.display = 'block';
-                });
+            .then(response => response.json())
+            .then(data => {
+                selectedInstructionText.textContent = data.instruction;
+                selectedInstructionDisplay.style.display = 'block';
+            });
         } else {
             clearSelectedInstructionDisplay();
         }
@@ -50,15 +93,15 @@ document.addEventListener('DOMContentLoaded', function() {
     editInstructionSelect.addEventListener('change', function() {
         if (this.value) {
             fetch(`/delivery-instructions/${this.value}/`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('instructionAction').value = 'update';
-                    document.getElementById('instructionId').value = data.id;
-                    instructionTitleInput.value = data.title;
-                    instructionTextInput.value = data.instruction;
-                    deleteInstructionBtn.style.display = 'block';
-                    updateSaveButtonState();
-                });
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('instructionAction').value = 'update';
+                document.getElementById('instructionId').value = data.id;
+                instructionTitleInput.value = data.title;
+                instructionTextInput.value = data.instruction;
+                deleteInstructionBtn.style.display = 'block';
+                updateSaveButtonState();
+            });
         } else {
             resetForm();
         }
@@ -156,8 +199,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-     // Function to remove an option from a select element
-     function removeOptionFromSelect(selectElement, value) {
+    // Function to remove an option from a select element
+    function removeOptionFromSelect(selectElement, value) {
         const option = selectElement.querySelector(`option[value="${value}"]`);
         if (option) {
             option.remove();
@@ -168,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function clearSelectedInstructionDisplay() {
         selectedInstructionText.textContent = '';
         selectedInstructionDisplay.style.display = 'none';
+        hiddenInstructionInput.value = '';
     }
 
     // Initial call to set correct button states

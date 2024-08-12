@@ -4,7 +4,6 @@ from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
 from .models import Order
-from delivery_instructions.models import DeliveryInstruction
 from django.conf import settings
 from django.contrib import messages
 import stripe
@@ -22,9 +21,9 @@ def checkout(request):
             order.user = request.user
             order.total_price = cart.get_total_price()
 
-            saved_instruction = form.cleaned_data.get('saved_instruction')
-            if saved_instruction:
-                order.delivery_instruction = saved_instruction.instruction
+            # Get the selected instruction from the form
+            selected_instruction = request.POST.get('selected_instruction', '')
+            order.delivery_instruction = selected_instruction
 
             order.save()
             for item in cart:
