@@ -23,20 +23,8 @@ def checkout(request):
             order.total_price = cart.get_total_price()
 
             saved_instruction = form.cleaned_data.get('saved_instruction')
-            new_instruction = form.cleaned_data.get('delivery_instruction')
-            save_instruction = request.POST.get('save_instruction')
-            instruction_title = request.POST.get('instruction_title')
-
             if saved_instruction:
                 order.delivery_instruction = saved_instruction.instruction
-            elif new_instruction:
-                order.delivery_instruction = new_instruction
-                if save_instruction and instruction_title:
-                    DeliveryInstruction.objects.create(
-                        user=request.user,
-                        title=instruction_title,
-                        instruction=new_instruction
-                    )
 
             order.save()
             for item in cart:
@@ -47,7 +35,6 @@ def checkout(request):
 
             # Create a PaymentIntent with the order amount and currency
             intent = stripe.PaymentIntent.create(
-                # Stripe expects amount in cents
                 amount=int(order.total_price * 100),
                 currency='eur',
                 metadata={'order_id': order.id}
@@ -62,13 +49,10 @@ def checkout(request):
     else:
         form = OrderCreateForm(user=request.user)
 
-    saved_instructions = DeliveryInstruction.objects.filter(user=request.user)
-
     return render(request, 'orders/checkout.html', {
         'cart': cart,
         'form': form,
         'STRIPE_PUBLISHABLE_KEY': settings.STRIPE_PUBLISHABLE_KEY,
-        'saved_instructions': saved_instructions,
     })
 
 
