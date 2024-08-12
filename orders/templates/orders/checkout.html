@@ -15,14 +15,16 @@
         <div class="col-lg-8">
             <!-- Payment Form Card -->
             {% if client_secret %}
-                {% include "orders/components/payment-form.html" %}
+            {% include "orders/components/payment-form.html" %}
             {% endif %}
 
             <!-- Order Summary Card -->
             {% include "orders/components/order-summary.html" %}
 
             <!-- Delivery Instructions Card -->
-            {% include "delivery_instructions/components/delivery-instructions.html" %}
+            <div id="delivery-instructions-section">
+                {% include "delivery_instructions/components/delivery-instructions.html" %}
+            </div>
         </div>
 
         <!-- Delivery Information -->
