@@ -1,0 +1,60 @@
+{% extends "staff_dashboard/base.html" %}
+{% load custom_filters %}
+
+{% block dashboard_content %}
+<h2>Order #{{ order.id }} Details</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Customer Information</h5>
+        <p><strong>Name:</strong> {{ order.user.first_name }} {{ order.user.last_name }}</p>
+        <p><strong>Email:</strong> {{ order.user.email }}</p>
+        <p><strong>Phone:</strong> {{ order.user.phone_number }}</p>
+        <p><strong>Address:</strong> {{ order.user.house_number }} {{ order.user.street }}, {{ order.user.city }} {{ order.user.zip_code }}</p>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title">Order Items</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>€{{ item.price }}</td>
+                    <td>€{{ item.price|mul:item.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h5>Total: €{{ order.total_price }}</h5>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title">Update Order Status</h5>
+        <form method="post" action="{% url 'staff_dashboard:update_order_status' order.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select name="status" id="status" class="form-control">
+                    {% for status, display in order.STATUS_CHOICES %}
+                    <option value="{{ status }}" {% if order.status == status %}selected{% endif %}>{{ display }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Update Status</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "staff_dashboard/base.html" %}
+
+{% block dashboard_content %}
+<h2>Staff Dashboard</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.user.email }}</td>
+            <td>€{{ order.total_price }}</td>
+            <td>{{ order.get_status_display }}</td>
+            <td>
+                <a href="{% url 'staff_dashboard:order_detail' order.id %}" class="btn btn-sm btn-info">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
