@@ -32,6 +32,7 @@ urlpatterns = [
     path('delivery-instructions/', include('delivery_instructions.urls')),
     path('staff/', include('staff_dashboard.urls')),
     path('courier/', include('courier.urls')),
+    path('cookie-policy/', views.cookie_policy, name='cookie_policy'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
