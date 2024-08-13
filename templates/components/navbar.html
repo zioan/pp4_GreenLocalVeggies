@@ -30,6 +30,11 @@
                     <a class="nav-link" href="{% url 'staff_dashboard:order_list' %}">Staff Dashboard</a>
                 </li>
                 {% endif %}
+                {% if request.user.is_courier %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'courier_dashboard' %}">Courier Dashboard</a>
+                </li>
+                {% endif %}
 
             </ul>
             <div class="d-none d-lg-flex">
