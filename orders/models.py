@@ -21,6 +21,9 @@ class Order(models.Model):
         max_length=20, choices=STATUS_CHOICES, default='pending')
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     delivery_instruction = models.TextField(blank=True, null=True)
+    courier = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
+                                null=True, blank=True, related_name='delivered_orders')
+    delivered_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ['-created_at']
