@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from orders.models import Order
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def is_staff(user):
@@ -10,9 +11,19 @@ def is_staff(user):
 
 @login_required
 @user_passes_test(is_staff)
-def staff_dashboard(request):
-    orders = Order.objects.all().order_by('-created_at')
-    return render(request, 'staff_dashboard/dashboard.html', {'orders': orders})
+def order_list(request):
+    order_list = Order.objects.all().order_by('-created_at')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(order_list, 10)  # Show 10 orders per page
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+
+    return render(request, 'staff_dashboard/order_list.html', {'orders': orders})
 
 
 @login_required
