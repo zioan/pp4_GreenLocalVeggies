@@ -19,11 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
 
-            // Hide the delivery instructions section
-            if (deliveryInstructionsSection) {
-                deliveryInstructionsSection.style.display = 'none';
-            }
-
             const { error } = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
@@ -35,33 +30,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 const messageContainer = document.querySelector("#payment-message");
                 messageContainer.textContent = error.message;
                 messageContainer.classList.remove("hidden");
-                
-                // Show the delivery instructions section again if there's an error
-                if (deliveryInstructionsSection) {
-                    deliveryInstructionsSection.style.display = 'block';
-                }
+            } else {
+                // Redirect to post-payment page
+                window.location.href = '/orders/post-payment-redirect/';
             }
         });
+
     }
 });
 
 document.addEventListener("DOMContentLoaded", function() {
     const stripeForm = document.getElementById("payment-form");
-    const checkoutFormButton = document.querySelector("#checkout-form input[type='submit']");
+    const checkoutForm = document.getElementById('checkout-form');
     const deliveryInstructionsSection = document.getElementById("delivery-instructions-section");
 
     // Function to toggle visibility of the checkout button and hide delivery instructions
     function toggleCheckoutButtonVisibility() {
         if (stripeForm) {
-            if (checkoutFormButton) {
-                checkoutFormButton.style.display = 'none';
+            if (checkoutForm) {
+                checkoutForm.style.display = 'none';
             }
             if (deliveryInstructionsSection) {
                 deliveryInstructionsSection.style.display = 'none';
             }
         } else {
-            if (checkoutFormButton) {
-                checkoutFormButton.style.display = 'inline-block';
+            if (checkoutForm) {
+                checkoutForm.style.display = 'inline-block';
             }
             if (deliveryInstructionsSection) {
                 deliveryInstructionsSection.style.display = 'block';
