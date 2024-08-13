@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import OrderItem
 from .forms import OrderCreateForm
@@ -14,6 +14,10 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 @login_required
 def checkout(request):
     cart = Cart(request)
+    if len(cart) == 0:
+        messages.warning(
+            request, "Please add items before checking out.")
+        return redirect('cart_detail')
     if request.method == 'POST':
         form = OrderCreateForm(request.POST, user=request.user)
         if form.is_valid():

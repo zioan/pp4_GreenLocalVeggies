@@ -66,3 +66,26 @@ document.addEventListener("DOMContentLoaded", function() {
     // Run the function to set initial visibility
     toggleCheckoutButtonVisibility();
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    function checkCartAndRedirect() {
+        const cartTotal = document.getElementById('cart-total');
+        if (cartTotal && parseFloat(cartTotal.textContent) === 0) {
+            window.location.href = '/cart/';
+        }
+    }
+
+    checkCartAndRedirect();
+
+    document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) {
+            checkCartAndRedirect();
+        }
+    });
+
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+        checkCartAndRedirect();
+        window.history.pushState(null, "", window.location.href);
+    };
+});
