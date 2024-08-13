@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Order #{{ order.id }} Details{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Order #{{ order.id }} Details</h1>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Order Information</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Customer:</strong> {{ order.user.get_full_name }}</p>
+            <p><strong>Date:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+            <p><strong>Total:</strong> €{{ order.total_price }}</p>
+            <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+            <p><strong>Address:</strong> {{ order.user.house_number }} {{ order.user.street }}, {{ order.user.city }} {{ order.user.zip_code }}</p>
+            <p><strong>Phone:</strong> {{ order.user.phone_number }}</p>
+            
+            <h5 class="mt-4">Order Items</h5>
+            <ul>
+                {% for item in order.items.all %}
+                    <li>{{ item.product.name }} - {{ item.quantity }} x €{{ item.price }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h5 class="mt-4">Delivery Instructions</h5>
+            <p>{{ order.delivery_instruction|default:"No specific instructions" }}</p>
+            
+            <div class="mt-4">
+                <a href="{% url 'courier_mark_delivered' order.id %}" class="btn btn-success">Mark as Delivered</a>
+                <a href="{% url 'courier_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
