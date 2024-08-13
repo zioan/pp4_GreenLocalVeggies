@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "cart",
     "orders",
     "delivery_instructions",
+    "staff_dashboard",
 ]
 
 AUTH_USER_MODEL = 'customer.CustomerUser'
