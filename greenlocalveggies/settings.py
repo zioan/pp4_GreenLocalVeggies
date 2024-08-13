@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "orders",
     "delivery_instructions",
     "staff_dashboard",
+    "courier",
 ]
 
 AUTH_USER_MODEL = 'customer.CustomerUser'
