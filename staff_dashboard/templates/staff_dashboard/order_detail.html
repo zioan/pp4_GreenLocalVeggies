@@ -61,19 +61,26 @@
 
 <div class="card mb-4">
     <div class="card-body">
-        <h5 class="card-title">Update Order Status</h5>
-        <form method="post" action="{% url 'staff_dashboard:update_order_status' order.id %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="status">Status:</label>
-                <select name="status" id="status" class="form-select">
-                    {% for status, display in order.STATUS_CHOICES %}
-                    <option value="{{ status }}" {% if order.status == status %}selected{% endif %}>{{ display }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Update Status</button>
-        </form>
+        <h5 class="card-title">Order Status</h5>
+        <p>Current Status: <strong>{{ order.get_status_display }}</strong></p>
+        {% if order.status == 'processing' %}
+            <form method="post" action="{% url 'staff_dashboard:update_order_status' order.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="status" value="shipped">
+                <div class="mb-3">
+                    <label for="courier" class="form-label">Assign Courier:</label>
+                    <select name="courier" id="courier" class="form-select" required>
+                        <option value="">Select a courier</option>
+                        {% for courier in couriers %}
+                            <option value="{{ courier.id }}">{{ courier.first_name }} {{ courier.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Assign Courier and Mark as Shipped</button>
+            </form>
+        {% elif order.status == 'shipped' %}
+            <p>Assigned Courier: {{ order.courier.first_name }} {{ order.courier.last_name }}</p>
+        {% endif %}
     </div>
 </div>
 
