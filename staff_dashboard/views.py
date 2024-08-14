@@ -12,10 +12,15 @@ def is_staff(user):
 @login_required
 @user_passes_test(is_staff)
 def order_list(request):
+    status_filter = request.GET.get('status', '')
     order_list = Order.objects.all().order_by('-created_at')
-    page = request.GET.get('page', 1)
 
+    if status_filter:
+        order_list = order_list.filter(status=status_filter)
+
+    page = request.GET.get('page', 1)
     paginator = Paginator(order_list, 10)  # Show 10 orders per page
+
     try:
         orders = paginator.page(page)
     except PageNotAnInteger:
@@ -23,7 +28,14 @@ def order_list(request):
     except EmptyPage:
         orders = paginator.page(paginator.num_pages)
 
-    return render(request, 'staff_dashboard/order_list.html', {'orders': orders})
+    status_choices = Order.STATUS_CHOICES
+
+    context = {
+        'orders': orders,
+        'status_choices': status_choices,
+        'current_status': status_filter
+    }
+    return render(request, 'staff_dashboard/order_list.html', context)
 
 
 @login_required
