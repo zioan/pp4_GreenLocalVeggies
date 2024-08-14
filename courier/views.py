@@ -12,15 +12,23 @@ def is_courier(user):
 @user_passes_test(is_courier)
 def courier_dashboard(request):
     shipped_orders = Order.objects.filter(status='shipped')
+    delivered_orders = Order.objects.filter(
+        status='delivered', courier=request.user)
     return render(request, 'courier/dashboard.html', {
-        'orders': shipped_orders
+        'shipped_orders': shipped_orders,
+        'delivered_orders': delivered_orders
     })
 
 
 @login_required
 @user_passes_test(is_courier)
 def order_detail(request, order_id):
-    order = get_object_or_404(Order, id=order_id, status='shipped')
+    order = get_object_or_404(Order, id=order_id)
+
+    # Check if the order is either shipped or delivered by the current courier
+    if order.status not in ['shipped', 'delivered'] or (order.status == 'delivered' and order.courier != request.user):
+        return render(request, '404.html', status=404)
+
     return render(request, 'courier/order_detail.html', {'order': order})
 
 

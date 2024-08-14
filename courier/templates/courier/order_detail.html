@@ -10,10 +10,13 @@
             <h5 class="mb-0">Order Information</h5>
         </div>
         <div class="card-body">
-            <p><strong>Customer:</strong> {{ order.user.get_full_name }}</p>
+            <p><strong>Customer:</strong> {{ order.user.first_name }} {{ order.user.last_name }}</p>
             <p><strong>Date:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
             <p><strong>Total:</strong> €{{ order.total_price }}</p>
             <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+            {% if order.status == 'delivered' %}
+                <p><strong>Delivered at:</strong> {{ order.delivered_at|date:"d.m.Y H:i" }}</p>
+            {% endif %}
             <p><strong>Address:</strong> {{ order.user.house_number }} {{ order.user.street }}, {{ order.user.city }} {{ order.user.zip_code }}</p>
             <p><strong>Phone:</strong> {{ order.user.phone_number }}</p>
             
@@ -28,7 +31,9 @@
             <p>{{ order.delivery_instruction|default:"No specific instructions" }}</p>
             
             <div class="mt-4">
-                <a href="{% url 'courier_mark_delivered' order.id %}" class="btn btn-success">Mark as Delivered</a>
+                {% if order.status == 'shipped' %}
+                    <a href="{% url 'courier_mark_delivered' order.id %}" class="btn btn-success">Mark as Delivered</a>
+                {% endif %}
                 <a href="{% url 'courier_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
             </div>
         </div>
