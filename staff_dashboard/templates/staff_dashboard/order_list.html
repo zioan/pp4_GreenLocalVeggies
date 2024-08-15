@@ -46,7 +46,7 @@
                         <td>{{ order.id }}</td>
                         <td>{{ order.user.first_name }} {{ order.user.last_name }}</td>
                         <td>€{{ order.total_price|floatformat:2 }}</td>
-                        <td>{{ order.get_status_display }}</td>
+                        <td><span class="badge bg-{{ order.get_status_display|lower }}">{{ order.get_status_display }}</span></td>
                         <td>{{ order.created_at|date:"d/m/Y H:i" }}</td>
                         <td>
                             <a href="{% url 'staff_dashboard:order_detail' order.id %}?status={{ current_status }}&page={{ orders.number }}" class="btn btn-sm btn-primary">View</a>
@@ -68,8 +68,8 @@
                     <p class="card-text">
                         <strong>Customer:</strong> {{ order.user.first_name }} {{ order.user.last_name }}<br>
                         <strong>Total Price:</strong> €{{ order.total_price|floatformat:2 }}<br>
-                        <strong>Status:</strong> {{ order.get_status_display }}<br>
-                        <strong>Date:</strong> {{ order.created_at|date:"d/m/Y H:i" }}
+                        <strong>Status:</strong> <span class="badge bg-{{ order.get_status_display|lower }}">{{ order.get_status_display }}</span><br>
+                        <strong>Order Date:</strong> {{ order.created_at|date:"d/m/Y H:i" }}
                     </p>
                     <a href="{% url 'staff_dashboard:order_detail' order.id %}?status={{ current_status }}&page={{ orders.number }}" class="btn btn-primary w-100">View Details</a>
                 </div>
