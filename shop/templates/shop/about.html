@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About Green Local Veggies{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-5">About Green Local Veggies</h1>
+
+    <div class="row about-section">
+        <div class="col-md-6">
+            <h2>Our Story</h2>
+            <p>Green Local Veggies was founded in 2024 with a simple mission: to bring the freshest, locally-sourced produce directly to the doorsteps of Westerstede residents. We believe in supporting local farmers, reducing food miles, and promoting healthy eating habits in our community.</p>
+            <p>Our team of dedicated professionals works tirelessly to ensure that you receive the highest quality fruits and vegetables, harvested at their peak freshness.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'shop/images/local-farm.jpg' %}" alt="Local farm" class="about-image">
+        </div>
+    </div>
+
+    <div class="row about-section">
+        <div class="col-md-6 order-md-2">
+            <h2>Our Commitment</h2>
+            <p>At Green Local Veggies, we are committed to:</p>
+            <ul>
+                <li>Sourcing only the freshest, locally-grown produce</li>
+                <li>Supporting local farmers and the Westerstede economy</li>
+                <li>Reducing food miles and our carbon footprint</li>
+                <li>Promoting healthy eating habits in our community</li>
+                <li>Providing exceptional customer service</li>
+            </ul>
+        </div>
+        <div class="col-md-6 order-md-1">
+            <img src="{% static 'shop/images/fresh-vegetables.jpg' %}" alt="Fresh vegetables" class="about-image">
+        </div>
+    </div>
+
+    <div class="row about-section">
+        <div class="col-md-6">
+            <h2>Our Service</h2>
+            <p>We offer a convenient online ordering system and fast delivery service exclusively within Westerstede (26655). Our delivery times are between 09:00 and 18:00, Monday through Saturday.</p>
+            <p>Orders placed before 16:00 on weekdays are delivered the same day. Orders placed after 16:00 or on weekends will be delivered the next business day.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'shop/images/delivery-van.jpg' %}" alt="Delivery van" class="about-image">
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{% url 'index' %}" class="btn btn-primary">Start Shopping</a>
+    </div>
+</div>
+{% endblock %}

@@ -273,3 +273,17 @@ body {
 .badge.bg-shipped { background-color: var(--success-color); }
 .badge.bg-delivered { background-color: var(--success-color); }
 .badge.bg-cancelled { background-color: var(--danger-color); }
+
+/* About Page */
+.about-section {
+    background-color: var(--bg-light);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+.about-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}

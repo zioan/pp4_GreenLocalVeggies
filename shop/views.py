@@ -97,3 +97,7 @@ def add_to_cart(request, product_id):
         })
     except ValueError:
         return JsonResponse({'status': 'error', 'message': 'Invalid quantity'}, status=400)
+
+
+def about(request):
+    return render(request, 'shop/about.html')
