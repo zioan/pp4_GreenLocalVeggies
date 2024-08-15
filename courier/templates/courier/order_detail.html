@@ -3,25 +3,37 @@
 {% block title %}Order #{{ order.id }} Details{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="mb-4">Order #{{ order.id }} Details</h1>
+<div class="container mt-3 mt-md-5">
+    <h1 class="mb-3 mb-md-4 fs-3">Order #{{ order.id }} Details</h1>
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">Order Information</h5>
         </div>
         <div class="card-body">
-            <p><strong>Customer:</strong> {{ order.user.first_name }} {{ order.user.last_name }}</p>
-            <p><strong>Date:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
-            <p><strong>Total:</strong> €{{ order.total_price|floatformat:2 }}</p>
-            <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3">
+                <div>
+                    <p class="mb-1"><strong>Customer:</strong> {{ order.user.first_name }} {{ order.user.last_name }}</p>
+                    <p class="mb-1"><strong>Phone:</strong> {{ order.user.phone_number }}</p>
+                    <p class="mb-1"><strong>Address:</strong> {{ order.user.house_number }} {{ order.user.street }}, {{ order.user.city }} {{ order.user.zip_code }}</p>
+                </div>
+                <!-- Google Maps link to the customer's address. Made with ChatGPT -->
+                <a href="https://www.google.com/maps/dir/?api=1&origin=current+location&destination={{ order.user.house_number }}+{{ order.user.street }}+{{ order.user.city }}+{{ order.user.zip_code }}" 
+                   class="btn btn-primary mt-2 mt-md-0" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <i class="fas fa-map-marker-alt me-2"></i>Go to Address
+                </a>
+            </div>
+            
+            <p class="mb-1"><strong>Order Date:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+            <p class="mb-1"><strong>Total:</strong> €{{ order.total_price|floatformat:2 }}</p>
+            <p class="mb-1"><strong>Status:</strong> {{ order.get_status_display }}</p>
             {% if order.status == 'delivered' %}
-                <p><strong>Delivered at:</strong> {{ order.delivered_at|date:"d.m.Y H:i" }}</p>
+                <p class="mb-1"><strong>Delivered at:</strong> {{ order.delivered_at|date:"d.m.Y H:i" }}</p>
             {% endif %}
-            <p><strong>Address:</strong> {{ order.user.house_number }} {{ order.user.street }}, {{ order.user.city }} {{ order.user.zip_code }}</p>
-            <p><strong>Phone:</strong> {{ order.user.phone_number }}</p>
             
             <h5 class="mt-4">Order Items</h5>
-            <ul>
+            <ul class="list-unstyled">
                 {% for item in order.items.all %}
                     <li>{{ item.product.name }} - {{ item.quantity }} x €{{ item.price }}</li>
                 {% endfor %}
@@ -30,7 +42,7 @@
             <h5 class="mt-4">Delivery Instructions</h5>
             <p>{{ order.delivery_instruction|default:"No specific instructions" }}</p>
             
-            <div class="mt-4">
+            <div class="mt-4 d-flex flex-wrap gap-2">
                 {% if order.status == 'shipped' %}
                     <a href="{% url 'courier_mark_delivered' order.id %}" class="btn btn-success">Mark as Delivered</a>
                 {% endif %}
@@ -40,3 +52,4 @@
     </div>
 </div>
 {% endblock %}
+
