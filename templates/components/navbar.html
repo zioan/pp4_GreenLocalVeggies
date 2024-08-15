@@ -17,20 +17,22 @@
                         href="{% url 'index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                        href="{% url 'about' %}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                        href="{% url 'contact' %}">Contact</a>
                 </li>
                 {% if request.user.is_staff %}
                 <li class="nav-item">
-                    <a class="nav-link {% if 'staff_dashboard' in request.path %}active{% endif %}"
+                    <a class="nav-link {% if request.resolver_match.app_name == 'staff_dashboard' %}active{% endif %}"
                         href="{% url 'staff_dashboard:order_list' %}">Staff Dashboard</a>
                 </li>
                 {% endif %}
                 {% if request.user.is_courier %}
                 <li class="nav-item">
-                    <a class="nav-link {% if 'courier_dashboard' in request.path %}active{% endif %}"
+                    <a class="nav-link {% if request.resolver_match.url_name == 'courier_dashboard' %}active{% endif %}"
                         href="{% url 'courier_dashboard' %}">Courier Dashboard</a>
                 </li>
                 {% endif %}
