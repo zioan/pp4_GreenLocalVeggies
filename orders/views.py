@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
@@ -107,3 +108,17 @@ def order_list(request):
 def order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
     return render(request, 'orders/order-detail.html', {'order': order})
+
+
+@login_required
+@require_POST
+def cancel_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+
+    if order.cancel():
+        messages.success(request, f"Order #{
+                         order.pk} has been successfully cancelled.")
+    else:
+        messages.error(request, f"Order #{order.pk} cannot be cancelled.")
+
+    return redirect('order-detail', order_id=order.pk)

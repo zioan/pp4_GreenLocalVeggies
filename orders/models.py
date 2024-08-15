@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from shop.models import Product
+from django.utils import timezone
 
 
 class Order(models.Model):
@@ -24,12 +25,21 @@ class Order(models.Model):
     courier = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
                                 null=True, blank=True, related_name='delivered_orders')
     delivered_at = models.DateTimeField(null=True, blank=True)
+    cancelled_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ['-created_at']
 
     def __str__(self):
         return f'Order {self.id}'
+
+    def cancel(self):
+        if self.status in ['pending', 'processing']:
+            self.status = 'cancelled'
+            self.cancelled_at = timezone.now()
+            self.save()
+            return True
+        return False
 
 
 class OrderItem(models.Model):

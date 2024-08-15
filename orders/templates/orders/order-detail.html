@@ -62,6 +62,36 @@
                 <a href="{% url 'order-history' %}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left me-2"></i>Back to Order History
                 </a>
+                <!-- Cancel Order Button (only show for pending or processing orders) -->
+                {% if order.status == 'pending' or order.status == 'processing' %}
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelOrderModal">
+                    <i class="fas fa-times me-2"></i>Cancel Order
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Order Modal -->
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelOrderModalLabel">Confirm Order Cancellation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel this order?</p>
+                <p>If you change your mind, please contact us and we will assist you with your order.</p>
+                <p>If you already paid for the order, a refund will be issued to your account in 3-5 business days.</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="{% url 'cancel-order' order.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Confirm Cancellation</button>
+                </form>
             </div>
         </div>
     </div>
