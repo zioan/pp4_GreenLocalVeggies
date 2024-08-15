@@ -28,7 +28,7 @@ Your shopping cart
                             <div class="d-flex align-items-center">
                                 <a href="{% url 'product-details' item.product.slug %}" class="me-3">
                                     <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
-                                        class="cart-item-image">
+                                        class="thumbnail">
                                 </a>
                                 <a href="{% url 'product-details' item.product.slug %}"
                                     class="text-decoration-none text-dark">

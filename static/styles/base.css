@@ -193,3 +193,18 @@ body {
         margin-top: 10px;
     }
 }
+
+/* Thumbnail image */
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+/* Order Status */
+.badge.bg-pending { background-color: var(--warning-color); }
+.badge.bg-processing { background-color: var(--info-color); }
+.badge.bg-shipped { background-color: var(--success-color); }
+.badge.bg-delivered { background-color: var(--success-color); }
+.badge.bg-cancelled { background-color: var(--danger-color); }
