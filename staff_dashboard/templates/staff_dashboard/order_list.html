@@ -45,7 +45,7 @@
                     <tr>
                         <td>{{ order.id }}</td>
                         <td>{{ order.user.first_name }} {{ order.user.last_name }}</td>
-                        <td>€{{ order.total_price }}</td>
+                        <td>€{{ order.total_price|floatformat:2 }}</td>
                         <td>{{ order.get_status_display }}</td>
                         <td>{{ order.created_at|date:"d/m/Y H:i" }}</td>
                         <td>

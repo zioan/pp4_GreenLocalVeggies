@@ -5,7 +5,7 @@
         </h5>
     </div>
     <div class="card-body">
-        <p class="mb-4">Total amount: €{{ cart.get_total_price }}</p>
+        <p class="mb-4">Total amount: €{{ cart.get_total_price|floatformat:2 }}</p>
         <form id="payment-form" data-stripe-publishable-key="{{ STRIPE_PUBLISHABLE_KEY }}"
             data-client-secret="{{ client_secret }}"
             data-return-url="{{ request.scheme }}://{{ request.get_host }}{% url 'payment_success' %}">

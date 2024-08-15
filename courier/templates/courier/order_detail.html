@@ -12,7 +12,7 @@
         <div class="card-body">
             <p><strong>Customer:</strong> {{ order.user.first_name }} {{ order.user.last_name }}</p>
             <p><strong>Date:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
-            <p><strong>Total:</strong> €{{ order.total_price }}</p>
+            <p><strong>Total:</strong> €{{ order.total_price|floatformat:2 }}</p>
             <p><strong>Status:</strong> {{ order.get_status_display }}</p>
             {% if order.status == 'delivered' %}
                 <p><strong>Delivered at:</strong> {{ order.delivered_at|date:"d.m.Y H:i" }}</p>

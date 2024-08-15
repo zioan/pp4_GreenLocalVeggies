@@ -59,7 +59,7 @@ Your shopping cart
                                 <div class="text-end nowrap">
                                     <p class="mb-0">€ {{ item.price }}</p>
                                     <p class="mb-0 fw-bold">Total: € <span
-                                            class="item-total">{{ item.total_price }}</span></p>
+                                            class="item-total">{{ item.total_price|floatformat:2 }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@ Your shopping cart
             </div>
             <div class="text-end nowrap mt-4">
                 <hr>
-                <h4>Total: € <span id="cart-total">{{ cart.get_total_price }}</span></h4>
+                <h4>Total: € <span id="cart-total">{{ cart.get_total_price|floatformat:2 }}</span></h4>
             </div>
         </div>
     </div>
