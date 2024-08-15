@@ -21,6 +21,7 @@
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
             </div>
+            <input type="hidden" name="page" value="{{ current_page }}">
         </form>
     </div>
 </div>
@@ -48,7 +49,7 @@
                         <td>{{ order.get_status_display }}</td>
                         <td>{{ order.created_at|date:"d/m/Y H:i" }}</td>
                         <td>
-                            <a href="{% url 'staff_dashboard:order_detail' order.id %}" class="btn btn-sm btn-primary">View</a>
+                            <a href="{% url 'staff_dashboard:order_detail' order.id %}?status={{ current_status }}&page={{ orders.number }}" class="btn btn-sm btn-primary">View</a>
                         </td>
                     </tr>
                     {% empty %}
@@ -67,7 +68,7 @@
     <ul class="pagination justify-content-center">
         {% if orders.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ orders.previous_page_number }}{% if current_status %}&status={{ current_status }}{% endif %}">&laquo; Previous</a>
+                <a class="page-link" href="?page={{ orders.previous_page_number }}&status={{ current_status }}">&laquo; Previous</a>
             </li>
         {% else %}
             <li class="page-item disabled">
@@ -82,14 +83,14 @@
                 </li>
             {% else %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ i }}{% if current_status %}&status={{ current_status }}{% endif %}">{{ i }}</a>
+                    <a class="page-link" href="?page={{ i }}&status={{ current_status }}">{{ i }}</a>
                 </li>
             {% endif %}
         {% endfor %}
 
         {% if orders.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ orders.next_page_number }}{% if current_status %}&status={{ current_status }}{% endif %}">Next &raquo;</a>
+                <a class="page-link" href="?page={{ orders.next_page_number }}&status={{ current_status }}">Next &raquo;</a>
             </li>
         {% else %}
             <li class="page-item disabled">

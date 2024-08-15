@@ -4,7 +4,7 @@
 {% block dashboard_content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Order #{{ order.id }} Details</h2>
-    <a href="{% url 'staff_dashboard:order_list' %}" class="btn btn-secondary">
+    <a href="{% url 'staff_dashboard:order_list' %}?status={{ current_status }}&page={{ current_page }}" class="btn btn-secondary">
         <i class="fas fa-arrow-left"></i> Back to Orders
     </a>
 </div>
@@ -84,8 +84,8 @@
     </div>
 </div>
 
-<div class="mt-4">
-    <a href="{% url 'staff_dashboard:order_list' %}" class="btn btn-secondary">
+<div class="d-flex justify-content-end my-4">
+    <a href="{% url 'staff_dashboard:order_list' %}?status={{ current_status }}&page={{ current_page }}" class="btn btn-secondary">
         <i class="fas fa-arrow-left"></i> Back to Orders
     </a>
 </div>
