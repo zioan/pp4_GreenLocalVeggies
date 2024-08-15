@@ -19,6 +19,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}">About</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                </li>
                 {% if request.user.is_staff %}
                 <li class="nav-item">
                     <a class="nav-link {% if 'staff_dashboard' in request.path %}active{% endif %}"

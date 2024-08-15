@@ -101,3 +101,7 @@ def add_to_cart(request, product_id):
 
 def about(request):
     return render(request, 'shop/about.html')
+
+
+def contact(request):
+    return render(request, 'shop/contact.html')
