@@ -25,7 +25,9 @@ from . import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("customers/", include('customer.urls')),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'),
+         name='logout'
+         ),
     path("", include("shop.urls")),
     path('cart/', include('cart.urls')),
     path('orders/', include('orders.urls')),
