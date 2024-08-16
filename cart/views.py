@@ -10,11 +10,22 @@ from .cart import Cart
 
 @require_POST
 def add_to_cart(request, product_id):
+    """
+    Add a product to the cart.
+
+    Args:
+        request: The HTTP request object.
+        product_id (int): The ID of the product to add.
+
+    Returns:
+        JsonResponse: A JSON response indicating success or failure.
+    """
     try:
         cart = Cart(request)
         product = get_object_or_404(Product, id=product_id)
         quantity = Decimal(request.POST.get('quantity', '1'))
 
+        # Validate quantity
         if quantity <= 0 or quantity > product.stock:
             raise ValidationError("Invalid quantity.")
 
@@ -36,6 +47,16 @@ def add_to_cart(request, product_id):
 
 @require_POST
 def update_cart(request, product_id):
+    """
+    Update the quantity of a product in the cart.
+
+    Args:
+        request: The HTTP request object.
+        product_id (int): The ID of the product to update.
+
+    Returns:
+        JsonResponse: A JSON response with updated cart information.
+    """
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity'))
@@ -54,6 +75,16 @@ def update_cart(request, product_id):
 
 @require_POST
 def remove_from_cart(request, product_id):
+    """
+    Remove a product from the cart.
+
+    Args:
+        request: The HTTP request object.
+        product_id (int): The ID of the product to remove.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the cart detail page.
+    """
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
@@ -62,6 +93,15 @@ def remove_from_cart(request, product_id):
 
 
 def cart_detail(request):
+    """
+    Display the cart details.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse: Renders the cart detail page.
+    """
     cart = Cart(request)
     cart_items = cart.get_items()
     return render(request, "cart/index.html", {
