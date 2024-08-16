@@ -13,12 +13,16 @@
             </h5>
         </div>
         <div class="card-body">
+            
+            <!-- Order and Delivery Information -->
             <div class="row mb-4">
                 <div class="col-md-6">
                     <h6 class="text-muted">Order Information</h6>
                     <p><strong>Order Date:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
-                    <p><strong>Status:</strong> <span
-                            class="badge bg-{{ order.get_status_display|lower }}">{{ order.get_status_display }}</span>
+                    <p><strong>Status:</strong> 
+                        <span class="badge bg-{{ order.get_status_display|lower }}">
+                            {{ order.get_status_display }}
+                        </span>
                     </p>
                     {% if order.status == 'delivered' %}
                     <p><strong>Delivered Date:</strong> {{ order.delivered_at|date:"d.m.Y H:i" }}</p>
@@ -42,6 +46,7 @@
                 </div>
             </div>
 
+            <!-- Order Items Table -->
             <h6 class="text-muted mb-3">Order Items</h6>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -78,6 +83,7 @@
                 </table>
             </div>
 
+            <!-- Display Delivery Instructions if available -->
             {% if order.delivery_instruction %}
             <div class="mt-4">
                 <h6 class="text-muted">Delivery Instructions</h6>
@@ -85,11 +91,12 @@
             </div>
             {% endif %}
 
+            <!-- Action Buttons -->
             <div class="mt-4 d-flex justify-content-between">
                 <a href="{% url 'order-history' %}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left me-2"></i>Back to Order History
                 </a>
-                <!-- Cancel Order Button (only show for pending or processing orders) -->
+                <!-- Cancel Order Button (only visible for pending or processing orders) -->
                 {% if order.status == 'pending' or order.status == 'processing' %}
                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelOrderModal">
                     <i class="fas fa-times me-2"></i>Cancel Order
@@ -123,4 +130,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock content %}

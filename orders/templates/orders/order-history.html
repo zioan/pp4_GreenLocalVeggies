@@ -12,7 +12,10 @@
             </h5>
         </div>
         <div class="card-body">
+            <!-- Check if there are any orders to display -->
             {% if orders %}
+
+            <!-- Table view for larger screens (md and up) -->
             <div class="table-responsive d-none d-md-block">
                 <table class="table table-hover">
                     <thead>
@@ -43,6 +46,8 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Card view for smaller screens (below md) -->
             <div class="d-md-none">
                 {% for order in orders %}
                 <div class="card mb-3">
@@ -61,10 +66,12 @@
                 </div>
                 {% endfor %}
             </div>
+
             {% else %}
+            <!-- Message when there are no orders -->
             <p class="text-center">You haven't placed any orders yet.</p>
             {% endif %}
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock content%}

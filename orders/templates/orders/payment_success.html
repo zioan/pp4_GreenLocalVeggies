@@ -10,6 +10,8 @@
             <h1 class="mb-0"><i class="fas fa-check-circle me-2"></i>Thank You for Your Order!</h1>
         </div>
         <div class="card-body">
+
+            <!-- Display order details -->
             <h2 class="card-title">Order Details</h2>
             <p class="card-text">Your order has been successfully placed and is being processed.</p>
             <ul class="list-group list-group-flush mb-4">
@@ -19,6 +21,7 @@
                 <li class="list-group-item"><strong>Status:</strong> {{ order.get_status_display }}</li>
             </ul>
 
+            <!-- Display summary of ordered items -->
             <h3>Order Summary</h3>
             <table class="table">
                 <thead>
@@ -39,6 +42,7 @@
                 </tbody>
             </table>
 
+            <!-- Display delivery information -->
             <h3>Delivery Information</h3>
             <p><strong>Address:</strong> {{ order.user.house_number }} {{ order.user.street }}, {{ order.user.city }},
                 {{ order.user.zip_code }}
@@ -47,6 +51,7 @@
                 {{ order.delivery_instruction|default:"No specific instructions provided." }}
             </p>
 
+            <!-- Action buttons for further navigation -->
             <div class="mt-4">
                 <a href="{% url 'index' %}" class="btn btn-primary me-2 mb-2">
                     <i class="fas fa-shopping-cart me-2"></i>Continue Shopping
