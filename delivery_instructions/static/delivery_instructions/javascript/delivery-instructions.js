@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Get references to DOM elements
     const savedInstructionSelect = document.getElementById('id_saved_instruction');
     const editInstructionSelect = document.getElementById('editInstructionSelect');
     const instructionForm = document.getElementById('instructionForm');
@@ -14,14 +15,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectedInstructionText = document.getElementById('selectedInstructionText');
     const checkoutForm = document.getElementById('checkout-form');
 
-    // Hidden input to the checkout form for the selected instruction
+    // Create a hidden input field to store the selected instruction ID in the checkout form
     const hiddenInstructionInput = document.createElement('input');
     hiddenInstructionInput.type = 'hidden';
     hiddenInstructionInput.name = 'selected_instruction';
     hiddenInstructionInput.id = 'selected_instruction';
     checkoutForm.appendChild(hiddenInstructionInput);
 
-    // Event listener for selecting an instruction from the main dropdown
+    // Event handler for changes in the saved instruction dropdown
     savedInstructionSelect.addEventListener('change', function() {
         if (this.value) {
             fetch(`/delivery-instructions/${this.value}/`)
@@ -37,34 +38,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Toggle manage instructions section
+    // Event handler for the manage instructions button click
     toggleManageInstructionsBtn.addEventListener('click', function() {
-        manageInstructionsSection.style.display = manageInstructionsSection.style.display === 'none' ? 'block' : 'none';
+        manageInstructionsSection.style.display = 
+            manageInstructionsSection.style.display === 'none' ? 'block' : 'none';
         if (manageInstructionsSection.style.display === 'block') {
             populateEditSelect();
         }
     });
 
-    // Enable/disable Place Order button based on checkbox
+    // Event handler to enable or disable the Place Order button based on checkbox status
     termsCheckbox.addEventListener('change', function() {
         placeOrderBtn.disabled = !this.checked;
     });
 
-    // Handle Place Order button click
+    // Event handler for the Place Order button click. Hides the delivery instructions card and shows the payment form.
     placeOrderBtn.addEventListener('click', function() {
         const deliveryInstructionsCard = document.querySelector('.delivery-instructions-card');
         if (deliveryInstructionsCard) {
             deliveryInstructionsCard.style.display = 'none';
         }
 
-        // Show the Stripe payment form (assuming it's hidden initially)
+        // Show the Stripe payment form
         const paymentForm = document.getElementById('payment-form');
         if (paymentForm) {
             paymentForm.style.display = 'block';
         }
     });
 
-    // Function to populate edit select with options from the main select
+    /**
+     * Populates the edit instruction dropdown with options from the saved instructions dropdown.
+     */
     function populateEditSelect() {
         editInstructionSelect.innerHTML = '<option value="">Choose an instruction or add new</option>';
         Array.from(savedInstructionSelect.options).forEach(option => {
@@ -75,21 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Event listener for selecting an instruction from the main dropdown
-    savedInstructionSelect.addEventListener('change', function() {
-        if (this.value) {
-            fetch(`/delivery-instructions/${this.value}/`)
-            .then(response => response.json())
-            .then(data => {
-                selectedInstructionText.textContent = data.instruction;
-                selectedInstructionDisplay.style.display = 'block';
-            });
-        } else {
-            clearSelectedInstructionDisplay();
-        }
-    });
-
-    // Event listener for selecting an instruction to edit
+    // Event handler for changes in the edit instruction dropdow.Fetches and displays the details of the selected instruction for editing.
     editInstructionSelect.addEventListener('change', function() {
         if (this.value) {
             fetch(`/delivery-instructions/${this.value}/`)
@@ -107,7 +97,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Function to reset the form
+    /**
+     * Resets the form fields and button states to their default values.
+     */
     function resetForm() {
         document.getElementById('instructionAction').value = 'add';
         document.getElementById('instructionId').value = '';
@@ -117,7 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSaveButtonState();
     }
 
-    // Function to update save button state
+    /**
+     * Updates the state of the save button based on the input field values.
+     */
     function updateSaveButtonState() {
         saveInstructionBtn.disabled = !(instructionTitleInput.value.trim() && instructionTextInput.value.trim());
     }
@@ -126,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
     instructionTitleInput.addEventListener('input', updateSaveButtonState);
     instructionTextInput.addEventListener('input', updateSaveButtonState);
 
-    // Event listener for form submission (add/update)
+    // Event handler for the form submission (add/update instruction). Sends the form data to the server and updates the dropdowns based on the response.
     instructionForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(this);
@@ -164,10 +158,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Event handler for the delete instruction button click.Shows the confirmation modal for deletion.
     deleteInstructionBtn.addEventListener('click', function() {
         deleteConfirmModal.show();
     });
 
+    // Event handler for confirming instruction deletion. Sends a delete request to the server and updates the dropdowns based on the response.
     confirmDeleteBtn.addEventListener('click', function() {
         const id = document.getElementById('instructionId').value;
         fetch(`/delivery-instructions/${id}/delete/`, {
@@ -199,7 +195,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Function to remove an option from a select element
+    /**
+     * Removes an option from a select element based on its value.
+     * @param {HTMLElement} selectElement - The select element to remove the option from.
+     * @param {string} value - The value of the option to remove.
+     */
     function removeOptionFromSelect(selectElement, value) {
         const option = selectElement.querySelector(`option[value="${value}"]`);
         if (option) {
@@ -207,7 +207,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to clear the selected instruction display
+    /**
+     * Clears the selected instruction display and resets the hidden input.
+     */
     function clearSelectedInstructionDisplay() {
         selectedInstructionText.textContent = '';
         selectedInstructionDisplay.style.display = 'none';

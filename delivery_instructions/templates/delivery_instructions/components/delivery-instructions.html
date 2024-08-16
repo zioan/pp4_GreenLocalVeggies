@@ -5,6 +5,8 @@
         </h5>
     </div>
     <div class="card-body">
+
+        <!-- Form group responsible for the delivery instruction selection -->
         <div class="mb-4">
             <label for="{{ form.saved_instruction.id_for_label }}" class="form-label fw-bold">Select a delivery instruction:</label>
             {{ form.saved_instruction }}
@@ -19,6 +21,7 @@
             </button>
         </div>
 
+        <!-- Form group responsible for the instruction CRUD implementation -->
         <div id="manageInstructionsSection" style="display: none;">
             <hr>
             <h5 class="mb-3">Manage Instructions</h5>
