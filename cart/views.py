@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from shop.models import Product
 from decimal import Decimal
+import math
 from .cart import Cart
 
 
@@ -29,11 +30,14 @@ def add_to_cart(request, product_id):
         if quantity <= 0 or quantity > product.stock:
             raise ValidationError("Invalid quantity.")
 
-        cart.add(product=product, quantity=quantity, update_quantity=False)
+        quantity_int = int(math.floor(quantity))
+
+        cart.add(product=product, quantity=quantity_int, update_quantity=False)
 
         return JsonResponse({
             'status': 'success',
-            'message': f"{quantity} {product.unit} of {product.name} added to cart.",
+            'message': (f"{quantity} {product.unit} of "
+                        f"{product.name} added to cart."),
             'cart_count': len(cart),
             'product_in_cart': True
         })
