@@ -40,8 +40,7 @@ class Cart:
         if update_quantity:
             self.cart[product_id]['quantity'] = int(quantity)
         else:
-            self.cart[product_id]['quantity'] = int(
-                self.cart[product_id]['quantity']) + int(quantity)
+            self.cart[product_id]['quantity'] += int(quantity)
 
         self.save()
 
