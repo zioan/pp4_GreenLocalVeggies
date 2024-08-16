@@ -13,10 +13,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+import stripe
 
+# Load environment variables if env.py file exists
 if os.path.isfile("env.py"):
     import env
-import stripe
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,13 +30,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Toggle debug mode based on environment
 DEBUG = "DEVELOPMENT" in os.environ
 
 ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
-
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -58,6 +58,7 @@ AUTH_USER_MODEL = 'customer.CustomerUser'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    # whitenoise for serving static files in production
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # custom middleware for database connection
     'shop.middleware.DatabaseConnectionMiddleware',
 ]
 
@@ -128,7 +130,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -157,12 +158,13 @@ else:
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Development settings for media files
+# Media files configuration
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/media/"
 CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+# Logging configuration
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -177,12 +179,13 @@ LOGGING = {
     },
 }
 
-CART_SESSION_ID = 'cart'
-LOGIN_URL = 'login'
+# Additional settings
+CART_SESSION_ID = 'cart'  # Session ID for the cart
+LOGIN_URL = 'login'  # URL to redirect to when login is required
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 JSON_ENCODER = 'greenlocalveggies.utils.DecimalEncoder'
 
 STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
-stripe.api_key = STRIPE_SECRET_KEY
+stripe.api_key = STRIPE_SECRET_KEY  # Configure Stripe API key
