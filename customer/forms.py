@@ -1,16 +1,27 @@
 from django import forms
 from .models import CustomerUser
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import PasswordChangeForm
 
 
 def validate_numeric(value):
+    """
+    Validator to ensure that the phone number contains only digits.
+
+    Args:
+        value (str): The phone number to validate.
+
+    Raises:
+        ValidationError: If the phone number contains non-digit characters.
+    """
     if not value.isdigit():
         raise ValidationError('Phone number must contain only digits.')
 
 
 class CustomerRegistrationForm(forms.ModelForm):
+    """
+    Form for registering a new customer user.
+    """
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         min_length=8,  # Optional: Add minimum length requirement
@@ -32,6 +43,7 @@ class CustomerRegistrationForm(forms.ModelForm):
     phone_number = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True,
+        # Ensure phone number contains only digits
         validators=[validate_numeric],
     )
 
@@ -49,6 +61,7 @@ class CustomerRegistrationForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
         error_messages = {
             "first_name": {
                 "required": "Your first name must not be empty",
@@ -63,23 +76,42 @@ class CustomerRegistrationForm(forms.ModelForm):
                 "required": "Your house number must not be empty",
             },
             "city": {
-                "required": "We only allow orders from Westerstede, please confirm your city",
+                "required": (
+                    "We only allow orders from Westerstede, "
+                    "please confirm your city"
+                ),
             },
             "zip_code": {
-                "required": "We only allow orders from 26655, please confirm your zip code",
+                "required": (
+                    "We only allow orders from 26655, "
+                    "please confirm your zip code"
+                ),
             },
             "email": {
-                "required": "Your email address must not be empty, you use it to login",
-                "unique": "This email address is already registered, please login",
+                "required": (
+                    "Your email address must not be empty, "
+                    "you use it to login"
+                ),
+                "unique": (
+                    "This email address is already registered, "
+                    "please login"
+                ),
             },
             "phone_number": {
-                "required": "Your phone number must not be empty, we may reach you for delivery",
-                "invalid": "Phone number must contain only digits",
-            },
-
+                "required": (
+                    "Your phone number must not be empty, "
+                    "we may reach you for delivery"
+                ),
+            }
         }
 
     def clean(self):
+        """
+        Custom validation to ensure passwords match.
+
+        Raises:
+            ValidationError: If the passwords do not match.
+        """
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
@@ -93,6 +125,9 @@ class CustomerRegistrationForm(forms.ModelForm):
 
 
 class CustomerLoginForm(AuthenticationForm):
+    """
+    Form for customer login.
+    """
     username = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'form-control'}),
         required=True,
@@ -111,9 +146,13 @@ class CustomerLoginForm(AuthenticationForm):
 
 
 class CustomerProfileForm(forms.ModelForm):
+    """
+    Form for updating customer profile information.
+    """
     class Meta:
         model = CustomerUser
-        fields = ['first_name', 'last_name', 'street', 'house_number', 'city', 'zip_code', 'email', 'phone_number']
+        fields = ['first_name', 'last_name', 'street',
+                  'house_number', 'city', 'zip_code', 'email', 'phone_number']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -124,6 +163,7 @@ class CustomerProfileForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
         error_messages = {
             "first_name": {
                 "required": "Your first name must not be empty",
@@ -138,28 +178,62 @@ class CustomerProfileForm(forms.ModelForm):
                 "required": "Your house number must not be empty",
             },
             "city": {
-                "required": "We only allow orders from Westerstede, please confirm your city",
+                "required": (
+                    "We only allow orders from Westerstede, "
+                    "please confirm your city"
+                ),
             },
             "zip_code": {
-                "required": "We only allow orders from 26655, please confirm your zip code",
+                "required": (
+                    "We only allow orders from 26655, "
+                    "please confirm your zip code"
+                ),
             },
             "email": {
-                "required": "Your email address must not be empty, you use it to login",
-                "unique": "This email address is already registered, please login",
+                "required": (
+                    "Your email address must not be empty, "
+                    "you use it to login"
+                ),
+                "unique": (
+                    "This email address is already registered, "
+                    "please login"
+                ),
             },
             "phone_number": {
-                "required": "Your phone number must not be empty, we may reach you for delivery",
+                "required": (
+                    "Your phone number must not be empty, "
+                    "we may reach you for delivery"
+                ),
             },
         }
 
     def clean_email(self):
+        """
+        Ensure the email is unique across the CustomerUser model.
+
+        Returns:
+            str: The cleaned email value.
+
+        Raises:
+            ValidationError: If the email is already in use by another user.
+        """
         email = self.cleaned_data.get('email')
-        if CustomerUser.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
-            raise forms.ValidationError("This email is already in use. Please supply a different email address.")
+        if (
+            CustomerUser.objects.filter(email=email)
+            .exclude(pk=self.instance.pk)
+            .exists()
+        ):
+            raise forms.ValidationError(
+                "This email is already in use. "
+                "Please supply a different email address."
+            )
         return email
 
 
 class CustomerPasswordChangeForm(PasswordChangeForm):
+    """
+    Form for changing a customer's password.
+    """
     old_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         label="Old Password"

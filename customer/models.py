@@ -8,7 +8,15 @@ from django.contrib.auth.models import (
 
 
 class CustomerUserManager(BaseUserManager):
+    """
+    Custom manager for CustomerUser model.
+    Provides methods to create regular users and superusers.
+    """
+
     def create_user(self, email, password=None, **extra_fields):
+        """
+        Create and return a regular user with the given email and password.
+        """
         if not email:
             raise ValueError("The Email field must be set")
         email = self.normalize_email(email)
@@ -18,6 +26,9 @@ class CustomerUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
+        """
+        Create and return a superuser with the given email and password.
+        """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -28,14 +39,20 @@ class CustomerUserManager(BaseUserManager):
 
 
 class CustomerUser(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom user model that uses email as the unique identifier
+    instead of username.
+    """
+
+    # Constants for required fields
     REQUIRED_ZIP_CODE = [
         ("26655", "26655"),
     ]
-
     REQUIRED_CITY = [
         ("Westerstede", "Westerstede"),
     ]
 
+    # User model fields
     first_name = models.CharField(max_length=100, blank=False, null=False)
     last_name = models.CharField(max_length=100, blank=False, null=False)
     street = models.CharField(max_length=100, blank=False, null=False)
@@ -46,26 +63,34 @@ class CustomerUser(AbstractBaseUser, PermissionsMixin):
         max_length=5, choices=REQUIRED_ZIP_CODE, blank=False, null=False)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, blank=False, null=False)
+    # Indicates if the user is active
     is_active = models.BooleanField(default=True)
+    # Indicates if the user can access the staff dashboard
     is_staff = models.BooleanField(default=False)
+    # Indicates if the user can access the courier dashboard
     is_courier = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(default=timezone.now)
-    last_login = models.DateTimeField(blank=True, null=True)
+    date_joined = models.DateTimeField(
+        default=timezone.now)
+    last_login = models.DateTimeField(
+        blank=True, null=True)
 
+    # Associate the custom manager
     objects = CustomerUserManager()
 
+    # Field that will be used as the unique identifier
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    # Groups and permissions fields
     groups = models.ManyToManyField(
         'auth.Group',
-        related_name='customer_user_set',  # Customize the related name
+        related_name='customer_user_set',
         blank=True
     )
 
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='customer_user_set',  # Customize the related name
+        related_name='customer_user_set',
         blank=True
     )
 
@@ -74,4 +99,5 @@ class CustomerUser(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Users'
 
     def __str__(self):
+        # String representation of the user
         return self.email
