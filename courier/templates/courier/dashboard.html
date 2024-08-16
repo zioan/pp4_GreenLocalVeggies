@@ -3,9 +3,10 @@
 {% block title %}Courier Dashboard{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container my-5">
     <h1 class="mb-4">Courier Dashboard</h1>
     
+    <!-- Navigation Tabs -->
     <ul class="nav nav-tabs" id="courierTabs" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="shipped-tab" data-bs-toggle="tab" data-bs-target="#shipped" type="button" role="tab" aria-controls="shipped" aria-selected="true">Orders to Deliver</button>
@@ -15,7 +16,10 @@
         </li>
     </ul>
     
+    <!-- Tab Content -->
     <div class="tab-content" id="courierTabsContent">
+
+        <!-- Orders to Deliver Tab -->
         <div class="tab-pane fade show active" id="shipped" role="tabpanel" aria-labelledby="shipped-tab">
             <div class="card mt-3">
                 <div class="card-header">
@@ -23,6 +27,8 @@
                 </div>
                 <div class="card-body">
                     {% if shipped_orders %}
+
+                        <!-- Desktop View -->
                         <div class="table-responsive d-none d-md-block">
                             <table class="table table-hover">
                                 <thead>
@@ -49,6 +55,8 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Mobile View -->
                         <div class="d-md-none">
                             {% for order in shipped_orders %}
                             <div class="card mb-3">
@@ -71,6 +79,7 @@
             </div>
         </div>
         
+        <!-- Delivered Orders Tab -->
         <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
             <div class="card mt-3">
                 <div class="card-header">
@@ -78,6 +87,8 @@
                 </div>
                 <div class="card-body">
                     {% if delivered_orders %}
+
+                        <!-- Desktop View -->
                         <div class="table-responsive d-none d-md-block">
                             <table class="table table-hover">
                                 <thead>
@@ -104,6 +115,8 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Mobile View -->
                         <div class="d-md-none">
                             {% for order in delivered_orders %}
                             <div class="card mb-3">
@@ -127,4 +140,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock content%}

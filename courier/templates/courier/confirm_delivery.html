@@ -5,12 +5,16 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="mb-4">Confirm Delivery - Order #{{ order.id }}</h1>
+    
+    <!-- Delivery Confirmation Card -->
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">Delivery Confirmation</h5>
         </div>
         <div class="card-body">
             <p>Are you sure you want to mark Order #{{ order.id }} as delivered?</p>
+            
+            <!-- Confirmation Form -->
             <form method="post">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-success">Confirm Delivery</button>
@@ -19,4 +23,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock content %}
