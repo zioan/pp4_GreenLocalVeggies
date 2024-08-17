@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from shop.models import Product
+from django.core.exceptions import ValidationError
 
 
 class Cart:
@@ -32,6 +33,12 @@ class Cart:
             update_quantity (bool): If True, set the quantity instead of
                 adding to it.
         """
+        if product.stock == 0:
+            raise ValidationError("This product is out of stock.")
+        if quantity > product.stock:
+            raise ValidationError(
+                "Requested quantity exceeds available stock.")
+
         product_id = str(product.id)
         if product_id not in self.cart:
             self.cart[product_id] = {
@@ -102,7 +109,8 @@ class Cart:
 
     def clear(self):
         """Remove the cart from session."""
-        del self.session[settings.CART_SESSION_ID]
+        self.cart = {}
+        self.session[settings.CART_SESSION_ID] = self.cart
         self.save()
 
     def get_items(self):

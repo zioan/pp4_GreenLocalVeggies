@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+import sys
 import stripe
 
 # Load environment variables if env.py file exists
@@ -107,6 +108,15 @@ else:
     # Use PostgreSQL for production
     DATABASES = {
         "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+
+# Use in-memory SQLite database for testing
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
     }
 
 # CSRF configuration
