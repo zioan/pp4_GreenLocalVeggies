@@ -10,6 +10,7 @@
     </a>
 </div>
 
+<!-- Customer information section -->
 <div class="card mb-4">
     <div class="card-body">
         <h5 class="card-title">Customer Information</h5>
@@ -26,6 +27,7 @@
     </div>
 </div>
 
+<!-- Section displaying order summary -->
 <div class="card mb-4">
     <div class="card-body">
         <h5 class="card-title">Order Items</h5>
@@ -60,6 +62,7 @@
     </div>
 </div>
 
+<!-- Section to update order status and assign courier -->
 <div class="card mb-4">
     <div class="card-body">
         <h5 class="card-title">Update Order Status</h5>
@@ -93,6 +96,7 @@
     </div>
 </div>
 
+<!-- Footer with navigation back to orders list -->
 <div class="d-flex justify-content-end my-4">
     <a href="{% url 'staff_dashboard:order_list' %}?status={{ current_status }}&page={{ current_page }}" class="btn btn-secondary">
         <i class="fas fa-arrow-left"></i> Back to Orders
@@ -100,4 +104,4 @@
 </div>
 
 <script src="{% static 'staff_dashboard/javascript/courier-handler.js' %}"></script>
-{% endblock %}
+{% endblock dashboard_content %}

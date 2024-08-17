@@ -10,12 +10,30 @@ User = get_user_model()
 
 
 def is_staff(user):
+    """
+    Check if the user is a staff member.
+
+    Args:
+        user (User): The user to be checked.
+
+    Returns:
+        bool: True if the user is staff, False otherwise.
+    """
     return user.is_staff
 
 
 @login_required
 @user_passes_test(is_staff)
 def order_list(request):
+    """
+    Display a list of orders with filtering and pagination.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered HTML page showing the order list.
+    """
     status_filter = request.GET.get('status', '')
     page = request.GET.get('page', 1)
 
@@ -47,6 +65,16 @@ def order_list(request):
 @login_required
 @user_passes_test(is_staff)
 def order_detail(request, order_id):
+    """
+    Display detailed information for a specific order.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        order_id (int): The ID of the order to display.
+
+    Returns:
+        HttpResponse: Rendered HTML page showing the order details.
+    """
     order = get_object_or_404(Order, id=order_id)
     couriers = User.objects.filter(is_courier=True)
 
@@ -66,6 +94,17 @@ def order_detail(request, order_id):
 @login_required
 @user_passes_test(is_staff)
 def update_order_status(request, order_id):
+    """
+    Update the status of a specific order and optionally assign a courier.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        order_id (int): The ID of the order to update.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the order detail page
+            with updated status.
+    """
     if request.method == 'POST':
         order = get_object_or_404(Order, id=order_id)
         new_status = request.POST.get('status')
@@ -74,7 +113,10 @@ def update_order_status(request, order_id):
         if new_status in dict(Order.STATUS_CHOICES):
             if new_status == 'shipped' and not courier_id:
                 messages.error(
-                    request, "Please assign a courier before marking the order as shipped.")
+                    request,
+                    "Please assign a courier before marking the order "
+                    "as shipped."
+                )
             else:
                 if courier_id:
                     courier = get_object_or_404(
@@ -82,8 +124,10 @@ def update_order_status(request, order_id):
                     order.courier = courier
                 order.status = new_status
                 order.save()
-                messages.success(request, f"Order #{order.id} status updated to {
-                                 order.get_status_display()}")
+                messages.success(
+                    request,
+                    f"Order #{order.pk} status updated"
+                )
         else:
             messages.error(request, "Invalid status update")
 
@@ -91,4 +135,7 @@ def update_order_status(request, order_id):
     current_status = request.GET.get('status', '')
     current_page = request.GET.get('page', '1')
 
-    return redirect(f"{reverse('staff_dashboard:order_detail', args=[order_id])}?status={current_status}&page={current_page}")
+    return redirect(
+        f"{reverse('staff_dashboard:order_detail', args=[order_id])}"
+        f"?status={current_status}&page={current_page}"
+    )
