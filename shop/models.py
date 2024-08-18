@@ -38,3 +38,6 @@ class Product(models.Model):
         Returns the string representation of the product, which is its name.
         """
         return self.name
+
+    class Meta:
+        ordering = ['name']
