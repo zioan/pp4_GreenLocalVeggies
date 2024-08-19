@@ -38,13 +38,13 @@
                 <p class="product-category mb-3">
                     <span class="badge bg-secondary">{{ product.category }}</span>
                 </p>
-                <h4 class="product-price mb-3">€ {{ product.price }}</h4>
+                <h2 class="product-price mb-3">€ {{ product.price }}</h2>
                 <div class="product-description mb-4">
-                    <h5>Description</h5>
+                    <h3>Description</h3>
                     <p>{{ product.description }}</p>
                 </div>
                 <div class="product-availability mb-3">
-                    <h5>Availability</h5>
+                    <h3>Availability</h3>
                     {% if product.stock > 0 %}
                         <p class="text-success"><i class="fas fa-check-circle"></i> In Stock</p>
                     {% else %}
@@ -57,7 +57,7 @@
                 <form method="post" action="{% url 'add_to_cart' product.id %}" class="add-to-cart-form">
                     {% csrf_token %}
                     <div class="quantity-selector mb-3">
-                        <h5>Quantity ({{ product.unit }})</h5>
+                        <h3>Quantity ({{ product.unit }})</h3>
                         <div class="d-flex align-items-center">
                             <div class="quantity-container">
                                 <button type="button"
@@ -67,7 +67,8 @@
                                 <input type="number" 
                                        id="quantity" 
                                        name="quantity" 
-                                       class="form-control quantity-input" 
+                                       class="form-control quantity-input"
+                                       aria-label="Quantity"
                                        min="1" 
                                        max="{{ product.stock }}" 
                                        value="{% if cart_quantity %}{{ cart_quantity }}{% else %}1{% endif %}" 
@@ -84,9 +85,9 @@
                     {% if cart_quantity %}
                     <p class="fw-bold mt-4">Current quantity in cart: {{ cart_quantity }} {{ product.unit }}</p>
                     {% endif %}
-                    <h4 id="product-price" class="text-success mb-3" data-base-price="{{ product.price }}">
+                    <h3 id="product-price" class="text-success mb-3" data-base-price="{{ product.price }}">
                         Total € <span id="total-price">{{ product.price }}</span>
-                    </h4>
+                    </h3>
                     <div class="d-grid gap-2">
                         {% include "shop/components/form-btn.html" %}
                     </div>
