@@ -1,60 +1,60 @@
-<footer class="bg-light shadow-lg mt-auto">
-    <div class="container py-4">
+<footer class="footer bg-light shadow-lg mt-auto">
+    <div class="container py-5">
         <div class="row g-4">
+            <!-- Green Local Veggies Info -->
             <div class="col-lg-4 col-md-6">
-                <h5 class="text-uppercase mb-3">Green Local Veggies</h5>
-                <p class="text-dark">
-                    Bringing fresh, locally-sourced vegetables straight to your doorstep in Westerstede. Experience the
-                    taste of freshness with every bite!
+                <h5 class="footer-heading">Green Local Veggies</h5>
+                <p class="footer-text">
+                    Bringing fresh, locally-sourced vegetables straight to your doorstep in Westerstede. Experience the taste of freshness with every bite!
                 </p>
             </div>
 
+            <!-- Quick Links -->
             <div class="col-lg-2 col-md-6">
-                <h5 class="text-uppercase mb-3">Quick Links</h5>
+                <h5 class="footer-heading text-dark">Quick Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="{% url 'index' %}" class="text-dark text-decoration-none">Home</a></li>
-                    <li><a href="{% url 'about' %}" class="text-dark text-decoration-none">About Us</a></li>
-                    <li><a href="{% url 'contact' %}" class="text-dark text-decoration-none">Contact</a></li>
+                    <li><a href="{% url 'index' %}" class="nav-link-custom footer-link">Home</a></li>
+                    <li><a href="{% url 'about' %}" class="nav-link-custom footer-link">About Us</a></li>
+                    <li><a href="{% url 'contact' %}" class="nav-link-custom footer-link">Contact</a></li>
                 </ul>
             </div>
 
+            <!-- My Account -->
             <div class="col-lg-2 col-md-6">
-                <h5 class="text-uppercase mb-3">My Account</h5>
+                <h5 class="footer-heading text-dark">My Account</h5>
                 <ul class="list-unstyled">
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}" class="text-dark text-decoration-none">My Profile</a></li>
-                    <li><a href="{% url 'order-history' %}" class="text-dark text-decoration-none">Order History</a></li>
+                    <li><a href="{% url 'profile' %}" class="nav-link-custom footer-link">My Profile</a></li>
+                    <li><a href="{% url 'order-history' %}" class="nav-link-custom footer-link">Order History</a></li>
                     <li>
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-link text-dark p-0 text-decoration-none">Logout</button>
+                            <button type="submit" class="btn btn-link nav-link-custom footer-link p-0">Logout</button>
                         </form>
                     </li>
                     {% else %}
-                    <li><a href="{% url 'login' %}" class="text-dark text-decoration-none">Login</a></li>
-                    <li><a href="{% url 'register' %}" class="text-dark text-decoration-none">Register</a></li>
+                    <li><a href="{% url 'login' %}" class="nav-link-custom footer-link">Login</a></li>
+                    <li><a href="{% url 'register' %}" class="nav-link-custom footer-link">Register</a></li>
                     {% endif %}
-                    <li><a href="{% url 'cart_detail' %}" class="text-dark text-decoration-none">Cart</a></li>
+                    <li><a href="{% url 'cart_detail' %}" class="nav-link-custom footer-link">Cart</a></li>
                 </ul>
             </div>
 
+            <!-- Social Media -->
             <div class="col-lg-4 col-md-6">
-                <h5 class="text-uppercase mb-3">Stay Connected</h5>
-                <p class="mb-2 text-dark">Follow us on social media for updates and special offers!</p>
+                <h5 class="footer-heading text-dark">Stay Connected</h5>
+                <p class="footer-text">Follow us on social media for updates and special offers!</p>
                 <div class="d-flex justify-content-center justify-content-lg-start">
-                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"
-                        class="me-3 fs-5 text-dark"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
-                        class="me-3 fs-5 text-dark"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"
-                        class="fs-5 text-dark"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="social-link me-3"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-link me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="bg-black text-light text-center p-3">
+    <div class="footer-bottom bg-black text-light text-center p-3">
         <p class="mb-0">© 2024 Green Local Veggies. All rights reserved.</p>
-        <p class="mb-0">Made by <a class="text-light" href="https://ioanzaharia.com/" target="_blank">Ioan Zaharia</a></p>
+        <p class="mb-0">Made by <a class="nav-link-custom footer-bottom-link" href="https://ioanzaharia.com/" target="_blank">Ioan Zaharia</a></p>
     </div>
 </footer>

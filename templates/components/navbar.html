@@ -13,30 +13,30 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+                    <a class="nav-link nav-link-custom {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
                         href="{% url 'index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                    <a class="nav-link nav-link-custom {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
                         href="{% url 'about' %}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                    <a class="nav-link nav-link-custom {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
                         href="{% url 'contact' %}">Contact</a>
                 </li>
                 {% if request.user.is_staff %}
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.app_name == 'staff_dashboard' %}active{% endif %}"
+                    <a class="nav-link nav-link-custom {% if request.resolver_match.app_name == 'staff_dashboard' %}active{% endif %}"
                         href="{% url 'staff_dashboard:order_list' %}">Staff Dashboard</a>
                 </li>
                 {% endif %}
                 {% if request.user.is_courier %}
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'courier_dashboard' %}active{% endif %}"
+                    <a class="nav-link nav-link-custom {% if request.resolver_match.url_name == 'courier_dashboard' %}active{% endif %}"
                         href="{% url 'courier_dashboard' %}">Courier Dashboard</a>
                 </li>
                 {% endif %}
-            </ul>
+            </ul>            
             <div class="d-flex align-items-center">
                 {% include "includes/navbar-account-dropdown.html" %}
                 <a href="{% url 'cart_detail' %}" class="btn btn-outline-success position-relative">

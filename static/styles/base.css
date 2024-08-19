@@ -52,18 +52,6 @@ body {
     color: var(--primary-color);
 }
 
-.navbar-nav .nav-link {
-    color: var(--text-primary);
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    transition: color 0.3s ease-in-out;
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-    color: var(--primary-color);
-}
-
 .navbar-nav .dropdown-menu {
     border: none;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -284,4 +272,80 @@ body {
 .contact-info {
     background-color: var(--bg-light);
     border-radius: 10px;
+}
+
+/* Shared link styles for navbar and footer */
+.nav-link-custom,
+.footer-link {
+    color: var(--text-dark);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px !important;
+    transition: color var(--transition-speed), border-color var(--transition-speed);
+    margin-right: 0.25rem;
+}
+
+.nav-link-custom::after,
+.footer-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: var(--primary-color);
+    transition: width var(--transition-speed);
+}
+
+.nav-link-custom:hover,
+.nav-link-custom.active,
+.footer-link:hover,
+.footer-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link-custom:hover::after,
+.nav-link-custom.active::after,
+.footer-link:hover::after,
+.footer-link.active::after {
+    width: 100%;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--bg-light);
+    box-shadow: var(--box-shadow);
+}
+
+.footer-heading {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.footer-text {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.social-link {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    transition: color var(--transition-speed), transform var(--transition-speed);
+}
+
+.social-link:hover {
+    color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    border-top: 2px solid var(--border-color);
+    background-color: var(--black-color);
+}
+
+.footer-bottom-link:hover {
+    color: inherit;
 }
