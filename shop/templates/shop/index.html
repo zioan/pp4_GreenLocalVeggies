@@ -8,7 +8,7 @@
     <form class="d-flex mb-4 w-50 m-auto mb-5" role="search" method="GET" action="{% url 'index' %}">
         <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search" name="q"
             value="{{ search_query|default_if_none:'' }}">
-        <button class="btn btn-outline-none btn-no-border-outline" type="submit">
+        <button class="btn btn-outline-none btn-no-border-outline" aria-label="Search" type="submit">
             <i class="fas fa-search"></i>
         </button>
         <!-- Preserve sort, category, and availability during search -->
@@ -40,7 +40,7 @@
     <form method="GET" action="{% url 'index' %}" id="filter-form">
         <div class="row mb-4">
             <div class="col-md-4 mb-3 mb-md-0">
-                <select class="form-select" name="sort" onchange="this.form.submit()">
+                <select class="form-select" name="sort" aria-label="Sort by price or by name" onchange="this.form.submit()">
                     <option value="">Sort by</option>
                     <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
                     <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
@@ -48,7 +48,7 @@
                 </select>
             </div>
             <div class="col-md-4 mb-3 mb-md-0">
-                <select class="form-select" name="category" onchange="this.form.submit()">
+                <select class="form-select" name="category" aria-label="Sort by category" onchange="this.form.submit()">
                     <option value="">All Categories</option>
                     {% for category in categories %}
                     <option value="{{ category }}" {% if current_category == category %}selected{% endif %}>
@@ -58,7 +58,7 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <select class="form-select" name="availability" onchange="this.form.submit()">
+                <select class="form-select" name="availability" aria-label="Sort by availability in stock" onchange="this.form.submit()">
                     <option value="">All Availability</option>
                     <option value="in_stock" {% if current_availability == 'in_stock' %}selected{% endif %}>In Stock</option>
                     <option value="out_of_stock" {% if current_availability == 'out_of_stock' %}selected{% endif %}>Out of Stock</option>
