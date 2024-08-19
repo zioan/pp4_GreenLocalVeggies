@@ -381,3 +381,61 @@ As a Site Admin, I can create, read, update, and delete products so that I can m
 A complete list of user stories (including not implemented ones) can be found in the [Issues](https://github.com/zioan/pp4_GreenLocalVeggies/issues) section of the project repository.
 
 
+### Design Choices
+#### Color Scheme
+The color scheme for Green Local Veggies has been carefully selected to reflect the natural, fresh, and organic qualities of the products.
+
+![Color Scheme](placeholder.jpg)
+
+#### Typography
+Typography plays a crucial role in conveying the brand's personality and enhancing readability. The following fonts have been chosen for their modern, clean, and elegant qualities:
+
+** MUST BE IMPLEMENTED **
+
+Headings: Montserrat (Sans-serif)
+Body Text: Lora (Serif)
+
+The combination of Montserrat for headings and Lora for body text creates a pleasant contrast between modern and traditional styles, reflecting our commitment to blending innovative e-commerce with traditional farming values.
+
+#### Imagery
+The imagery used throughout the Green Local Veggies website is carefully curated to showcase the product quality.
+More info on the images used in the project can be found in the Credits section.
+
+
+### Wireframes
+To ensure a responsive and user-friendly design across various devices, wireframes were created for mobile and desktop views. These wireframes serve as a blueprint for the layout and structure of key pages in the Green Local Veggies e-commerce platform.
+
+#### Mobile Design
+The mobile design focuses on a streamlined, vertical layout that prioritizes essential information and easy navigation for users on smaller screens.
+
+Key features of the mobile design include:
+
+A hamburger menu for compact navigation
+Large, touch-friendly product cards
+
+#### Desktop Design
+The desktop design offers the full experience, with a spacious layout that showcases products and allows for easy browsing and purchasing.
+
+Desktop design features:
+
+Full navigation menu
+Three or four-column product grid
+
+#### Key Pages Wireframed:
+
+Home Page
+![Home wireframe](placeholder.jpg)
+Product Detail Page
+![Product Detail wireframe](placeholder.jpg)
+Shopping Cart
+![Shopping Cart wireframe](placeholder.jpg)
+Checkout Process
+![Checkout Process wireframe](placeholder.jpg)
+User Profile
+![User Profile wireframe](placeholder.jpg)
+
+These wireframes were created using [Balsamiq](https://balsamiq.com/wireframes/).
+
+#### Wireframe to Implementation
+As the project progresses, these wireframes serve as a guide for the development. However, it's important to note that the final implementation may vary slightly from these initial designs as I iterate and refine the user experience based on testing.
+
