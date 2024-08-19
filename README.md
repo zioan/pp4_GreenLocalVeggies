@@ -239,3 +239,145 @@ The Django Admin Panel is a powerful tool provided by Django for superusers to m
 ![Django Admin Panel](placeholder.jpg)
 
 
+## User Experience (UX)
+
+### Project Goals
+
+#### Site Owner Goals
+
+- Establish an online presence for Green Local Veggies in Westerstede, Germany
+- Create a platform that connects local farmers with urban consumers
+- Promote sustainable food practices and support the local economy
+- Provide a user-friendly interface for customers to browse and purchase fresh produce online
+- Implement an efficient system for order management and delivery logistics
+- Build a scalable and maintainable e-commerce solution
+- Increase sales and customer base for local produce
+- Offer a convenient alternative to traditional grocery shopping
+
+#### User Goals
+
+- Find and purchase fresh, locally-sourced fruits and vegetables conveniently online
+- Support local farmers and sustainable agriculture practices
+- Access detailed information about products, including origin and nutritional value
+- Easily navigate through product categories and search for specific items
+- Manage personal accounts, including order history and delivery preferences
+- Experience a smooth and secure checkout process
+- Receive timely updates on order status and delivery information
+- Access the platform seamlessly across various devices (desktop, tablet, mobile)
+- Provide feedback and communicate with the Green Local Veggies team
+- Stay informed about seasonal offerings and special promotions
+
+These project goals align with the overall mission of Green Local Veggies to bridge the gap between local farmers and urban consumers while promoting sustainable food practices. The site owner aims to create a robust, user-friendly platform that serves both the business objectives and the needs of the target audience, ultimately contributing to the local economy and encouraging healthier, more sustainable food choices.
+
+### User Stories (in order of priority and relation to the project goals)
+User stories are implemented in the project. The user stories are linked to the Github issues and the project board. When created, the user stories were prioritized based on their importance and relevance to the project goals using the MoSCoW method (Must have, Should have, Could have, Won't have). Story points were assigned to each user story to estimate the level of effort required for implementation. The user stories were then added to the project board and assigned to the appropriate project milestone for tracking progress.
+
+[User Stories (Github issue)](https://github.com/zioan/pp4_GreenLocalVeggies/issues)
+<br>
+[Kanban Board (Github project)]( https://github.com/users/zioan/projects/5)
+
+#### 1. View Main Page with Products
+As a Site User, I can view the main page displaying all products so that I can browse the available items.
+##### Acceptance Criteria
+- When a user visits the main page, a list of all available products is displayed.
+- Each product listing includes a thumbnail image, name, price, and a brief description.
+- The user can click on a product to view its detailed page.
+
+#### 2. Search for Products
+As a Site User, I can search for products so that I can quickly find items I am interested in.
+##### Acceptance Criteria
+- A search bar is available on the main page.
+- When a user enters a search term, relevant products are displayed in the search results.
+- The search results include product name, image, and price.
+
+#### 3. Filer Products
+As a Site User, I can filter products by category, price range, and availability so that I can easily find what I need.
+##### Acceptance Criteria
+- Filters for category and price range.
+- When a filter is applied, the product listings update to show only the relevant products.
+
+#### 4. View Product Details
+As a Site User, I can click on a product so that I can read the full details.
+##### Acceptance Criteria
+- When a product title is clicked, a detailed view of the product is seen.
+- The detailed view should include the product name, description, price, and available stock.
+- The view should display an image of the product.
+- The view should have an option to add the product to the cart.
+
+#### 5. Account Registration
+As a Site User, I can register an account so that I can place orders.
+##### Acceptance Criteria
+- Given an email, a user can register an account.
+- Then the user can log in.
+- When the user is logged in, they can place orders.
+
+#### 6. User Profile Management
+As a Site User, I can manage my profile so that I can update my personal information and view my order history.
+##### Acceptance Criteria
+- The user can update their personal information (name, email, address).
+- The user can view their past orders and order details.
+
+#### 7. Add to Cart
+As a Site User, I can add products to my cart so that I can purchase them later.
+##### Acceptance Criteria
+- When a product is added to the cart, it appears in the cart with the correct quantity.
+- The cart shows the total price of all added products.
+
+#### 8. Product Recommendations
+As a Site User, I can see product recommendations based on my browsing and purchase history so that I can discover new items.
+##### Acceptance Criteria
+- Recommendations are displayed on the product detail pages.
+
+#### 9 Delivery Instructions
+As a Customer, I can provide and save custom delivery instructions so that I can ensure my orders are delivered according to my preferences.
+##### Acceptance Criteria:
+- Customers can view (use), add, edit, and delete custom delivery instructions in their profile.
+- Saved instructions can be selected during the checkout process.
+
+#### 10. Checkout and Payment
+As a Site User, I can checkout and make a payment so that I can complete my purchase.
+##### Acceptance Criteria
+- Given a filled cart, the user can proceed to checkout.
+- The user can enter payment and shipping information.
+- The user receives a confirmation message or some kind of notification upon successful payment.
+
+#### 11. View Order History
+As a Site User, I can view my order history so that I can keep track of my past purchases.
+##### Acceptance Criteria
+- Given a logged-in user, they can view a list of their past orders.
+- Each order includes details such as order date, items purchased, total amount, and order status.
+
+#### 12. Order Status Tracking
+As a Customer, I can track the status of my order so that I know when to expect my delivery.
+##### Acceptance Criteria:
+- Customers can view the current status of their order (e.g., processing, delivered).
+
+#### 13. Staff Member Dashboard
+As a Staff Member, I can access a comprehensive dashboard so that I can manage orders.
+##### Acceptance Criteria:
+- Staff members can log in to a secure, role-specific dashboard.
+- The dashboard provides an overview of current orders and their statuses.
+
+#### 14. Courier Dashboard
+As a Courier, I can access a dedicated dashboard so that I can manage and track my delivery tasks efficiently.
+##### Acceptance Criteria:
+- Couriers can log in to a secure, role-specific dashboard.
+- The dashboard displays a list of pending deliveries assigned to the courier.
+- Couriers can update the status of each delivery (e.g., delivered).
+- The dashboard provides a map or navigation assistance for delivery routes.
+- Couriers can view customer contact information for each delivery.
+
+#### 15. Admin dashboard (Django Admin Panel)
+As a Site Admin, I can access an admin dashboard so that I can manage products, orders, and users efficiently.
+##### Acceptance Criteria
+- The admin dashboard provides an overview (sales, orders).
+- Admins can navigate to different sections to manage products and orders.
+
+##### 16. Manage Products (Django Admin Panel - early implementation)
+As a Site Admin, I can create, read, update, and delete products so that I can manage my inventory.
+##### Acceptance Criteria
+- Given a logged-in admin, full CRUD access and functionality over the products must be provided.
+
+A complete list of user stories (including not implemented ones) can be found in the [Issues](https://github.com/zioan/pp4_GreenLocalVeggies/issues) section of the project repository.
+
+
