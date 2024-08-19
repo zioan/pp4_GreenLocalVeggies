@@ -28,4 +28,4 @@ class DeliveryInstruction(models.Model):
             str: A string combining the title and the email of the
                 associated user.
         """
-        return f"{self.title} - {self.user.email}"
+        return f"{self.title}"
