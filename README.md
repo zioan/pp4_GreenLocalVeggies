@@ -57,6 +57,18 @@ The Green Local Veggies platform offers a user-friendly interface for customers 
     - Quantity lock and "Current quantity in cart" for products already in the cart (on the product detail page);
     - Delivery instructions automatically selected upon editing;
 
+### Navigation Bar
+
+The navigation bar is a crucial component, providing easy access to key areas of the site. It has been designed with user experience in mind, ensuring that visitors can quickly find what they're looking for.
+
+![Navigation Bar](placeholder.jpg)
+
+
+### Footer
+The footer serves as an informational and navigational element at the bottom of each page, providing additional resources and links to enhance the user experience.
+
+![Footer](placeholder.jpg)
+
 
 ### Home Page
 
