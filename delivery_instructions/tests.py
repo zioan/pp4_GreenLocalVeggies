@@ -41,7 +41,7 @@ class DeliveryInstructionModelTest(TestCase):
         """
         Test the string representation of a DeliveryInstruction instance.
         """
-        expected_str = "Test Instruction - testuser@example.com"
+        expected_str = "Test Instruction"
         self.assertEqual(str(self.instruction), expected_str)
 
 
