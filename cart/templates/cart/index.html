@@ -12,7 +12,7 @@ Your shopping cart
 {% block content %}
 <div class="container mt-5">
     <h1 class="mb-5 text-center">Your shopping cart</h1>
-    
+
     {% if cart_items %}
     <div class="card my-5">
         <div class="card-header bg-light">
@@ -45,7 +45,7 @@ Your shopping cart
                                     <div class="quantity-container me-2">
                                         <button type="button" class="quantity-btn quantity-decrease"
                                             data-product-id="{{ item.product.id }}">-</button>
-                                        <input type="number" class="form-control quantity-input"
+                                        <input type="number" class="form-control quantity-input" aria-label="Quantity"
                                             value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}"
                                             data-product-id="{{ item.product.id }}" readonly>
                                         <button type="button" class="quantity-btn quantity-increase"
