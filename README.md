@@ -540,3 +540,36 @@ This database schema provides a comprehensive structure for the Green Local Vegg
 - Order processing with line items and delivery instructions
 - Saved delivery instructions for repeat customers
 
+
+## Technologies Used
+### Languages
+- HTML5
+- CSS3
+- JavaScript
+- Python 3.8+
+
+### Frameworks & Libraries
+- Django 5.0.6 - High-level Python web framework that encourages rapid development and clean, pragmatic design;
+- Bootstrap 5.2 - Front-end framework for developing responsive and mobile-first websites;
+- Cloudinary 1.40.0 - Cloud service that offers a solution to a web application's entire image management pipeline;
+- django-cloudinary-storage 0.3.0 - Django package that facilitates integration with Cloudinary;
+- Gunicorn 22.0.0 - Python WSGI HTTP Server for UNIX, used to run Python web applications on Heroku;
+- Pillow 10.4.0 - Python Imaging Library (PIL), adding image processing capabilities to Python interpreter;
+- Whitenoise 6.7.0 - Allows Django apps to serve its own static files, making it self-contained and easier to deploy;
+- Stripe 10.6.0 - Payment processing platform for online businesses.
+
+### Databases
+- SQLite (development) - Lightweight disk-based database that doesn't require a separate server process;
+- PostgreSQL (production) - Powerful, open-source object-relational database system.
+
+### Other Tools & Services
+- Git - Version control system for tracking changes in source code during software development;
+- GitHub - Internet hosting service for software development, version control using Git, user stories (Issues), and project management;
+- Heroku - Cloud platform used to deploy the Green Local Veggies application;
+- Stripe - Payment processing platform for online businesses;
+- Cloudinary - Cloud-based image and video management service;
+- Balsamiq - Wireframing tool for creating low-fidelity wireframes;
+- Google Fonts - Library of free and open-source font families;
+- Font Awesome - Icon toolkit for web development;
+- dj-database-url 2.2.0 - Utility to help configure Django application database from the DATABASE_URL environment variable;
+- psycopg2-binary 2.9.9 - PostgreSQL adapter for Python.
