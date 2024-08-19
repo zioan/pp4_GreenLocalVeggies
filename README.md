@@ -439,3 +439,104 @@ These wireframes were created using [Balsamiq](https://balsamiq.com/wireframes/)
 #### Wireframe to Implementation
 As the project progresses, these wireframes serve as a guide for the development. However, it's important to note that the final implementation may vary slightly from these initial designs as I iterate and refine the user experience based on testing.
 
+
+## Information Architecture
+### Database Schema (ERD Diagram)
+![ERD Diagram](static/readme/images/erd.png)
+
+### Data Models Description
+#### PRODUCT
+Represents the items available for purchase on the platform.
+
+- ID: Primary key, unique identifier for each product
+- Name: String, name of the product
+- Description: Text, detailed description of the product
+- Price: Decimal, price of the product
+- Stock: Integer, current available quantity of the product
+- Unit: String, unit of measurement for the product (e.g., kg, piece)
+- Category: String, category of the product
+- Image: String, path or URL to the product image
+- Slug: String, URL-friendly version of the product name
+
+#### CUSTOMERUSER
+Represents registered users of the Green Local Veggies platform, including customers, staff, and couriers.
+
+- ID: Primary key, unique identifier for each user
+- FirstName: String, user's first name
+- LastName: String, user's last name
+- Street: String, street name of user's address
+- HouseNumber: String, house number of user's address
+- City: String, city of user's address
+- ZipCode: String, zip code of user's address
+- Email: String, user's email address
+- PhoneNumber: String, user's contact number
+- IsActive: Boolean, indicates if the user account is active
+- IsStaff: Boolean, indicates if the user has staff privileges
+- IsCourier: Boolean, indicates if the user is a courier
+- DateJoined: DateTime, date and time when the user registered
+- LastLogin: DateTime, date and time of the user's last login
+
+#### ORDER
+Represents a customer's order.
+
+- ID: Primary key, unique identifier for each order
+- User: Foreign key, references the CUSTOMERUSER who placed the order
+- CreatedAt: DateTime, timestamp of when the order was created
+- UpdatedAt: DateTime, timestamp of the last update to the order
+- Paid: Boolean, indicates if the order has been paid for
+- Status: String, current status of the order (e.g., "Pending", "Shipped", "Delivered")
+- TotalPrice: Decimal, total cost of the order
+- DeliveryInstruction: Text, custom instructions for order delivery
+
+#### ORDERITEM
+Represents individual items within an order.
+
+- ID: Primary key, unique identifier for each order item
+- Order: Foreign key, references the ORDER this item belongs to
+- Product: Foreign key, references the PRODUCT in this order item
+- Price: Decimal, price of the product at the time of order
+- Quantity: Integer, quantity of the product in this order item
+
+#### DELIVERYINSTRUCTION
+Represents saved delivery instructions for a user.
+
+- ID: Primary key, unique identifier for each delivery instruction
+- User: Foreign key, references the CUSTOMERUSER who created the instruction
+- Title: String, short title or name for the delivery instruction
+- Instruction: Text, detailed delivery instructions
+- CreatedAt: DateTime, timestamp of when the instruction was created
+- UpdatedAt: DateTime, timestamp of the last update to the instruction
+
+### Database Relationships
+
+#### CUSTOMERUSER to ORDER: One-to-Many
+
+A CUSTOMERUSER can place multiple ORDERs, but each ORDER belongs to only one CUSTOMERUSER.
+This relationship is represented by the foreign key 'User' in the ORDER model.
+
+
+#### CUSTOMERUSER to DELIVERYINSTRUCTION: One-to-Many
+
+A CUSTOMERUSER can create multiple DELIVERYINSTRUCTIONs, but each DELIVERYINSTRUCTION belongs to only one CUSTOMERUSER.
+This relationship is represented by the foreign key 'User' in the DELIVERYINSTRUCTION model.
+
+
+#### ORDER to ORDERITEM: One-to-Many
+
+An ORDER can contain multiple ORDERITEMs, but each ORDERITEM belongs to only one ORDER.
+This relationship is represented by the foreign key 'Order' in the ORDERITEM model.
+
+
+#### PRODUCT to ORDERITEM: One-to-Many
+
+A PRODUCT can be included in multiple ORDERITEMs, but each ORDERITEM refers to only one PRODUCT.
+This relationship is represented by the foreign key 'Product' in the ORDERITEM model.
+
+
+This database schema provides a comprehensive structure for the Green Local Veggies e-commerce platform. It supports key functionalities such as:
+
+- User management with different roles (customer, staff, courier)
+- Product catalog with detailed product information
+- Order processing with line items and delivery instructions
+- Saved delivery instructions for repeat customers
+
