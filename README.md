@@ -407,6 +407,53 @@ This database schema provides a comprehensive structure for the Green Local Vegg
 - psycopg2-binary 2.9.9 - PostgreSQL adapter for Python.
 
 
+## Agile Methodology
+
+This project was developed using Agile methodology, focusing on iterative development and flexibility to adapt to changes throughout the development process.
+
+### Project Management
+
+- **Tool Used**: GitHub Projects
+- **Link to Project Board**: [Kanban Board](https://github.com/users/zioan/projects/5)
+
+### User Stories
+
+User Stories were created as GitHub Issues and managed through the project board. Each user story was assigned a priority label using the MoSCoW method:
+
+- Must Have
+- Should Have
+- Could Have
+- Won't Have (this time)
+
+### Kanban Board
+
+The Kanban board consisted of the following columns:
+
+1. **Backlog**: All user stories
+2. **ToDo**: User stories for the current sprint
+3. **In Progress**: Stories actively being worked on
+4. **In Review**: Stories ready for testing
+5. **Done**: Completed stories
+
+### Milestones
+
+Milestones were used to mark significant points in the project development:
+
+- MVP (Minimum Viable Product)
+- User Experience Enhancements
+- Optional Features
+- Promotional Features
+
+### Agile Approach Benefits
+
+By using Agile methodology, I was able to:
+
+- Respond quickly to changes in requirements
+- Deliver working features incrementally
+- Maintain a clear overview of project progress
+- Prioritize features effectively based on their importance and complexity
+
+
 ## Version Control
 
 Throughout the development process, I used Git for version control, with Visual Studio Code as my primary development environment (MacOS 14.6.1). This setup allowed me to manage my code efficiently. Here's an overview of my workflow:
