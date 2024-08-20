@@ -454,7 +454,7 @@ As the project progresses, these wireframes serve as a guide for the development
 
 ## Information Architecture
 ### Database Schema (ERD Diagram)
-![ERD Diagram](static/readme/images/erd.png)
+![ERD Diagram](readme_assets/images/erd.png)
 
 ### Data Models Description
 #### PRODUCT
