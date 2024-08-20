@@ -591,3 +591,75 @@ Comprehensive testing has been conducted to ensure the functionality, usability,
 - Automated Testing: Automated tests for critical components
 
 For detailed information on the testing procedures, results, and ongoing test plans, please refer to the [TESTING.md](TESTING.md) file. This document provides in-depth coverage of the testing methodologies, including specific test cases, browser compatibility results, and the outcomes of the automated test suites.
+
+
+## Future Features
+
+Some of the features described below were initially conceptualized in my project planning phase and can be found in the GitHub project's user stories and issues. Due to time constraints, some features weren't implemented in the current version. For a comprehensive list of planned features and their current status, please visit the [GitHub Project Board](https://github.com/users/zioan/projects/5) and [Issues page](https://github.com/zioan/pp4_GreenLocalVeggies/issues). These resources provide insight into my development process and future directions for Green Local Veggies.
+
+These features would significantly enhance the functionality, user experience, and administrative capabilities of the Green Local Veggies platform:
+
+### Shop and Customer Experience
+
+1. **Email Confirmation and Notifications**
+   - Implement email confirmation for user registration
+   - Send order confirmation and shipping update emails
+   - Provide email notifications for price drops on favorite items
+
+2. **Enhanced User Accounts**
+   - Allow social media login integration (Google, Facebook, etc.)
+   - Implement a "Forgot Password" feature
+   - Enable users to manage multiple delivery addresses
+
+3. **Improved Shopping Experience**
+   - Add a wishlist feature for users to save items for later
+   - Create a "Frequently Bought Together" section for product recommendations
+
+4. **Reviews and Ratings**
+   - Allow customers to leave reviews and ratings for products
+   - Add a feature for customers to upload photos in their reviews
+
+5. **Personalization**
+   - Develop a recommendation engine based on past purchases
+   - Implement personalized email marketing campaigns
+   - Create customizable produce boxes based on customer preferences
+   - Add a "Subscribe and Save" option for recurring orders
+   - Develop a "Quick Reorder" feature for frequently purchased items
+   - Implement a "Notify Me" feature for out-of-stock products
+
+6. **Subscription Services**
+   - Offer weekly or monthly subscription boxes
+   - Implement a "Pause" or "Skip" feature for subscriptions
+   - Provide customizable subscription options (e.g., all-fruit, all-vegetable, mixed)
+
+### Operational Improvements
+
+7. **Advanced Order Management**
+   - Allow customers to modify orders within a certain timeframe
+   - Develop a system for handling backorders and pre-orders
+
+8. **Inventory and Supplier Management**
+    - Create an automated inventory tracking and reordering system
+    - Develop tools for predicting inventory needs based on historical data and seasonality
+    - Enhance Django admin panel for managing suppliers and product catalogs
+
+9. **Enhanced Staff Dashboard**
+    - Create a comprehensive analytics dashboard with sales trends and customer insights
+    - Implement a customer service ticket system
+    - Develop tools for managing and optimizing product promotions
+
+10. **Improved Courier System**
+    - Implement real-time order tracking for customers
+    - Develop a route optimization algorithm for efficient deliveries
+
+### General Improvements
+
+11. **Multi-language Support**
+    - Implement a language selection feature for the website
+    - Provide product descriptions in multiple languages
+
+12. **Sustainability Features**
+    - Add a carbon footprint calculator for orders
+    - Create a system for customers to return packaging for reuse
+
+These future features represent my vision for the continued evolution of the project, and can be successfully transformed in a profitable and sustainable SaaS platform.
