@@ -712,3 +712,13 @@ If you'd like to fork this repository and run it locally, follow these steps:
      ```
    - Open a web browser and navigate to `http://127.0.0.1:8000/` to view the application.
 
+
+## Testing
+
+Comprehensive testing has been conducted to ensure the functionality, usability, and reliability of this Django e-commerce application. My testing approach includes:
+
+- User Story Testing: Verification of features against defined user stories
+- Manual Testing: Thorough checks across various browsers
+- Automated Testing: Automated tests for critical components
+
+For detailed information on the testing procedures, results, and ongoing test plans, please refer to the [TESTING.md](TESTING.md) file. This document provides in-depth coverage of the testing methodologies, including specific test cases, browser compatibility results, and the outcomes of the automated test suites.
