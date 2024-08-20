@@ -585,3 +585,130 @@ This database schema provides a comprehensive structure for the Green Local Vegg
 - Font Awesome - Icon toolkit for web development;
 - dj-database-url 2.2.0 - Utility to help configure Django application database from the DATABASE_URL environment variable;
 - psycopg2-binary 2.9.9 - PostgreSQL adapter for Python.
+
+
+## Version Control
+
+Throughout the development process, I used Git for version control, with Visual Studio Code as my primary development environment (MacOS 14.6.1). This setup allowed me to manage my code efficiently. Here's an overview of my workflow:
+
+1. **Development in VS Code**: 
+   I used VS Code as my main IDE for writing and editing Django code. The integrated terminal allowed me to run Django commands and manage my virtual environment easily.
+
+2. **Leveraging VS Code's Source Control**:
+   VS Code's Source Control panel was instrumental in managing changes across my complex Django project structure. After making significant changes involving multiple apps, views, and URL configurations, I used the Source Control panel to review all modifications in one place. This comprehensive view helped me logically group changes into meaningful commits, ensuring that each commit represented a coherent unit of work despite the intricate relationships in Django.
+
+3. **Commit Strategy**:
+   Given Django's interconnected nature, I often made changes across multiple files (e.g., models, views, templates, and URLs) for a single feature. VS Code's diff viewer allowed me to carefully review these changes, helping me create commits that encapsulated related modifications across different parts of the project. I aimed to create descriptive commit messages that explained the purpose of each set of changes, making it easier to understand the project's evolution and helping maintainability.
+
+4. **Key Git Commands**:
+   I frequently used the following Git commands:
+   - `git add <file>` or `git add .`: To stage specific files or all changes.
+   - `git commit -m "descriptive message"`: To create a commit with a meaningful message.
+   - `git push`: To push changes to my remote repository.
+
+5. **Syncing with Remote**:
+   I regularly used `git pull` to keep my local repository up-to-date with the remote, especially after making changes in the project's GitHub repository (Kanban board) or Issues. This practice helped me avoid conflicts and stay aligned with the latest changes.
+
+By leveraging VS Code's Git integration and following these practices, I maintained a clean and understandable version history throughout my project's development, even as I worked with Django's complex structure and interconnected components.
+
+
+## Deployment
+
+I deployed this Django application on Heroku, taking advantage of its integration with GitHub. Here's a step-by-step overview of my deployment process:
+
+1. **Heroku App Creation**:
+   I logged into my Heroku dashboard and clicked "New" > "Create new app". I chose a unique app name and selected the appropriate region.
+
+2. **GitHub Integration**:
+   In the app's "Deploy" tab, I selected GitHub as the deployment method. I connected to my GitHub account and selected the repository containing my Django app.
+
+3. **Environment Configuration**:
+   In the "Settings" tab, I clicked on "Reveal Config Vars" and added the necessary environment variables:
+
+- `SECRET_KEY`: My Django secret key
+- `DATABASE_URL`: The URL provided by Code Institute for the database
+- `CLOUDINARY_URL`: The URL provided by Cloudinary for image storage
+- `STRIPE_PUBLISHABLE_KEY`: My Stripe publishable key
+- `STRIPE_SECRET_KEY`: My Stripe secret key
+
+4. **Database Configuration**:
+   Since my database is provided by Code Institute, I ensured the `DATABASE_URL` in Config Vars was correctly set to the provided database URL. In my Django settings, I made sure to use this environment variable to configure the database connection.
+
+5. **Buildpack Configuration**:
+   Still in the "Settings" tab, I scrolled to the "Buildpacks" section, clicked "Add buildpack", and selected "heroku/python".
+
+6. **Deployment Configuration**:
+   In the "Deploy" tab, under "Deployment method", I confirmed that GitHub was selected. In the "App connected to GitHub" section, I ensured my repository was selected.
+
+7. **Manual Deploy**:
+   I scrolled to the "Manual deploy" section, chose the `main` branch, and clicked "Deploy Branch".
+
+8. **Verify Deployment**:
+   Once the deployment was complete, I clicked "View" to open my app and verify it was working correctly.
+
+
+## Forking and Local Setup
+
+If you'd like to fork this repository and run it locally, follow these steps:
+
+1. **Fork the Repository**:
+   - Navigate to the GitHub repository: [Green Local Veggies repository](https://github.com/zioan/pp4_GreenLocalVeggies)
+   - In the top-right corner of the page, click the "Fork" button.
+   - This will create a copy of the repository in your GitHub account.
+
+2. **Clone Your Fork**:
+   - On your forked repository page, click the "Code" button and copy the URL.
+   - Open your terminal and run:
+     ```
+     git clone [URL you just copied]
+     ```
+   - This creates a local copy of the repository on your machine.
+
+3. **Set Up Virtual Environment**:
+   - Navigate into the project directory:
+     ```
+     cd [project directory name]
+     ```
+   - Create a virtual environment:
+     ```
+     python -m venv venv
+     ```
+   - Activate the virtual environment:
+     - On Windows: `venv\Scripts\activate`
+     - On macOS and Linux: `source venv/bin/activate`
+
+4. **Install Dependencies**:
+   - With your virtual environment activated, install the required packages:
+     ```
+     pip install -r requirements.txt
+     ```
+
+5. **Set Up Environment Variables**:
+   - Create a `env.py` file in the root directory of the project.
+   - Add the following variables (replace with your actual values):
+     ```
+     SECRET_KEY=your_secret_key
+     DATABASE_URL=your_database_url
+     CLOUDINARY_URL=your_cloudinary_url
+     STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+     STRIPE_SECRET_KEY=your_stripe_secret_key
+     DEBUG=True
+     ```
+    Important Notes: 
+    - Make sure to set `DEBUG=True` for local development and testing in `env.py`. In `settings.py`, DEBUG mode will be automatically recognized for the development environment based on the presence of the `DEBUG` variable in `env.py`.
+    - Remember to never commit the `env.py` file or any sensitive information to version control. If you plan to deploy your fork, make sure to set up the necessary environment variables in your deployment environment.
+
+6. **Apply Migrations**:
+   - Run the following commands to apply database migrations:
+     ```
+     python manage.py makemigrations
+     python manage.py migrate
+     ```
+
+7. **Run the Development Server**:
+   - Start the Django development server:
+     ```
+     python manage.py runserver
+     ```
+   - Open a web browser and navigate to `http://127.0.0.1:8000/` to view the application.
+
