@@ -10,7 +10,7 @@ The Green Local Veggies platform offers a user-friendly interface for customers 
 
 [Live Demo](https://p4-green-local-veggies-c5f2f4c33912.herokuapp.com/)
 
-![Responsive Design Screenshot](static/images/placeholder-image.jpg)
+![Responsive Design Screenshot](readme_assets/images/local-green-veggies.png)
 
 ### Key Features
 
@@ -273,6 +273,12 @@ As the project progresses, these wireframes serve as a guide for the development
 
 
 ## Information Architecture
+### Flowchart
+
+To visualize the structure and user flow of the Green Local Veggies application, I created a flowchart using [Lucidchart](https://www.lucidchart.com/pages/). This flowchart illustrates the main processes and decision points within the application.
+
+![Green Local Veggies Flowchart](readme_assets/images/flowchart.png)
+
 ### Database Schema (ERD Diagram)
 ![ERD Diagram](readme_assets/images/erd.png)
 
