@@ -94,7 +94,7 @@ User stories are implemented in the project. The user stories are linked to the 
 
 [User Stories (Github issue)](https://github.com/zioan/pp4_GreenLocalVeggies/issues)
 <br>
-[Kanban Board (Github project)]( https://github.com/users/zioan/projects/5)
+[Kanban Board (Github project)](https://github.com/users/zioan/projects/5)
 
 #### 1. View Main Page with Products
 As a Site User, I can view the main page displaying all products so that I can browse the available items.
@@ -210,12 +210,10 @@ The color scheme for Green Local Veggies has been carefully selected to reflect 
 #### Typography
 Typography plays a crucial role in conveying the brand's personality and enhancing readability. The following fonts have been chosen for their modern, clean, and elegant qualities:
 
-** MUST BE IMPLEMENTED **
+** remember to edit - MUST BE IMPLEMENTED **
 
 Headings: Montserrat (Sans-serif)
 Body Text: Lora (Serif)
-
-The combination of Montserrat for headings and Lora for body text creates a pleasant contrast between modern and traditional styles, reflecting our commitment to blending innovative e-commerce with traditional farming values.
 
 #### Imagery
 The imagery used throughout the Green Local Veggies website is carefully curated to showcase the product quality.
