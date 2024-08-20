@@ -1,5 +1,41 @@
 # Green Local Veggies - Testing
 
+## Code Validation
+### HTML Validation
+
+HTML was validated using the [W3C Markup Validation Service](https://validator.w3.org/) for all pages. As the project uses Django templates, the HTML was validated by copying the rendered HTML from the browser into the validator.
+
+Minor warnings about a trailing slash on a link element and missing aria-labels for icon buttons were fixed.
+![HTML validation](.jpg)
+
+### CSS Validation
+
+CSS was validated using the[Jigsaw validator Service](https://jigsaw.w3.org/css-validator/).
+
+Results:
+- No errors and no warnings found
+![CSS validation](.jpg)
+
+### JavaScript Validation
+
+All custom files including JavaScript code were validated using [JSHint](https://jshint.com/).
+
+Results:
+- No errors and no warnings found
+![JSHint validation](.jpg)
+
+### Python (PEP8) Validation
+
+Python code was validated using Black Formatter VS Code extension during development.
+All custom Python files were checked using the [Code Institute PEP8 Validator](https://pep8ci.herokuapp.com/) as part of the final validation process.
+
+Results:
+- No errors found
+- Several line too long warnings were addressed by refactoring long lines
+- Unused import warnings (F401) were resolved by removing unnecessary imports
+![PEP8 Validation](.jpg)
+
+
 ## Manual Testing
 
 ### User Story Testing
