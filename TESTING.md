@@ -237,14 +237,21 @@ Results:
 
 Manual testing was conducted across all major features and user stories of the Green Local Veggies application. The testing process covered functionality, usability, responsiveness, and cross-browser compatibility. All tests were performed on the following browsers:
 
-| Browser | Version | Result |
-|---------|---------|--------|
-| Google Chrome | 127.0.6533.120 | Pass |
-| Mozilla Firefox | 128.0.3 | Pass |
-| Safari | 17.6 | Pass |
-| Microsoft Edge | 127.0.2651.105 | Pass |
+| Browser           | Version | Desktop | Tablet | Mobile | Notes                                      |
+|-------------------|---------|---------|--------|--------|-------------------------------------------|
+| Google Chrome     | 127.0.6533.120   | ✅       | ✅      | ✅      | Fully responsive, all features functional |
+| Mozilla Firefox   | 128.0.3   | ✅       | ✅      | ✅      | Smooth performance across all devices     |
+| Safari            | 17.6    | ✅       | ✅      | ✅      | Minor styling differences, all features working |
+| Microsoft Edge    | 127.0.2651.105   | ✅       | ✅      | ✅      | Consistent with Chrome performance        |
 
-All features functioned as expected across these browsers, with no bugs or issues detected. The application demonstrated consistent behavior and appearance across different devices and screen sizes.
+✅ = Fully Compatible
+⚠️ = Minor Issues
+❌ = Not Compatible
+
+#### Notes on Compatibility:
+- The site is fully responsive and functions well on all modern browsers across desktop, tablet, and mobile devices.
+- Minor styling differences in Safari do not affect functionality and are related to form input rendering.
+- All critical features including product browsing, cart management, checkout process, and user account functions have been verified across listed compatible browsers.
 
 Key areas tested include:
 - User authentication and account management
