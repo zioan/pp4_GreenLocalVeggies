@@ -436,15 +436,29 @@ Three or four-column product grid
 #### Key Pages Wireframed:
 
 Home Page
-![Home wireframe](placeholder.jpg)
+![Home wireframe](readme_assets/images/wireframes/home.png)
+
+![Home wireframe mobile](readme_assets/images/wireframes/home-mobile.png)
+
 Product Detail Page
-![Product Detail wireframe](placeholder.jpg)
+![Product Detail wireframe](readme_assets/images/wireframes/details.png)
+
+![Product Detail wireframe mobile](readme_assets/images/wireframes/details-mobile.png)
+
 Shopping Cart
-![Shopping Cart wireframe](placeholder.jpg)
-Checkout Process
-![Checkout Process wireframe](placeholder.jpg)
+![Shopping Cart wireframe](readme_assets/images/wireframes/cart.png)
+
+![Shopping Cart wireframe mobile](readme_assets/images/wireframes/cart-mobile.png)
+
+Checkout Page
+![Checkout Page wireframe](readme_assets/images/wireframes/checkout.png)
+
+![Checkout Page wireframe mobile](readme_assets/images/wireframes/checkout-mobile.png)
+
 User Profile
-![User Profile wireframe](placeholder.jpg)
+![User Profile wireframe](readme_assets/images/wireframes/user.png)
+
+![User Profile wireframe mobile](readme_assets/images/wireframes/user-mobile.png)
 
 These wireframes were created using [Balsamiq](https://balsamiq.com/wireframes/).
 
