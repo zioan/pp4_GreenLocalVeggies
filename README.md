@@ -698,6 +698,8 @@ If you'd like to fork this repository and run it locally, follow these steps:
     - Make sure to set `DEBUG=True` for local development and testing in `env.py`. In `settings.py`, DEBUG mode will be automatically recognized for the development environment based on the presence of the `DEBUG` variable in `env.py`.
     - Remember to never commit the `env.py` file or any sensitive information to version control. If you plan to deploy your fork, make sure to set up the necessary environment variables in your deployment environment.
 
+    Note on automated testing: Automated tests are present for all apps in the project. To run the tests run `python manage.py test` in the terminal.
+
 6. **Apply Migrations**:
    - Run the following commands to apply database migrations:
      ```
