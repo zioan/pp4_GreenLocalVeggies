@@ -88,8 +88,11 @@ def product_details(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
 
     # Get related products from the same category, excluding the current one
+    # and out-of-stock items
     related_products = Product.objects.filter(
-        category=product.category).exclude(pk=product.pk)[:4]
+        category=product.category,
+        stock__gt=0  # Only include products with stock greater than 0
+    ).exclude(pk=product.pk).order_by('?')[:4]
 
     # Default step value for quantity increment/decrement
     step_value = 1
