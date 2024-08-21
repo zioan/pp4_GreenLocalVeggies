@@ -1,21 +1,16 @@
 from django import forms
 from .models import CustomerUser
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
+# Custom validators for phone number and name fields, suggested by ChatGpt
+phone_number_validator = RegexValidator(
+    r'^\d+$', 'Phone number must contain only digits.'
+)
 
-def validate_numeric(value):
-    """
-    Validator to ensure that the phone number contains only digits.
-
-    Args:
-        value (str): The phone number to validate.
-
-    Raises:
-        ValidationError: If the phone number contains non-digit characters.
-    """
-    if not value.isdigit():
-        raise ValidationError('Phone number must contain only digits.')
+name_validator = RegexValidator(
+    r'^[a-zA-Z\s]+$', 'Names should only contain letters and spaces.'
+)
 
 
 class CustomerRegistrationForm(forms.ModelForm):
@@ -44,7 +39,7 @@ class CustomerRegistrationForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True,
         # Ensure phone number contains only digits
-        validators=[validate_numeric],
+        validators=[phone_number_validator],
     )
 
     class Meta:
@@ -105,12 +100,17 @@ class CustomerRegistrationForm(forms.ModelForm):
             }
         }
 
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize the form and apply validators.
+        """
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].validators.append(name_validator)
+        self.fields['last_name'].validators.append(name_validator)
+
     def clean(self):
         """
         Custom validation to ensure passwords match.
-
-        Raises:
-            ValidationError: If the passwords do not match.
         """
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
@@ -149,6 +149,24 @@ class CustomerProfileForm(forms.ModelForm):
     """
     Form for updating customer profile information.
     """
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        required=True,
+        validators=[name_validator],
+    )
+
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        required=True,
+        validators=[name_validator],
+    )
+
+    phone_number = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        required=True,
+        validators=[phone_number_validator],
+    )
+
     class Meta:
         model = CustomerUser
         fields = ['first_name', 'last_name', 'street',
