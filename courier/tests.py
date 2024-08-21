@@ -77,7 +77,7 @@ class CourierViewsTestCase(TestCase):
         response = self.client.get(
             reverse('courier_order_detail', args=[self.order.pk]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'courier/order_detail.html')
+        self.assertTemplateUsed(response, 'courier/order-detail.html')
         self.assertEqual(response.context['order'], self.order)
 
     def test_mark_delivered_view(self):

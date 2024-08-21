@@ -72,7 +72,7 @@ def order_detail(request, order_id):
             (order.status == 'delivered' and order.courier != request.user)):
         return render(request, '404.html', status=404)
 
-    return render(request, 'courier/order_detail.html', {'order': order})
+    return render(request, 'courier/order-detail.html', {'order': order})
 
 
 @login_required
@@ -106,4 +106,4 @@ def mark_delivered(request, order_id):
             messages.error(request, f'Error marking order as delivered: {e}')
         return redirect('courier_dashboard')
 
-    return render(request, 'courier/confirm_delivery.html', {'order': order})
+    return render(request, 'courier/confirm-delivery.html', {'order': order})

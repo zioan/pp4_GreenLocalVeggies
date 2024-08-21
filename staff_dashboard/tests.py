@@ -71,7 +71,7 @@ class StaffDashboardTestCase(TestCase):
         self.client.login(email='staff@example.com', password='testpassword')
         response = self.client.get(reverse('staff_dashboard:order_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'staff_dashboard/order_list.html')
+        self.assertTemplateUsed(response, 'staff_dashboard/order-list.html')
         self.assertContains(response, self.order.pk)
 
     def test_order_detail_view(self):
@@ -82,7 +82,7 @@ class StaffDashboardTestCase(TestCase):
         response = self.client.get(
             reverse('staff_dashboard:order_detail', args=[self.order.pk]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'staff_dashboard/order_detail.html')
+        self.assertTemplateUsed(response, 'staff_dashboard/order-detail.html')
         self.assertContains(response, self.order.user.email)
 
     def test_update_order_status(self):

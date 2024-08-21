@@ -111,21 +111,21 @@ def payment_success(request):
             cart.clear()
             messages.success(request, f"Payment successful! Your order #{
                              order.pk} is now being processed.")
-            return render(request, 'orders/payment_success.html', {
+            return render(request, 'orders/payment-success.html', {
                 "order": order
             })
         else:
             messages.error(request, "Payment was not successful.")
-            return render(request, 'orders/payment_failed.html')
+            return render(request, 'orders/payment-failed.html')
 
     except stripe.error.StripeError as e:  # type: ignore
         # Handle Stripe-specific errors
         messages.error(request, f"An error occurred: {str(e)}")
-        return render(request, 'orders/payment_failed.html')
+        return render(request, 'orders/payment-failed.html')
 
     except Exception as e:
         messages.error(request, f"An unexpected error occurred: {str(e)}.")
-        return render(request, 'orders/payment_failed.html')
+        return render(request, 'orders/payment-failed.html')
 
 
 @login_required

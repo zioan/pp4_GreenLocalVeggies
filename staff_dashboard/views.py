@@ -59,7 +59,7 @@ def order_list(request):
         'current_status': status_filter,
         'current_page': page,
     }
-    return render(request, 'staff_dashboard/order_list.html', context)
+    return render(request, 'staff_dashboard/order-list.html', context)
 
 
 @login_required
@@ -88,7 +88,7 @@ def order_detail(request, order_id):
         'current_status': current_status,
         'current_page': current_page,
     }
-    return render(request, 'staff_dashboard/order_detail.html', context)
+    return render(request, 'staff_dashboard/order-detail.html', context)
 
 
 @login_required

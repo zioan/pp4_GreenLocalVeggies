@@ -24,4 +24,4 @@ def cookie_policy(request):
     Returns:
         HttpResponse: A response object with the cookie policy page.
     """
-    return render(request, 'cookie_policy.html')
+    return render(request, 'cookie-policy.html')
