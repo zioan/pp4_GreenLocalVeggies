@@ -1,9 +1,11 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Product
+from customer.models import CustomerMessage
 from cart.cart import Cart
+from django.contrib import messages
 
 
 def index(request):
@@ -150,9 +152,21 @@ def about(request):
 
 def contact(request):
     """
-    Renders the 'Contact' page.
-
-    Returns:
-        HttpResponse: The rendered 'contact.html' page.
+    Renders the 'Contact' page with a contact form.
     """
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        CustomerMessage.objects.create(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message
+        )
+
+        messages.success(request, 'Your message has been sent successfully!')
+        return redirect('contact')
     return render(request, 'shop/contact.html')

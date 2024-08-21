@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import CustomerUser
+from .models import CustomerMessage
 
 
 class CustomerAdmin(admin.ModelAdmin):
@@ -26,5 +27,18 @@ class CustomerAdmin(admin.ModelAdmin):
         return exclude
 
 
+class CustomerMessageAdmin(admin.ModelAdmin):
+    """
+    Custom admin configuration for the CustomerMessage model.
+    """
+    list_display = ('name', 'email', 'subject', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('name', 'email', 'subject', 'message')
+    readonly_fields = ('created_at',)
+
+
 # Register the CustomerUser model with the custom admin configuration
 admin.site.register(CustomerUser, CustomerAdmin)
+
+# Register the CustomerMessage model with the custom admin configuration
+admin.site.register(CustomerMessage)
