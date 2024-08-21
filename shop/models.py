@@ -33,6 +33,13 @@ class Product(models.Model):
     image = models.ImageField(upload_to="products/")
     slug = models.SlugField(unique=True)
 
+    def reduce_stock(self, quantity):
+        if self.stock >= quantity:
+            self.stock -= quantity
+            self.save()
+            return True
+        return False
+
     def __str__(self):
         """
         Returns the string representation of the product, which is its name.

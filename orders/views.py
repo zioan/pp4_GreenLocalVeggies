@@ -15,8 +15,9 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 @login_required
 def checkout(request):
     """
-    Handles the checkout process, including displaying the order form and
-    creating a Stripe PaymentIntent if the form is valid.
+    Handles the checkout process, including displaying the order form,
+    checking stock availability, creating a Stripe PaymentIntent if the form
+    is valid, and reducing stock after successful order creation.
     """
     cart = Cart(request)
 
@@ -27,6 +28,18 @@ def checkout(request):
     if request.method == 'POST':
         form = OrderCreateForm(request.POST, user=request.user)
         if form.is_valid():
+            # Check stock for all items in the cart
+            for item in cart:
+                product = item['product']
+                if product.stock < item['quantity']:
+                    messages.error(
+                        request,
+                        f"Sorry, we don't have enough stock for {
+                            product.name}. "
+                        f"Available: {product.stock}"
+                    )
+                    return redirect('cart_detail')
+
             order = form.save(commit=False)
             order.user = request.user
             order.total_price = cart.get_total_price()
@@ -37,13 +50,18 @@ def checkout(request):
 
             order.save()
 
+            # Create order items and reduce stock
             for item in cart:
+                product = item['product']
+                quantity = item['quantity']
                 OrderItem.objects.create(
                     order=order,
-                    product=item['product'],
+                    product=product,
                     price=item['price'],
-                    quantity=item['quantity']
+                    quantity=quantity
                 )
+                product.stock -= quantity
+                product.save()
 
             # Create a PaymentIntent with the order amount and currency
             intent = stripe.PaymentIntent.create(
