@@ -4,7 +4,8 @@
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}">
             <i class="fas fa-leaf text-success me-2"></i>
-            Green Local Veggies
+            <span class="d-none d-sm-inline">Green Local Veggies</span>
+            <span class="d-inline d-sm-none">GLV</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
             aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +37,7 @@
                         href="{% url 'courier_dashboard' %}">Courier Dashboard</a>
                 </li>
                 {% endif %}
-            </ul>            
+            </ul>
             <div class="d-flex align-items-center">
                 {% include "includes/navbar-account-dropdown.html" %}
                 <a href="{% url 'cart_detail' %}" class="btn btn-outline-success position-relative">
