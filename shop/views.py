@@ -57,7 +57,8 @@ def index(request):
         products = paginator.page(paginator.num_pages)
 
     # Get all categories for the filter
-    categories = Product.objects.values_list('category', flat=True).distinct()
+    categories = Product.objects.values_list(
+        'category', flat=True).distinct().order_by('category')
 
     context = {
         "products": products,
