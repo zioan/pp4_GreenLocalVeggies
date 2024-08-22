@@ -325,6 +325,9 @@ Represents a customer's order.
 - Status: String, current status of the order (e.g., "Pending", "Shipped", "Delivered")
 - TotalPrice: Decimal, total cost of the order
 - DeliveryInstruction: Text, custom instructions for order delivery
+- Courier: Foreign key, references the CUSTOMERUSER who is assigned to deliver the order
+- DeliveredAt: DateTime, timestamp of when the order was delivered
+- CancelledAt: DateTime, timestamp of when the order was cancelled (if applicable)
 
 #### ORDERITEM
 Represents individual items within an order.
@@ -344,6 +347,16 @@ Represents saved delivery instructions for a user.
 - Instruction: Text, detailed delivery instructions
 - CreatedAt: DateTime, timestamp of when the instruction was created
 - UpdatedAt: DateTime, timestamp of the last update to the instruction
+
+#### CUSTOMERMESSAGE
+Represents messages sent by users through the contact form.
+
+- ID: Primary key, unique identifier for each message
+- Name: String, name of the person sending the message
+- Email: String, email address of the sender
+- Subject: String, subject of the message
+- Message: Text, content of the message
+- CreatedAt: DateTime, timestamp of when the message was sent
 
 ### Database Relationships
 
