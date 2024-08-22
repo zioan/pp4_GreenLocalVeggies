@@ -682,3 +682,75 @@ These features would significantly enhance the functionality, user experience, a
     - Create a system for customers to return packaging for reuse
 
 These future features represent my vision for the continued evolution of the project, and can be successfully transformed in a profitable and sustainable SaaS platform.
+
+
+## Credits
+
+### Code
+
+- The implementation of the shopping cart functionality was inspired by this article found on [dev.to](https://dev.to/nick_langat/building-a-shopping-cart-using-django-rest-framework-54i0).
+- The custom user model and authentication system was developed with guidance from the [Django Custom User Model](https://learndjango.com/tutorials/django-custom-user-model) tutorial by William S. Vincent.
+- The components design was adapted from the [Bootstrap documentation](https://getbootstrap.com/docs/5.0/components/).
+- The AJAX functionality for updating cart items without page refresh was implemented using techniques from [Real Python's AJAX with Django tutorial](https://realpython.com/django-and-ajax-form-submissions/).
+- The product filtering system was built following the [Django Filters tutorial](https://django-filter.readthedocs.io/en/stable/guide/usage.html) in the official documentation.
+- Stripe payment integration was accomplished with help from [Stripe Django integration guide](https://stripe.com/docs/payments/accept-a-payment?platform=web&ui=elements) and [Unlocking E-commerce: Stripe Payment Gateway with Python](https://medium.com/@nikhilwani05/stripe-payment-gateway-with-python-caad352d008c).
+
+Code snippets suggested and used from ChatGpt:
+
+- ![Code snippet from ChatGpt](readme_assets/images//snippets/snippet-chat-1.png)
+
+- ![Code snippet from ChatGpt](readme_assets/images//snippets/snippet-chat-2.png)
+
+- ![Code snippet from ChatGpt](readme_assets/images//snippets/snippet-chat-3.png)
+
+- ![Code snippet from ChatGpt](readme_assets/images//snippets/snippet-chat-4.png)
+
+### Content
+
+- The content for this application was created by me.
+
+### Media
+
+- The vegetables and fruits images used throughout the application were sourced from [transparentimagesclub.com](https://www.transparentimagesclub.com/), a paid stock images service that I purchased years ago waiting for the right project to use them.
+- The images from the About page were sourced from [Unsplash](https://unsplash.com/).
+- Icons used in the UI were provided by [Font Awesome](https://fontawesome.com/).
+
+### Tools
+
+- [Coolors](https://coolors.co/) was used to generate the color palette for the application, which I fine-tuned to match my design preferences.
+- Database schema was designed using [mermaidflow.app](https://www.mermaidflow.app).
+- The Flowchart was created using [Lucidchart](https://www.lucidchart.com/).
+- Wireframes were created using [Balsamiq](https://balsamiq.com/).
+- The favicon was created using [gauger.io](https://gauger.io/fonticon/), a tool that generates favicons from fontawesome icons.
+- The image from the top of this document with responsive devices was created using [Am I Responsive](https://ui.dev/amiresponsive).
+
+### Other Resources for Learning and Reference
+
+- [Code Institute learning materials](https://codeinstitute.net/).
+- [Python Django - The Practical Guide](https://www.udemy.com/course/python-django-the-practical-guide/): A comprehensive course on Django web development.
+- [Django Documentation](https://docs.djangoproject.com/): Official documentation for Django web framework.
+- [Python.org](https://www.python.org/): Official website for Python programming language.
+- [Bootstrap Documentation](https://getbootstrap.com/docs/5.0/getting-started/introduction/): Official documentation for Bootstrap front-end framework.
+- [Stripe Documentation](https://docs.stripe.com/): Comprehensive guides and API references for Stripe payment processing.
+- [Cloudinary Documentation](https://cloudinary.com/documentation): Resources for Cloudinary image and video management.
+- [This article](https://www.w3schools.com/js/js_cookies.asp) from W3Schools was used to implement the cookie consent logic.
+- [Font Awesome Icons](https://fontawesome.com/icons): Icon toolkit for web development.
+- [Google Fonts](https://fonts.google.com/): Library of free and open-source font families.
+- [MDN Web Docs](https://developer.mozilla.org/): Valuable reference for JavaScript documentation.
+- [CSS-Tricks](https://css-tricks.com/): Helpful resource for CSS styling and responsive design principles.
+- [W3Schools](https://www.w3schools.com/): Comprehensive references for HTML, CSS, and JavaScript.
+- [Can I Use](https://caniuse.com/): Essential resource for checking browser compatibility.
+- [Google search engine](https://www.google.com/): For general research.
+- [ChatGpt](https://chatgpt.com/): For fast answers to coding questions, small debugging sessions, quick implementation ideas, and general advice about best practices.
+
+### Honourable Mentions
+
+- I would like to thank my Code Institute mentor, Spencer Barriball, for his invaluable feedback and guidance throughout the development process.
+- My colleague and Code Institute student, Lorenz Bächtold, for invaluable feedback and guidance for the Agile Methodology and the project management. [Github](https://github.com/Lorenz-127) [LinkedIn](https://www.linkedin.com/in/lorenz-b-swe/)
+- My Cohort Facilitator from Code Institute, [Kristyna Wach](https://www.linkedin.com/in/kristyna-wach/), for weekly invaluable feedback and general guidance.
+- Last but not least, Daisy Mc Girr for her support in implementing Cloudinary in my project, as well as her invaluable tutorials on [YouTube](https://www.youtube.com/@IonaFrisbee).
+
+
+### Note on code used from third-party sources
+
+No code was literally copy-pasted from those mentions, but it was used to get ideas and suggestions, except for the code mentioned above in this Credits section.
