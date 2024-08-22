@@ -137,6 +137,8 @@ The detail order page also includes functionality for recent orders that haven't
 
 The Staff Dashboard is a restricted area accessible only to users with staff privileges. It provides a dashboard where staff members can manage orders, set order statuses, view user details, and assign deliveries to couriers.
 
+Future development would include product management, customer support, settings for application appearance and functionality, and other administrative tasks.
+
 ![Staff Dashboard](placeholder.jpg)
 
 
@@ -164,32 +166,52 @@ The last section of the page highlights the company's delivery and working hours
 
 The Contact page serves as a vital communication bridge between Green Local Veggies and its customers.
 
-A prominent feature of the page is the contact form. This form allows users to send messages directly through the website, without the need to open their email client. The form includes fields for the user's name, email address, subject of inquiry, and a message box.
+A prominent feature of the page is the contact form. This form allows users to send messages directly through the website, without the need to open their email client. The form includes fields for the user's name, email address, subject of inquiry, and a message box. After the message is submitted, users are redirected to a "Thank You" page to confirm that their message has been received. The message is stored in the database for superadmin interaction.
+
+Due to time limitation, this is the only implementation of the contact form and message storage. Future development would include a notification system for the Staff members with a system to reply to the messages and a record of the conversation.
 
 In addition to the contact form, the page displays Green Local Veggies' customer business hours. This information sets clear expectations for when customers can anticipate a response, contributing to a transparent and trustworthy customer service experience.
 
 The page also lists alternative contact methods. This includes a support service email address and phone number for those who prefer these communication channels.
 
 ![Contact Page](placeholder.jpg)
+![Thank You Page](placeholder.jpg)
 
 
 ### Django Admin Panel (/admin/)
 
 The Django Admin Panel is a powerful tool provided by Django for superusers to manage all aspects of the application.
 
-#### User Management
+#### User Management (CUSTOMER)
 
 - Comprehensive control over user accounts, including creation, modification, and deletion.
-- Ability to assign different roles (staff, superuser) and permissions.
+- Ability to assign different roles (staff, courier, superuser) and permissions.
 
-#### Order Management
+Note on accounts and roles:
+- Users registering through the regular registration form are automatically considered customers.
+- Staff and couriers must register trough the regular registration form, and then be assigned their roles by a superuser in the admin panel.
+- Superusers have full access to all areas of the application, but not to Courier Dashboard features by default (this can be customized in the admin panel by editing the user's permissions).
+- All users have access to all public pages of the application, including the Profile page and its functionalities for easy account management.
+- Staff and Courier Dashboards are restricted areas accessible only to users with the corresponding roles.
 
-- Detailed view and edit capabilities for all orders in the system.
-- Advanced filtering and search options to find specific orders quickly.
+Notes on Customer messages:
+- Messages sent through the Contact page are stored in the database for superadmin interaction and accessible in this section.
+- Due to time limitation during the development of this project, there is no notification system for the Staff members with a system to reply to the messages and a record of the conversation. This is a feature that would be implemented in future development.
+- The ability to edit or delete messages is not restricted.
 
-#### Product Catalog Management
+#### Product Catalog Management (SHOP)
 
 - Full CRUD (Create, Read, Update, Delete) operations for products.
 
 ![Django Admin Panel](placeholder.jpg)
 
+#### Order Management (ORDERS)
+
+- Detailed view and edit capabilities for all orders in the system.
+- Advanced filtering and search options to find specific orders quickly.
+
+#### Delivery Instructions
+
+- Full CRUD operations available for the customer trough the Checkout page.
+- This feature allows customers to provide specific details about their delivery preferences, such as preferred delivery times or special instructions for the order or the courier.
+- A good use case for this feature (future development), would be the implementation of a customer support system where staff members can view and edit delivery instructions on behalf of the customer, or filtering inappropriate instructions.
