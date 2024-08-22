@@ -1,5 +1,12 @@
 {% extends "includes/card-component.html" %}
 {% block card_content %}
+{% if profile_form.errors %}
+<div class="alert alert-danger text-center" role="alert">
+    Invalid fields in your profile update.
+    <br>
+    Please check the errors below.
+</div>
+{% endif %}
 <form method="post" action="{% url 'profile' %}">
     {% csrf_token %}
     {% for field in profile_form %}
