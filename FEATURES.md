@@ -4,13 +4,18 @@
 
 The navigation bar is a crucial component, providing easy access to key areas of the site. It has been designed with user experience in mind, ensuring that visitors can quickly find what they're looking for.
 
-![Navigation Bar](placeholder.jpg)
+![Navigation Bar](readme_assets/images/features/navigation-mobile.png)
+
+![Navigation Bar](readme_assets/images/features/navigation.png)
+
 
 
 ### Footer
 The footer serves as an informational and navigational element at the bottom of each page, providing additional resources and links to enhance the user experience.
 
-![Footer](placeholder.jpg)
+![Footer](readme_assets/images/features/footer-mobile.png)
+
+![Footer](readme_assets/images/features/footer.png)
 
 
 ### Home Page
@@ -25,7 +30,9 @@ The page also includes a search bar, allowing users to quickly find specific ite
 
 The page implements pagination to ensure fast loading times and a manageable browsing experience. Users can easily navigate through multiple pages of products, with clear indicators of their current page and the total number of pages available.
 
-![Home Page](placeholder.jpg)
+![Home Page](readme_assets/images/features/home-mobile.png)
+
+![Home Page](readme_assets/images/features/home.png)
 
 
 ### Product Detail Page
@@ -36,7 +43,9 @@ Accompanying the image is a comprehensive product description. The page clearly 
 
 To provide additional value and encourage exploration of the product range, the page includes a "Related Products" section. This showcases items that are similar to the current product, helping customers discover new products and potentially increasing order values.
 
-![Product Detail Page](placeholder.jpg)
+![Product Detail Page](readme_assets/images/features/detail-mobile.png)
+
+![Product Detail Page](readme_assets/images/features/detail.png)
 
 
 ### Register Page
@@ -47,7 +56,9 @@ The page features a clean and intuitive registration form. The form requests ess
 
 To ensure data integrity and security, the form incorporates real-time validation. As users fill out the fields, immediate feedback is provided if any information is entered incorrectly or if required fields are left blank. This helps prevent submission errors and frustration for the user.
 
-![Register Page](placeholder.jpg)
+![Register Page](readme_assets/images/features/register-mobile.png)
+
+![Register Page](readme_assets/images/features/register.png)
 
 
 ### Login Page
@@ -58,7 +69,8 @@ The page features a simple, clean login form prominently displayed. This form co
 
 For those who don't yet have an account, the login page includes a prominent link directing them to the registration page. This encourages new visitors to create an account and engage more deeply with Green Local Veggies.
 
-![Login Page](placeholder.jpg)
+![Login Page](readme_assets/images/features/login-mobile.png)
+![Login Page](readme_assets/images/features/login.png)
 
 
 ### User Profile Page
@@ -69,25 +81,33 @@ The User Profile page utilizes a tabular layout for easy navigation between diff
 
 This tab displays the user's basic information. Users can view their personal details here.
 
-![Profile tab](placeholder.jpg)
+![Profile tab](readme_assets/images/features/profile-mobile.png)
+
+![Profile tab](readme_assets/images/features/profile.png)
 
 #### Update Profile Tab
 
 This tab allows users to update their profile information, similar to the registration form.
 
-![Update profile tab](placeholder.jpg)
+![Profile tab](readme_assets/images/features/update-profile-mobile.png)
+
+![Profile tab](readme_assets/images/features/update-profile.png)
 
 #### Change Password Tab
 
 Users can update their account password in this section.
 
-![Update password tab](placeholder.jpg)
+![Update password tab](readme_assets/images/features/change-password-mobile.png)
+
+![Update password tab](readme_assets/images/features/change-password.png)
 
 #### Delete Account Tab
 
 This tab offers users the option to delete their account from Green Local Veggies.
 
-![Delete account tab](placeholder.jpg)
+![Delete account tab](readme_assets/images/features/delete-account-mobile.png)
+
+![Delete account tab](readme_assets/images/features/delete-account.png)
 
 
 ### Cart Page
@@ -98,7 +118,9 @@ Users have the flexibility to adjust quantities directly from this page, with in
 
 To encourage continued shopping, the Cart page includes a "Continue Shopping" button that takes users back to the product listings. For those ready to complete their purchase, a clear and prominent Checkout" button is provided, guiding users to the next step in the purchasing process.
 
-![Cart Page](placeholder.jpg)
+![Cart Page](readme_assets/images/features/cart-mobile.png)
+
+![Cart Page](readme_assets/images/features/cart.png)
 
 
 ### Checkout Page
@@ -117,7 +139,9 @@ The payment section of the page is integrated with Stripe for secure payment pro
 
 Throughout the checkout process, clear error messages and form validation ensure that all necessary information is correctly provided before the order can be submitted. A final "Pay Now" button at the bottom of the page allows customers to complete their purchase.
 
-![Checkout Page](placeholder.jpg)
+![Checkout Page](readme_assets/images/features/checkout-mobile.png)
+
+![Checkout Page](readme_assets/images/features/checkout.png)
 
 
 ### Order History Page
@@ -130,7 +154,9 @@ For each order, a 'View' link allows users to access more comprehensive informat
 
 The detail order page also includes functionality for recent orders that haven't yet been processed, to be canceled.
 
-![Order History Page](placeholder.jpg)
+![Order History Page](readme_assets/images/features/history-mobile.png)
+
+![Order History Page](readme_assets/images/features/history.png)
 
 
 ### Staff Dashboard
@@ -139,14 +165,21 @@ The Staff Dashboard is a restricted area accessible only to users with staff pri
 
 Future development would include product management, customer support, settings for application appearance and functionality, and other administrative tasks.
 
-![Staff Dashboard](placeholder.jpg)
+![Staff Dashboard](readme_assets/images/features/staff-mobile.png)
+
+![Staff Dashboard](readme_assets/images/features/staff-detail-mobile.png)
+
+![Staff Dashboard](readme_assets/images/features/staff.png)
+![Staff Dashboard](readme_assets/images/features/staff-detail.png)
 
 
 ### Courier Dashboard
 
 The Courier Dashboard is designed for delivery personnel to manage and track their deliveries. It includes features that help couriers organize their routes, update delivery statuses, and view essential information about each delivery. A convenient mobile-friendly interface ensures that couriers can access the dashboard on the go, while the "Go to address" button provides quick navigation to the delivery location using Google Maps.
 
-![Courier Dashboard](placeholder.jpg)
+![Courier Dashboard](readme_assets/images/features/courier-mobile.png)
+
+![Courier Dashboard](readme_assets/images/features/courier.png)
 
 
 ### About Page
@@ -159,7 +192,9 @@ Following the origin story, the page elaborates on Green Local Veggies' mission 
 
 The last section of the page highlights the company's delivery and working hours. This information is essential for customers to understand when they can expect their orders to arrive and the best times to place orders for timely delivery.
 
-![About Page](placeholder.jpg)
+![About Page](readme_assets/images/features/)
+
+![About Page](readme_assets/images/features/)
 
 
 ### Contact Page
@@ -174,8 +209,8 @@ In addition to the contact form, the page displays Green Local Veggies' customer
 
 The page also lists alternative contact methods. This includes a support service email address and phone number for those who prefer these communication channels.
 
-![Contact Page](placeholder.jpg)
-![Thank You Page](placeholder.jpg)
+![Contact Page](readme_assets/images/features/)
+![Thank You Page](readme_assets/images/features/)
 
 
 ### Django Admin Panel (/admin/)
@@ -202,8 +237,6 @@ Notes on Customer messages:
 #### Product Catalog Management (SHOP)
 
 - Full CRUD (Create, Read, Update, Delete) operations for products.
-
-![Django Admin Panel](placeholder.jpg)
 
 #### Order Management (ORDERS)
 
