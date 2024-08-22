@@ -3,9 +3,9 @@
 {% block title %}Confirm Delivery - Order #{{ order.id }}{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container my-5">
     <h1 class="mb-4">Confirm Delivery - Order #{{ order.id }}</h1>
-    
+
     <!-- Delivery Confirmation Card -->
     <div class="card">
         <div class="card-header">
@@ -13,7 +13,7 @@
         </div>
         <div class="card-body">
             <p>Are you sure you want to mark Order #{{ order.id }} as delivered?</p>
-            
+
             <!-- Confirmation Form -->
             <form method="post">
                 {% csrf_token %}
