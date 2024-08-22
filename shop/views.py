@@ -168,5 +168,12 @@ def contact(request):
         )
 
         messages.success(request, 'Your message has been sent successfully!')
-        return redirect('contact')
+        return redirect('thank_you')
     return render(request, 'shop/contact.html')
+
+
+def thank_you(request):
+    """
+    Renders the "Thank You" page after a message has been successfully sent.
+    """
+    return render(request, 'shop/thank-you.html')

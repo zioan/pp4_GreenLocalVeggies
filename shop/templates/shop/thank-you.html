@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Thank You - Green Local Veggies{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="mb-4">Thank You!</h1>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Your message has been sent successfully</h5>
+                    <p class="card-text">We appreciate you contacting us. One of our colleagues will get back in touch with you soon!</p>
+                    <p class="card-text">Have a great day!</p>
+                    <a href="{% url 'index' %}" class="btn btn-primary mt-3">Return to Shop</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
