@@ -612,6 +612,254 @@ Comprehensive testing has been conducted to ensure the functionality, usability,
 For detailed information on the testing procedures, results, and ongoing test plans, please refer to the [TESTING.md](TESTING.md) file. This document provides in-depth coverage of the testing methodologies, including specific test cases, browser compatibility results, and the outcomes of the automated test suites.
 
 
+## Bugs and Fixes
+
+Throughout the development process, several bugs were encountered and resolved. Here are some of the most notable ones:
+
+### Stock Not Checked and Updated Upon Order Placement
+**Bug**: The system was not verifying product stock levels or updating the inventory when an order was placed. This could lead to overselling products and inconsistencies between the actual stock and what was displayed on the website.
+
+**Fix**: Implemented stock checking and updating logic in the order placement process. The following changes were made:
+
+1. Added a stock check before finalizing the order:
+```python
+for item in cart:
+    product = item['product']
+    if product.stock < item['quantity']:
+        messages.error(
+            request,
+            f"Sorry, we don't have enough stock for {product.name}."
+        )
+        return redirect('cart_detail')
+```
+
+2. Implemented stock update after successful order creation:
+```python
+for item in cart:
+    product = item['product']
+    quantity = item['quantity']
+    product.stock -= quantity
+    product.save()
+```
+
+3. Modified the Product model to include a method for checking stock availability:
+```python
+def check_stock(self, quantity):
+    if self.stock >= quantity:
+        return True
+    else:
+        return False
+```
+
+This enhancement ensures that:
+
+- Orders are only placed when sufficient stock is available for all items in the cart.
+- Product stock levels are accurately updated after each successful order.
+- Customers are informed immediately if a product is out of stock or if their requested quantity exceeds available stock.
+
+
+### Duplicated Categories in Category Filter
+**Bug**: The category filter in the product listing was showing duplicate categories. This occurred because the query to fetch categories wasn't properly handling cases where multiple products have the same category, leading to redundant entries in the filter options.
+
+**Fix**: Modified the category query in the index view to eliminate duplicates and sort the categories. The following change was made:
+
+```python
+# Before:
+categories = Product.objects.values_list('category', flat=True).distinct()
+
+# After:
+categories = Product.objects.values_list(
+    'category', flat=True).distinct().order_by('category')
+```
+This enhancement:
+
+1. Uses distinct() to remove any duplicate category entries.
+2. Adds order_by('category') to sort the categories alphabetically.
+
+The fix ensures that:
+
+- Each category appears only once in the filter options.
+- Categories are presented in a consistent, alphabetical order.
+- The user experience is improved with a clean, organized category filter.
+
+
+### Inconsistent Order Filtering for Staff Dashboard
+**Bug**: The staff dashboard was not properly filtering and ordering orders, leading to inconsistent and potentially confusing displays of order information. This made it difficult for staff members to efficiently manage and track orders.
+
+**Fix**: Implemented consistent order filtering and sorting across the staff dashboard. The following changes were made:
+
+1. Updated the order queryset in various views to use consistent filtering and ordering:
+```python
+orders = Order.objects.filter(status=status).order_by('-created_at')
+```
+
+2. Added status-specific filtering to relevant views:
+```python
+if status == 'processing':
+    orders = orders.filter(status='processing')
+elif status == 'out_for_delivery':
+    orders = orders.filter(status='out_for_delivery')
+# ... (similar filters for other statuses)
+```
+
+3. Implemented a default ordering for orders when no specific status is selected:
+```python
+else:
+    orders = Order.objects.all().order_by('-created_at')
+```
+
+4. Updated the context data to include the current status for maintaining filter state:
+```python
+context = {
+    'orders': orders,
+    'current_status': status,
+}
+```
+
+These enhancements ensure that:
+
+Orders are consistently sorted by creation date (most recent first) across all dashboard views.
+Staff can easily filter orders by specific statuses (e.g., processing, out for delivery).
+The dashboard maintains the selected filter state, improving usability when navigating between pages.
+When no specific status is selected, all orders are displayed in a consistent, chronological order.
+
+This fix significantly improves the staff's ability to manage orders efficiently, providing a more organized and user-friendly dashboard experience.
+
+
+### Incorrect Order Status Update in Staff Dashboard
+**Bug**: The staff dashboard was not correctly updating the order status when staff members tried to change it. This led to inconsistencies between the displayed status and the actual status in the database, causing confusion and potential issues in order processing.
+
+**Fix**: Implemented a robust order status update mechanism in the staff dashboard.
+
+The following changes were made:
+
+1. Created a new view function update_order_status to handle status updates:
+```python
+@staff_member_required
+def update_order_status(request, order_id):
+    if request.method == 'POST':
+        order = get_object_or_404(Order, id=order_id)
+        new_status = request.POST.get('status')
+        if new_status in dict(Order.STATUS_CHOICES):
+            order.status = new_status
+            order.save()
+            messages.success(request, f'Order status updated to {order.get_status_display()}')
+        else:
+            messages.error(request, 'Invalid status')
+    return redirect('staff_dashboard:order_detail', order_id=order_id)
+```
+
+2. Updated the order detail template to include a form for status updates:
+```html
+<form method="post" action="{% url 'staff_dashboard:update_order_status' order.id %}">
+    {% csrf_token %}
+    <select name="status" class="form-select">
+        {% for status, display in order.STATUS_CHOICES %}
+            <option value="{{ status }}" {% if order.status == status %}selected{% endif %}>
+                {{ display }}
+            </option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary mt-2">Update Status</button>
+</form>
+```
+
+3. Added a new URL pattern in the staff_dashboard urls.py:
+```python
+path('order/<int:order_id>/update_status/', views.update_order_status, name='update_order_status'),
+```
+
+4. Implemented proper error handling and success messages to provide feedback to staff members.
+
+These enhancements ensure that:
+
+- Staff members can easily update order statuses from the order detail page.
+- The system validates the new status before updating to prevent invalid status assignments.
+- The database is correctly updated with the new status.
+- Staff members receive immediate feedback on the success or failure of the status update.
+- The order detail page reflects the updated status immediately after the change.
+
+This fix significantly improves the accuracy and reliability of order management in the staff dashboard, reducing errors and improving the overall efficiency of order processing.
+
+
+### Empty Cart Checkout Prevention and Back Button Handling
+**Bug**: Users could proceed to checkout with an empty cart, and the back button behavior after payment was inconsistent, potentially leading to confusion and errors in the ordering process.
+
+**Fix**: Implemented checks to prevent checkout with an empty cart and improved back button handling after payment. The following changes were made:
+
+1. Added a cart length check in the checkout view:
+```python
+@login_required
+def checkout(request):
+    cart = Cart(request)
+    if len(cart) == 0:
+        messages.warning(request, "Please add items before checking out.")
+        return redirect('cart_detail')
+    # ... rest of the checkout logic
+```
+
+2. Implemented a JavaScript function to check cart total and redirect if necessary:
+```javascript
+function checkCartAndRedirect() {
+    const cartTotal = document.getElementById('cart-total');
+    if (cartTotal && parseFloat(cartTotal.textContent) === 0) {
+        window.location.href = '/cart/';
+    }
+}
+```
+3. Added event listeners for document visibility and browser navigation:
+```javascript
+document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+        checkCartAndRedirect();
+    }
+});
+
+window.onpopstate = function () {
+    checkCartAndRedirect();
+    window.history.pushState(null, "", window.location.href);
+};
+```
+
+4. Integrated the cart check into the page load process:
+```javascript
+document.addEventListener('DOMContentLoaded', function () {
+    checkCartAndRedirect();
+    // ... other initialization code
+});
+```
+
+These enhancements ensure that:
+
+- Users cannot proceed to checkout with an empty cart, preventing potential errors in the order process.
+- A warning message is displayed when attempting to check out with an empty cart, guiding users to add items first.
+- The back button behavior after payment is consistent, preventing users from returning to an invalid checkout state.
+- The cart is checked when the page becomes visible or when using browser navigation, maintaining a consistent state.
+
+This fix significantly improves the user experience by preventing common pitfalls in the checkout process and ensuring that the cart state remains valid throughout the user's journey on the site.
+
+
+### Missing Validation Alert for Profile Update Form
+**Bug**: The update profile form lacked clear feedback when users submitted invalid data. This could lead to confusion as users wouldn't understand why their profile updates weren't being saved or what specific fields needed correction.
+
+**Fix**: Implemented a validation alert message for the update-profile form. The following changes were made:
+
+1. Added a conditional check for form errors: `{% if profile_form.errors %}`
+2. Inserted an alert div with appropriate Bootstrap classes for styling and accessibility:
+```html
+<div class="alert alert-danger text-center" role="alert">
+    Invalid fields in your profile update.
+    <br>
+    Please check the errors below.
+</div>
+```
+3. Enclosed the alert within an endif block to ensure it only displays when there are form errors.
+
+This enhancement provides users with immediate, visible feedback when their profile update submission contains errors, improving the overall user experience and reducing potential frustration during the profile update process.
+
+
+
+
 ## Future Features
 
 Some of the features described below were initially conceptualized in my project planning phase and can be found in the GitHub project's user stories and issues. Due to time constraints, some features weren't implemented in the current version. For a comprehensive list of planned features and their current status, please visit the [GitHub Project Board](https://github.com/users/zioan/projects/5) and [Issues page](https://github.com/zioan/pp4_GreenLocalVeggies/issues). These resources provide insight into my development process and future directions for Green Local Veggies.
