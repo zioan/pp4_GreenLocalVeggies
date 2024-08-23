@@ -48,6 +48,10 @@ def login(request):
     On successful login, redirect to the index page.
     Otherwise, render the login form.
     """
+    # Check if the user is already logged in
+    if request.user.is_authenticated:
+        return redirect('index')
+
     if request.method == 'POST':
         form = CustomerLoginForm(request, data=request.POST)
         if form.is_valid():
