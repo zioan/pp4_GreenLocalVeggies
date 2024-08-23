@@ -26,7 +26,8 @@ def courier_dashboard(request):
     Display the courier dashboard with shipped and delivered orders.
 
     This view shows a list of orders to be delivered (shipped orders)
-    and a list of orders already delivered by the current courier.
+    assigned to the current courier and a list of orders already 
+    delivered by the current courier.
 
     Args:
         request: The HTTP request object.
@@ -34,9 +35,10 @@ def courier_dashboard(request):
     Returns:
         A rendered HTML response with the courier dashboard.
     """
-    # Get all shipped orders, ordered by creation date (newest first)
+    # Get shipped orders assigned to the current courier, ordered by
+    # creation date (newest first)
     shipped_orders = Order.objects.filter(
-        status='shipped').order_by('-created_at')
+        status='shipped', courier=request.user).order_by('-created_at')
 
     # Get delivered orders for the current courier (newest first)
     delivered_orders = Order.objects.filter(
