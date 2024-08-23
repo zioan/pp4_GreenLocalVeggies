@@ -20,8 +20,19 @@ function showToast(message, type = "info") {
         "bg-info"
     );
     
+    // Map Django message types to Bootstrap classes
+    const typeMap = {
+        'success': 'success',
+        'error': 'danger',
+        'warning': 'warning',
+        'info': 'info'
+    };
+    
+    // Get the correct Bootstrap class
+    const bsType = typeMap[type] || type;
+    
     // Add the class corresponding to the toast type
-    toastEl.classList.add(`bg-${type}`, "text-white");
+    toastEl.classList.add(`bg-${bsType}`, "text-white");
     
     // Create and show the toast
     const toast = new bootstrap.Toast(toastEl);
