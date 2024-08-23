@@ -12,8 +12,9 @@ class SuperuserRequiredMiddleware:
 
     def __call__(self, request):
         is_admin_path = request.path.startswith('/admin/')
+        is_authenticated = request.user.is_authenticated
         is_not_superuser = not request.user.is_superuser
 
-        if is_admin_path and is_not_superuser:
+        if is_admin_path and is_authenticated and is_not_superuser:
             raise PermissionDenied
         return self.get_response(request)
