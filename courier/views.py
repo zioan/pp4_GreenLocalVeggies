@@ -100,7 +100,7 @@ def mark_delivered(request, order_id):
             order.courier = request.user
             order.delivered_at = timezone.now()
             order.save()
-            messages.success(request, f'Order #{
+            messages.success(request, f'Order {
                              order.pk} has been marked as delivered.')
         except Exception as e:
             messages.error(request, f'Error marking order as delivered: {e}')

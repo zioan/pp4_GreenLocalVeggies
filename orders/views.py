@@ -109,7 +109,7 @@ def payment_success(request):
             # Clear the cart
             cart = Cart(request)
             cart.clear()
-            messages.success(request, f"Payment successful! Your order #{
+            messages.success(request, f"Payment successful! Your order {
                              order.pk} is now being processed.")
             return render(request, 'orders/payment-success.html', {
                 "order": order
@@ -156,9 +156,9 @@ def cancel_order(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
 
     if order.cancel():
-        messages.success(request, f"Order #{
+        messages.success(request, f"Order {
                          order.pk} has been successfully cancelled.")
     else:
-        messages.error(request, f"Order #{order.pk} cannot be cancelled.")
+        messages.error(request, f"Order {order.pk} cannot be cancelled.")
 
     return redirect('order-detail', order_id=order.pk)
