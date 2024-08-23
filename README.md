@@ -658,11 +658,17 @@ If you'd like to fork this repository and run it locally, follow these steps:
 
 Comprehensive testing has been conducted to ensure the functionality, usability, and reliability of this Django e-commerce application. My testing approach includes:
 
+- Code Validation: Ensuring adherence to best practices and standards
+- Lighthouse Testing: Performance, accessibility, best practices, SEO
 - User Story Testing: Verification of features against defined user stories
 - Manual Testing: Thorough checks across various browsers
 - Automated Testing: Automated tests for critical components
 
 For detailed information on the testing procedures, results, and ongoing test plans, please refer to the [TESTING.md](TESTING.md) file. This document provides in-depth coverage of the testing methodologies, including specific test cases, browser compatibility results, and the outcomes of the automated test suites.
+
+Note on testing delivery functionality:
+
+Since Green Local Veggies is intended to sell products in a specific area, a customer should register only if the delivery address matches the area (26655 Westerstede - Germany). The system does not check the delivery address when a customer registers. If a fictitious street name and house number are entered, this can influence the ability of "Go to address" from the courier dashboard to work correctly. Using the demo accounts with the delivery address already set up is recommended for testing the full functionality of the application. The "Go to address" button in the courier dashboard uses Google Maps to generate a route from the courier's location to the delivery address.
 
 [Go to Table of Contents](#table-of-contents)
 
@@ -1030,7 +1036,7 @@ Code snippets suggested and used from ChatGpt:
 
 ### Tools
 
-- [Coolors](https://coolors.co/) was used to generate the color palette for the application, which I fine-tuned to match my design preferences.
+- [Coolors](https://coolors.co/) was used to generate the color palette for the application, which I fine-tuned to match my design preferences and Bootstrap components.
 - Database schema was designed using [mermaidflow.app](https://www.mermaidflow.app).
 - The Flowchart was created using [Lucidchart](https://www.lucidchart.com/).
 - Wireframes were created using [Balsamiq](https://balsamiq.com/).
