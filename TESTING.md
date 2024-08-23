@@ -5,16 +5,16 @@
 
 HTML was validated using the [W3C Markup Validation Service](https://validator.w3.org/) for all pages. As the project uses Django templates, the HTML was validated by copying the rendered HTML from the browser into the validator.
 
-Minor warnings about a trailing slash on a link element and missing aria-labels for icon buttons were fixed.
-![HTML validation](.jpg)
+- No errors and no warnings found
+![HTML validation](readme_assets/images/testing/html-check.png)
 
 ### CSS Validation
 
-CSS was validated using the[Jigsaw validator Service](https://jigsaw.w3.org/css-validator/).
+CSS modules was validated using the [Jigsaw validator Service](https://jigsaw.w3.org/css-validator/).
 
 Results:
 - No errors and no warnings found
-![CSS validation](.jpg)
+![CSS validation](readme_assets/images/testing/css-check.png)
 
 ### JavaScript Validation
 
@@ -22,7 +22,7 @@ All custom files including JavaScript code were validated using [JSHint](https:/
 
 Results:
 - No errors and no warnings found
-![JSHint validation](.jpg)
+![JSHint validation](readme_assets/images/testing/js-check.png)
 
 ### Python (PEP8) Validation
 
@@ -30,11 +30,27 @@ Python code was validated using Black Formatter VS Code extension during develop
 All custom Python files were checked using the [Code Institute PEP8 Validator](https://pep8ci.herokuapp.com/) as part of the final validation process.
 
 Results:
-- No errors found
-- Several line too long warnings were addressed by refactoring long lines
-- Unused import warnings (F401) were resolved by removing unnecessary imports
-![PEP8 Validation](.jpg)
+- No errors and no warnings found
+![PEP8 Validation](readme_assets/images/testing/python-check.png)
 
+
+## LightHouse Testing
+
+LightHouse was used to test the performance, accessibility, best practices and SEO of the Green Local Veggies application. 
+
+The tests were conducted on both desktop and mobile views.
+
+The performance score is lower on mobile views due to the number of images used in the project. All images have a relatively small file size and resolution, and have been optimized for web use. 
+
+A better approach would be to use lazy loading for images to improve performance and reduced resolution for mobile devices, but the time constraints of the project did not allow for these optimizations.
+
+![JSHint validation](readme_assets/images/testing/lighthouse-home.png)
+
+![JSHint validation](readme_assets/images/testing/lighthouse-home-mobile.png)
+
+![JSHint validation](readme_assets/images/testing/lighthouse-detail.png)
+
+![JSHint validation](readme_assets/images/testing/lighthouse-detail-mobile.png)
 
 ## Manual Testing
 
