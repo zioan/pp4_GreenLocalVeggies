@@ -109,6 +109,8 @@ The Green Local Veggies platform offers a user-friendly interface for customers 
 
 Details about the features, their implementation, and the user experience can be found in the [Features](FEATURES.md) document.
 
+[Go to Table of Contents](#table-of-contents)
+
 ## User Experience (UX)
 
 ### Project Goals
@@ -321,6 +323,7 @@ These wireframes were created using [Balsamiq](https://balsamiq.com/wireframes/)
 #### Wireframe to Implementation
 As the project progresses, these wireframes serve as a guide for the development. However, it's important to note that the final implementation may vary slightly from these initial designs as I iterate and refine the user experience based on testing.
 
+[Go to Table of Contents](#table-of-contents)
 
 ## Information Architecture
 ### Flowchart
@@ -441,6 +444,7 @@ This database schema provides a comprehensive structure for the Green Local Vegg
 - Order processing with line items and delivery instructions
 - Saved delivery instructions for repeat customers
 
+[Go to Table of Contents](#table-of-contents)
 
 ## Technologies Used
 ### Languages
@@ -475,6 +479,7 @@ This database schema provides a comprehensive structure for the Green Local Vegg
 - dj-database-url 2.2.0 - Utility to help configure Django application database from the DATABASE_URL environment variable;
 - psycopg2-binary 2.9.9 - PostgreSQL adapter for Python.
 
+[Go to Table of Contents](#table-of-contents)
 
 ## Agile Methodology
 
@@ -522,6 +527,7 @@ By using Agile methodology, I was able to:
 - Maintain a clear overview of project progress
 - Prioritize features effectively based on their importance and complexity
 
+[Go to Table of Contents](#table-of-contents)
 
 ## Version Control
 
@@ -547,6 +553,7 @@ Throughout the development process, I used Git for version control, with Visual 
 
 By leveraging VS Code's Git integration and following these practices, I maintained a clean and understandable version history throughout my project's development, even as I worked with Django's complex structure and interconnected components.
 
+[Go to Table of Contents](#table-of-contents)
 
 ## Deployment
 
@@ -582,6 +589,7 @@ I deployed this Django application on Heroku, taking advantage of its integratio
 8. **Verify Deployment**:
    Once the deployment was complete, I clicked "View" to open my app and verify it was working correctly.
 
+[Go to Table of Contents](#table-of-contents)
 
 ## Forking and Local Setup
 
@@ -650,6 +658,7 @@ If you'd like to fork this repository and run it locally, follow these steps:
      ```
    - Open a web browser and navigate to `http://127.0.0.1:8000/` to view the application.
 
+[Go to Table of Contents](#table-of-contents)
 
 ## Testing
 
@@ -661,6 +670,7 @@ Comprehensive testing has been conducted to ensure the functionality, usability,
 
 For detailed information on the testing procedures, results, and ongoing test plans, please refer to the [TESTING.md](TESTING.md) file. This document provides in-depth coverage of the testing methodologies, including specific test cases, browser compatibility results, and the outcomes of the automated test suites.
 
+[Go to Table of Contents](#table-of-contents)
 
 ## Bugs and Fixes
 
@@ -918,7 +928,7 @@ The following bugs have been identified in the application. Due to time constrai
    - **Impact:** While this does not affect the functionality of the shop, it may cause minor confusion in reading product quantities.
    - **Planned fix:** Implement a custom pluralization logic for units, particularly handling the "piece" to "pieces" conversion when quantities exceed one.
 
-
+[Go to Table of Contents](#table-of-contents)
 
 ## Future Features
 
@@ -991,6 +1001,7 @@ These features would significantly enhance the functionality, user experience, a
 
 These future features represent my vision for the continued evolution of the project, and can be successfully transformed in a profitable and sustainable SaaS platform.
 
+[Go to Table of Contents](#table-of-contents)
 
 ## Credits
 
@@ -1062,3 +1073,7 @@ Code snippets suggested and used from ChatGpt:
 ### Note on code used from third-party sources
 
 No code was literally copy-pasted from those mentions, but it was used to get ideas and suggestions, except for the code mentioned above in this Credits section.
+
+[Go to Table of Contents](#table-of-contents)
+
+[Back to top](#green-local-veggies)
