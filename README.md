@@ -31,6 +31,56 @@ The Green Local Veggies platform offers a user-friendly interface for customers 
 - Busy professionals looking for convenient grocery shopping options
 - Local farmers and produce suppliers seeking an online platform to reach customers
 
+
+## Table of Contents
+
+1. [Features](#features)
+   - [Key Features Summary](#key-features-summary)
+   - [Additional Features Summary](#additional-features-summary)
+
+2. [User Experience (UX)](#user-experience-ux)
+   - [Project Goals](#project-goals)
+   - [User Stories](#user-stories)
+   - [Design Choices](#design-choices)
+   - [Wireframes](#wireframes)
+
+3. [Information Architecture](#information-architecture)
+   - [Flowchart](#flowchart)
+   - [Database Schema (ERD Diagram)](#database-schema-erd-diagram)
+   - [Data Models Description](#data-models-description)
+
+4. [Technologies Used](#technologies-used)
+   - [Languages](#languages)
+   - [Frameworks & Libraries](#frameworks--libraries)
+   - [Databases](#databases)
+   - [Other Tools & Services](#other-tools--services)
+
+5. [Agile Methodology](#agile-methodology)
+
+6. [Version Control](#version-control)
+
+7. [Deployment](#deployment)
+
+8. [Forking and Local Setup](#forking-and-local-setup)
+
+9. [Testing](#testing)
+
+10. [Bugs and Fixes](#bugs-and-fixes)
+
+11. [Unsolved Issues and Bugs](#unsolved-issues-and-bugs)
+
+12. [Future Features](#future-features)
+
+13. [Credits](#credits)
+    - [Code](#code)
+    - [Content](#content)
+    - [Media](#media)
+    - [Tools](#tools)
+    - [Other Resources for Learning and Reference](#other-resources-for-learning-and-reference)
+    - [Honourable Mentions](#honourable-mentions)
+    - [Note on code used from third-party sources](#note-on-code-used-from-third-party-sources)
+
+
 ## Features
 
 ### Key Features Summary
