@@ -718,10 +718,10 @@ context = {
 
 These enhancements ensure that:
 
-Orders are consistently sorted by creation date (most recent first) across all dashboard views.
-Staff can easily filter orders by specific statuses (e.g., processing, out for delivery).
-The dashboard maintains the selected filter state, improving usability when navigating between pages.
-When no specific status is selected, all orders are displayed in a consistent, chronological order.
+- Orders are consistently sorted by creation date (most recent first) across all dashboard views.
+- Staff can easily filter orders by specific statuses (e.g., processing, out for delivery).
+- The dashboard maintains the selected filter state, improving usability when navigating between pages.
+- When no specific status is selected, all orders are displayed in a consistent, chronological order.
 
 This fix significantly improves the staff's ability to manage orders efficiently, providing a more organized and user-friendly dashboard experience.
 
@@ -857,6 +857,16 @@ This fix significantly improves the user experience by preventing common pitfall
 
 This enhancement provides users with immediate, visible feedback when their profile update submission contains errors, improving the overall user experience and reducing potential frustration during the profile update process.
 
+
+## Unsolved Issues and Bugs
+
+The following bugs have been identified in the application. Due to time constraints, these issues have not been resolved but are acknowledged and will be addressed in future updates.
+
+1. **Pluralization of "piece" unit:**
+   - **Description:** When displaying quantities of items with the unit "piece", the application does not correctly pluralize to "pieces" for quantities greater than one.
+   - **Affected areas:** This issue appears in the cart summary, order details, and notifications.
+   - **Impact:** While this does not affect the functionality of the shop, it may cause minor confusion in reading product quantities.
+   - **Planned fix:** Implement a custom pluralization logic for units, particularly handling the "piece" to "pieces" conversion when quantities exceed one.
 
 
 
