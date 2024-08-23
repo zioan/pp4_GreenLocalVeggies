@@ -68,7 +68,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # custom middleware for database connection
-    'shop.middleware.DatabaseConnectionMiddleware',
+    "shop.middleware.DatabaseConnectionMiddleware",
+    # custom middleware for superuser access
+    "greenlocalveggies.middleware.SuperuserRequiredMiddleware",
 ]
 
 ROOT_URLCONF = "greenlocalveggies.urls"
