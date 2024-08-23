@@ -252,3 +252,5 @@ Notes on Customer messages:
 - Full CRUD operations available for the customer trough the Checkout page.
 - This feature allows customers to provide specific details about their delivery preferences, such as preferred delivery times or special instructions for the order or the courier.
 - A good use case for this feature (future development), would be the implementation of a customer support system where staff members can view and edit delivery instructions on behalf of the customer, or filtering inappropriate instructions.
+
+[Go to README.md](README.md)

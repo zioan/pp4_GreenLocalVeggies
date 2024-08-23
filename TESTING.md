@@ -34,9 +34,9 @@ Results:
 ![PEP8 Validation](readme_assets/images/testing/python-check.png)
 
 
-## LightHouse Testing
+## Lighthouse Testing
 
-LightHouse was used to test the performance, accessibility, best practices and SEO of the Green Local Veggies application. 
+Lighthouse was used to test the performance, accessibility, best practices and SEO of the Green Local Veggies application. 
 
 The tests were conducted on both desktop and mobile views.
 
@@ -452,3 +452,5 @@ The courier app tests focus on validating the functionality related to courier o
 These tests cover the main functionalities of the courier app, ensuring that couriers can access their dashboard, view order details, and mark orders as delivered. The tests also verify that non-courier users are properly restricted from accessing courier-specific views, maintaining the security of the courier operations.
 
 Each test case uses a setup method to create necessary test data, including courier and customer users, and a sample order. This approach ensures a consistent testing environment across all tests in the suite.
+
+[Go to README.md](README.md)
