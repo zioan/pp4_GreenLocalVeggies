@@ -203,7 +203,7 @@ As a Site User, I can see product recommendations based on my browsing and purch
 #### 9 Delivery Instructions
 As a Customer, I can provide and save custom delivery instructions so that I can ensure my orders are delivered according to my preferences.
 ##### Acceptance Criteria:
-- Customers can view (use), add, edit, and delete custom delivery instructions in their profile.
+- Customers can add (Create), view (Read), edit (Update), and Delete custom delivery instructions in their profile.
 - Saved instructions can be selected during the checkout process.
 
 #### 10. Checkout and Payment
@@ -235,7 +235,6 @@ As a Courier, I can access a dedicated dashboard so that I can manage and track 
 ##### Acceptance Criteria:
 - Couriers can log in to a secure, role-specific dashboard.
 - The dashboard displays a list of pending deliveries assigned to the courier.
-- Couriers can update the status of each delivery (e.g., delivered).
 - The dashboard provides a map or navigation assistance for delivery routes.
 - Couriers can view customer contact information for each delivery.
 
