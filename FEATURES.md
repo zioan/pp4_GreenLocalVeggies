@@ -253,4 +253,17 @@ Notes on Customer messages:
 - This feature allows customers to provide specific details about their delivery preferences, such as preferred delivery times or special instructions for the order or the courier.
 - A good use case for this feature (future development), would be the implementation of a customer support system where staff members can view and edit delivery instructions on behalf of the customer, or filtering inappropriate instructions.
 
+### 404 Page
+
+The 404 page is a custom-designed error page that provides a friendly and informative message to users who encounter a page not found error. The page includes a brief explanation of the error and a link to the home page.
+
+![404 Page](readme_assets/images/features/404.png)
+
+### 403 Page
+
+The 403 page is a custom-designed error page that provides a friendly and informative message to users who encounter a forbidden access error. The page includes a brief explanation of the error and a link to the home page.
+This page was also necessary to avoid the default Django 403 error when a regular logged user tries to access the Django Admin Panel.
+
+![403 Page](readme_assets/images/features/403.png)
+
 [Go to README.md](README.md)
