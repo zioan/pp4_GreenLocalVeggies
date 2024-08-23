@@ -920,13 +920,15 @@ This enhancement provides users with immediate, visible feedback when their prof
 
 ## Unsolved Issues and Bugs
 
-The following bugs have been identified in the application. Due to time constraints, these issues have not been resolved but are acknowledged and will be addressed in future updates.
+Due to time constraints, the following issue could not be solved, but it is known and will be considered in future development.
 
-1. **Pluralization of "piece" unit:**
+**Pluralization of "piece" unit:**
    - **Description:** When displaying quantities of items with the unit "piece", the application does not correctly pluralize to "pieces" for quantities greater than one.
    - **Affected areas:** This issue appears in the cart summary, order details, and notifications.
    - **Impact:** While this does not affect the functionality of the shop, it may cause minor confusion in reading product quantities.
    - **Planned fix:** Implement a custom pluralization logic for units, particularly handling the "piece" to "pieces" conversion when quantities exceed one.
+
+There are no other known issues or bugs in the application at this time. The project has been thoroughly tested, and all critical bugs have been addressed.
 
 [Go to Table of Contents](#table-of-contents)
 
