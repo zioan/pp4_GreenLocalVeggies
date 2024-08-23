@@ -257,15 +257,10 @@ A complete list of user stories (including not implemented ones) can be found in
 #### Color Scheme
 The color scheme for Green Local Veggies has been carefully selected to reflect the natural, fresh, and organic qualities of the products.
 
-![Color Scheme](placeholder.jpg)
+![Color Scheme](readme_assets/images/color-scheme.png)
 
 #### Typography
-Typography plays a crucial role in conveying the brand's personality and enhancing readability. The following fonts have been chosen for their modern, clean, and elegant qualities:
-
-** remember to edit - MUST BE IMPLEMENTED **
-
-Headings: Montserrat (Sans-serif)
-Body Text: Lora (Serif)
+For this project, I have chosen Roboto as the primary font for its modern, clean, and versatile design. Roboto offers excellent legibility and readability across various devices and screen sizes.
 
 #### Imagery
 The imagery used throughout the Green Local Veggies website is carefully curated to showcase the product quality.
